@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+.card {
+    display: flex;
+    width: 17.75rem;
+    height: 26.375rem;
+    padding-bottom: 1.1875rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+}
+
+.cardImage {
+    width: 17.875rem;
+    height: 17.875rem;
+    flex-shrink: 0;
+    border-radius: 3%;
+}
+
+.cardFrame {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.cardInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1 0 0;
+}
+
+.ratingsLayout {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.ratingStars {
+    display: flex;
+    align-items: center;
+}
+
+.priceLayout {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    align-self: stretch;
+}
+
+.productNameText,
+.descriptionText,
+.oldPriceText,
+.discountText,
+.ratingText {
+    color: var(--Type-Low-Emphasis, #626262);
+    font-family: Inter;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+}
+
+.productNameText {
+    color: var(--Type-High-Emphasis, #171520);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+}
+
+.descriptionText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.oldPriceText {
+    text-decoration-line: line-through;
+}
+
+.discountText {
+    color: #E21D1D;
+    font-size: 1rem;
+    line-height: 1.25rem;
+}
+
+.ratingText {
+    font-weight: 500;
+    line-height: 1.125rem;
+    color: var(--Primary, #1B4B66);
+}
