@@ -7,6 +7,7 @@ import Category from "./pages/Category";
 import Product from "./pages/Product";
 import Checkout from "./pages/Checkout";
 
+console.log("Hello World!");
 function App() {
   return (
     <BrowserRouter>
