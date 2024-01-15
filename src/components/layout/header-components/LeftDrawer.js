@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import { Drawer, IconButton, List, ListItem, ListItemText, } from "@mui/material";
 import { Link } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
-import { CATEGORIES } from "../../utils/constants.js";
+import { CATEGORIES } from "../../../utils/constants.js";
 
 const CustomizedLink = styled(Link)`
 text-decoration: none;
