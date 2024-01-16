@@ -11,7 +11,7 @@ const Search = styled('div')(() => ({
     minWidth: '362px',
     height: '44px',
     borderRadius: '4px',
-    backgroundColor: 'var(--background-gray)',
+    backgroundColor: 'var(--gray)',
     display: 'flex',
     flex: '1',
     alignItems: 'center',
