@@ -1,9 +1,10 @@
-
+import HandPickedCollections from "../components/home/HandpickedCollections";
 
 const Home = () => {
   return (
-      <div>Home Page</div>
-
+    <>
+      <HandPickedCollections />
+    </>
   );
 };
 
