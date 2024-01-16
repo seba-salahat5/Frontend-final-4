@@ -1,0 +1,1 @@
+export const CATEGORIES = ['Handbags', 'Watches', 'Skincare', 'Jewellery', 'Apparels'];
