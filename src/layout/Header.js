@@ -6,7 +6,7 @@ import InputField from "../components/header/InputField.js";
 import LeftDrawer from '../components/header/LeftDrawer.js';
 import Navbar from '../components/header/Navbar.js';
 import IconButtonsGroup from '../components/header/IconButtonsGroup.js';
-import { CATEGORIES } from "../utils/constants.js";
+import { TOP_CATEGORIES } from "../utils/constants.js";
 
 const CustomizedAppBar = styled(AppBar)(() => ({
   width: '100%',
@@ -45,14 +45,14 @@ const Header = () => {
                 ? (
                   <>
                     <Stack spacing={{ xs: 1, sm: 2 }} direction="row" sx={{ alignItems: 'center' }}>
-                      <LeftDrawer />
+                      <LeftDrawer navItems={TOP_CATEGORIES} />
                       <Heading>Home</Heading>
                     </Stack>
                   </>
                 ) : (
                   <>
                     <CustomizedImage src={imageSrc} alt='logo' />
-                    <Navbar navItems={CATEGORIES} />
+                    <Navbar navItems={TOP_CATEGORIES} />
                   </>
                 )
             }
