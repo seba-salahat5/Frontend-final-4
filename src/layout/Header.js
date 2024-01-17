@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { AppBar, Toolbar, Container, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { CustomContainer } from "./CustomContainer";
 import InputField from "../components/header/InputField.js";
 import LeftDrawer from '../components/header/LeftDrawer.js';
 import Navbar from '../components/header/Navbar.js';
@@ -35,32 +36,34 @@ const Header = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const imageSrc = process.env.PUBLIC_URL + `/assets/logo.png`;
   return (
-    <CustomizedAppBar position="static" sx={{ boxShadow: 0, py: 1 }}>
-      <Container maxWidth="xl" disableGutters>
-        <Toolbar disableGutters sx={{ display: 'flex', mt: { xs: '24px', md: '0px' }, justifyContent: 'space-between' }}>
-          {
-            isMobile
-              ? (
-                <>
-                  <Stack spacing={{ xs: 1, sm: 2 }} direction="row" sx={{ alignItems: 'center' }}>
-                    <LeftDrawer />
-                    <Heading>Home</Heading>
-                  </Stack>
-                </>
-              ) : (
-                <>
-                  <CustomizedImage src={imageSrc} alt='logo' />
-                  <Navbar navItems={CATEGORIES} />
-                </>
-              )
-          }
-          <Stack direction="row">
-            <InputField placeholder="Search for products or brands....." />
-            <IconButtonsGroup />
-          </Stack>
-        </Toolbar>
-      </Container>
-    </CustomizedAppBar>
+    <CustomContainer>
+      <CustomizedAppBar position="static" sx={{ boxShadow: 0, py: 1 }}>
+        <Container maxWidth="xl" disableGutters>
+          <Toolbar disableGutters sx={{ display: 'flex', mt: { xs: '24px', md: '0px' }, justifyContent: 'space-between' }}>
+            {
+              isMobile
+                ? (
+                  <>
+                    <Stack spacing={{ xs: 1, sm: 2 }} direction="row" sx={{ alignItems: 'center' }}>
+                      <LeftDrawer />
+                      <Heading>Home</Heading>
+                    </Stack>
+                  </>
+                ) : (
+                  <>
+                    <CustomizedImage src={imageSrc} alt='logo' />
+                    <Navbar navItems={CATEGORIES} />
+                  </>
+                )
+            }
+            <Stack direction="row">
+              <InputField placeholder="Search for products or brands....." />
+              <IconButtonsGroup />
+            </Stack>
+          </Toolbar>
+        </Container>
+      </CustomizedAppBar>
+    </CustomContainer>
   );
 };
 

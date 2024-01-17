@@ -1,15 +1,12 @@
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
-import { CustomContainer } from "./CustomContainer";
+
 
 const Layout = () => {
   return (
     <>
-      <CustomContainer>
-        <Header />
-      </CustomContainer>
-
+      <Header />
       <main>
         <Outlet />
       </main>
