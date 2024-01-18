@@ -13,13 +13,13 @@ const FooterAccordion = styled(Accordion)(() => ({
   bottom: '0',
 }));
 
-const AccordionSummaryText = styled(Typography)(()=>({
-fontSize: '14px',
-fontWeight: '500',
-lineHeight: '18px',
-letterSpacing: '0em',
-textAlign: 'left',
-color: 'var(--summary-text)',
+const AccordionSummaryText = styled(Typography)(() => ({
+  fontSize: '14px',
+  fontWeight: '500',
+  lineHeight: '18px',
+  letterSpacing: '0em',
+  textAlign: 'left',
+  color: 'var(--summary-text)',
 }));
 
 const Layout = () => {
@@ -35,10 +35,10 @@ const Layout = () => {
         ? (
           <>
             <FooterAccordion>
-              <AccordionSummary expandIcon={<ExpandMoreIcon sx={{width: '24px', height: '24px' }} />} aria-controls="footer-content" id="footer-header">
+              <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ width: '24px', height: '24px' }} />} aria-controls="footer-content" id="footer-header">
                 <AccordionSummaryText>More about CORA’L</AccordionSummaryText>
               </AccordionSummary>
-              <AccordionDetails sx={{p:0}}>
+              <AccordionDetails sx={{ p: 0 }}>
                 <Footer />
               </AccordionDetails>
             </FooterAccordion>

@@ -11,7 +11,7 @@ const SocialLogos = ({ logos }) => {
     return (
         <Stack direction={'row'} spacing={2} mt={'24px'}>
             {logos.map((logo) => (
-                <IconButton key={logo.name} aria-label={logo.name} sx={{padding: '0px'}}>
+                <IconButton key={logo.name} aria-label={logo.name} sx={{ padding: '0px' }}>
                     <LogoImage src={imageSrc + logo.svg} alt={logo.name} />
                 </IconButton>
             ))}

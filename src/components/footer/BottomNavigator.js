@@ -26,10 +26,10 @@ export default function BottomNavigator() {
           },
         }}
       >
-        <BottomNavigationAction label="Home" value="Home" icon={<HomeOutlinedIcon/>} sx={{color: 'inherit'}} />
-        <BottomNavigationAction label="Categories" value="Categories" icon={<WidgetsOutlinedIcon />} sx={{color: 'inherit'}} />
-        <BottomNavigationAction label="Profile" value="Profile" icon={<PermIdentityRoundedIcon />} sx={{color: 'inherit'}} />
-        <BottomNavigationAction label="Cart" value="Cart" icon={<ShoppingBagOutlinedIcon />} sx={{color: 'inherit'}} />
+        <BottomNavigationAction label="Home" value="Home" icon={<HomeOutlinedIcon />} sx={{ color: 'inherit' }} />
+        <BottomNavigationAction label="Categories" value="Categories" icon={<WidgetsOutlinedIcon />} sx={{ color: 'inherit' }} />
+        <BottomNavigationAction label="Profile" value="Profile" icon={<PermIdentityRoundedIcon />} sx={{ color: 'inherit' }} />
+        <BottomNavigationAction label="Cart" value="Cart" icon={<ShoppingBagOutlinedIcon />} sx={{ color: 'inherit' }} />
       </BottomNavigation>
     </Box>
   );

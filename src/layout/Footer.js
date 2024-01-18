@@ -44,7 +44,7 @@ const CopyrightText = styled(Typography)(() => ({
   color: 'var(--light-text)',
 }));
 
-const StyledDivider = styled(Divider)(()=>({
+const StyledDivider = styled(Divider)(() => ({
   backgroundColor: 'var(--light-text)',
   position: 'absolute',
   left: 0,

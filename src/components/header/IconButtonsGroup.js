@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, IconButton} from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import PermIdentityRoundedIcon from '@mui/icons-material/PermIdentityRounded';

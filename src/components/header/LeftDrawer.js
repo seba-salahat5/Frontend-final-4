@@ -8,7 +8,8 @@ const CustomizedLink = styled(Link)`
 text-decoration: none;
 color: inherit;
 `;
-const LeftDrawer = ({navItems}) => {
+
+const LeftDrawer = ({ navItems }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   return (<>
     <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>

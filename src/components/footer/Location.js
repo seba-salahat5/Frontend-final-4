@@ -11,14 +11,14 @@ const LocationText = styled(Typography)(() => ({
     textAlign: 'left',
 }));
 
-const CustomStack = styled(Stack)(()=>({
+const CustomStack = styled(Stack)(() => ({
     color: 'var(--bright)',
     marginTop: '26px'
 }));
 const Location = () => {
     return (
-        <CustomStack direction={'row'} sx={{alignItems: 'center'}}>
-            <PlaceOutlinedIcon sx={{width: '24px', height: '24px'}}/>
+        <CustomStack direction={'row'} sx={{ alignItems: 'center' }}>
+            <PlaceOutlinedIcon sx={{ width: '24px', height: '24px' }} />
             <LocationText>United States</LocationText>
         </CustomStack>
     );
