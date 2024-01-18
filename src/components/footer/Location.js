@@ -17,8 +17,8 @@ const CustomStack = styled(Stack)(()=>({
 }));
 const Location = () => {
     return (
-        <CustomStack direction={'row'}>
-            <PlaceOutlinedIcon sx={{width: '24px', height: '24px' }}/>
+        <CustomStack direction={'row'} sx={{alignItems: 'center'}}>
+            <PlaceOutlinedIcon sx={{width: '24px', height: '24px'}}/>
             <LocationText>United States</LocationText>
         </CustomStack>
     );

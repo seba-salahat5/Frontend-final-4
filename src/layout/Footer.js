@@ -1,20 +1,24 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import { Typography, Box, Stack, Grid, useMediaQuery, useTheme } from '@mui/material';
-import { CustomContainer } from './CustomContainer.js';
+import { Typography, Box, Stack, Grid, Divider, useMediaQuery, useTheme } from '@mui/material';
 import FooterList from '../components/footer/FooterList.js';
 import SocialLogos from '../components/footer/SocialLogos.js';
 import Location from '../components/footer/Location.js';
 import { CATEGORIES, LOGOS, COLLECTIONS } from '../utils/constants.js';
 
-const FooterComponent = styled(CustomContainer)(() => ({
+const FooterComponent = styled('div')(() => ({
+  margin: 0,
+  paddingInline: '20px',
+  zIndex: '-3',
   width: '100%',
-  position: 'relative',
-  top: '2626px',
-  paddingBottom: '106px',
-  paddingTop: '32px',
-  paddingInline: '62px',
+  paddingBlock: '32px',
   backgroundColor: 'var(--primary)',
+  '@media (min-width: 900px)': {
+    position: 'relative',
+    top: '2626px',
+    paddingInline: '62px',
+    paddingBottom: '106px',
+  },
 }));
 
 const ListTitle = styled(Typography)(() => ({
@@ -31,14 +35,21 @@ const ListBox = styled(Box)(() => ({
   position: 'relative',
 }));
 
-const CopyrightText = styled(Typography)(()=>({
-fontSize: '14px',
-fontWeight: '500',
-lineHeight: '18px',
-letterSpacing: '0em',
-textAlign: 'right',
-marginTop: '8px',
-color: 'var(--light-text)',
+const CopyrightText = styled(Typography)(() => ({
+  fontSize: '14px',
+  fontWeight: '500',
+  lineHeight: '18px',
+  letterSpacing: '0em',
+  marginTop: '8px',
+  color: 'var(--light-text)',
+}));
+
+const StyledDivider = styled(Divider)(()=>({
+  backgroundColor: 'var(--light-text)',
+  position: 'absolute',
+  left: 0,
+  right: 0,
+  zIndex: 1,
 }));
 
 const Footer = () => {
@@ -59,11 +70,14 @@ const Footer = () => {
             </ListBox>
           </Stack>
         </Grid>
+        <Box sx={{ width: '100%', display: isMobile ? 'block' : 'none' }}>
+          <StyledDivider />
+        </Box>
         <Grid item xs={12} sm={6}>
-          <Stack direction={'column'} sx={{alignItems: {xs: 'left',sm:'end'}}}>
+          <Stack direction={'column'} sx={{ alignItems: { sm: 'left', md: 'end' } }}>
             <SocialLogos logos={LOGOS} />
-            <Location /> 
-            <CopyrightText>© 2021 | Cora Leviene All Rights Reserved</CopyrightText>
+            <Location />
+            <CopyrightText sx={{ textAlign: { sm: 'left', md: 'end' } }}>© 2021 | Cora Leviene All Rights Reserved</CopyrightText>
           </Stack>
         </Grid>
       </Grid>

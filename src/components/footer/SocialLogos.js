@@ -9,9 +9,9 @@ const LogoImage = styled('img')(() => ({
 const SocialLogos = ({ logos }) => {
     const imageSrc = process.env.PUBLIC_URL + `/assets/social-media/`;
     return (
-        <Stack direction={'row'}>
+        <Stack direction={'row'} spacing={2} mt={'24px'}>
             {logos.map((logo) => (
-                <IconButton key={logo.name} aria-label={logo.name}>
+                <IconButton key={logo.name} aria-label={logo.name} sx={{padding: '0px'}}>
                     <LogoImage src={imageSrc + logo.svg} alt={logo.name} />
                 </IconButton>
             ))}
