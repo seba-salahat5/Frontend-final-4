@@ -5,11 +5,12 @@ import { Accordion, AccordionSummary, AccordionDetails, Typography, useMediaQuer
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
+import BottomNavigator from '../components/footer/BottomNavigator';
 
 const FooterAccordion = styled(Accordion)(() => ({
   width: '100%',
   position: 'relative',
-  top: '118px',
+  bottom: '0',
 }));
 
 const AccordionSummaryText = styled(Typography)(()=>({
@@ -41,6 +42,7 @@ const Layout = () => {
                 <Footer />
               </AccordionDetails>
             </FooterAccordion>
+            <BottomNavigator />
           </>
         ) : (
           <Footer />
