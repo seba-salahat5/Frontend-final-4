@@ -54,6 +54,26 @@ const Home = () => {
       showOldPrice: false,
       ratersNumber: 43,
     },
+    {
+      image: "../assets/newArrivals/pink-bag-small.png",
+      productName: "Grande",
+      productDescreption: "Blossom Pouch",
+      discount: 0.5,
+      showRating: false,
+      price: 39.49,
+      showOldPrice: false,
+      ratersNumber: 43,
+    },
+    {
+      image: "../assets/newArrivals/pink-bag-small.png",
+      productName: "Grande",
+      productDescreption: "Blossom Pouch",
+      discount: 0.5,
+      showRating: false,
+      price: 39.49,
+      showOldPrice: false,
+      ratersNumber: 43,
+    },
   ];
 
   return (
