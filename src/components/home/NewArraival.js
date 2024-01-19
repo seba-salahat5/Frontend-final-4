@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import ProductCard from '../shared/ProductCard';
 
 const SharedTextStyles = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
-  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 600;
 `;
@@ -98,7 +96,7 @@ function NewArrivals({ cards }) {
           <ViewAllButton>
             <ButtonText>View All</ButtonText>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 4.5L16.5 12L9 19.5" stroke="#13101E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M9 4.5L16.5 12L9 19.5" stroke="#13101E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </ViewAllButton>
         </ViewAllLayout>
