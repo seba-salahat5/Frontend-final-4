@@ -1,4 +1,5 @@
-import { Container } from "@mui/material";
+import BrandsList from "../components/home/BrandsList";
+import CarouselBanner from "../components/home/CarouselBanner";
 import HandPickedCollections from "../components/home/HandpickedCollections";
 import NewArrivals from "../components/home/NewArraival";
 import { CustomContainer } from "../layout/CustomContainer";
@@ -49,9 +50,13 @@ const Home = () => {
   return (
     <>
       <CustomContainer>
+        <CarouselBanner />
         <NewArrivals cards={tempObj} />
       </CustomContainer>
       <HandPickedCollections />
+      <CustomContainer>
+        <BrandsList />
+      </CustomContainer>
     </>
   );
 };
