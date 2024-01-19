@@ -14,7 +14,7 @@ const SharedTextStyles = styled.div`
 const Card = styled.div`
   display: flex;
   width: 17.75rem;
-  height: 26.375rem;
+  height: 23.1875rem;
   padding-bottom: 1.1875rem;
   flex-direction: column;
   align-items: center;
