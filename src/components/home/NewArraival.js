@@ -9,7 +9,7 @@ const SharedTextStyles = styled.div`
 `;
 
 const ArrivalLayout = styled.div`
-  width: 78.5rem;
+  width: 100%;
   height: 29.6875rem;
   flex-shrink: 0;
 `;
@@ -18,14 +18,39 @@ const TopStyle = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
+  height: 4.188rem;
 `;
 
 const CardsLayout = styled.div`
-  display: inline-flex;
+  display: flex; /* Change from inline-flex to flex */
   height: 25.48175rem;
+  width: 100%;
   align-items: flex-start;
   gap: 2.5rem;
-  flex-shrink: 0;
+  overflow-x: scroll;
+
+  /* Add custom scrollbar styles here */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 5px !important;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: blue !important;
+    border-radius: 10px !important;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000 !important;
+  }
 `;
 
 const TitleStyle = styled.div`
@@ -92,6 +117,7 @@ function NewArrivals({ cards }) {
           </ViewAllButton>
         </ViewAllLayout>
       </TopStyle>
+
       <CardsLayout>
         {cards.map((item) => (
           <ProductCard

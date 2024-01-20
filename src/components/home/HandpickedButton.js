@@ -37,7 +37,7 @@ const HandPickedCategory = styled.h3`
 const HandPickedButton = ({ image, category }) => {
   return (
     <ButtonContainer>
-      <HandPickedImage src={"./assets/hand-picked/" + image} alt={image} />
+      <HandPickedImage src={process.env.PUBLIC_URL +"/assets/hand-picked/" + image} alt={image} />
       <HandPickedCategory>{category}</HandPickedCategory>
     </ButtonContainer>
   );
