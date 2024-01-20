@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import ProductCard from "../shared/ProductCard";
+import styled from 'styled-components';
+import ProductCard from '../shared/ProductCard';
+import { Link } from "react-router-dom";
 
 const SharedTextStyles = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
@@ -74,12 +75,14 @@ const ViewAllLayout = styled.div`
   flex-shrink: 0;
 `;
 
-const ViewAllButton = styled.div`
+const ViewAllButton = styled(Link)`
   display: inline-flex;
   padding: 0.625rem 0.5rem;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
 `;
 
 const ButtonText = styled(SharedTextStyles)`
@@ -97,7 +100,7 @@ function NewArrivals({ cards }) {
           <TitleTextStyle>New Arrivals</TitleTextStyle>
         </TitleStyle>
         <ViewAllLayout>
-          <ViewAllButton>
+          <ViewAllButton to="/category">
             <ButtonText>View All</ButtonText>
             <svg
               xmlns="http://www.w3.org/2000/svg"
