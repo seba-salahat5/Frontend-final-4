@@ -90,7 +90,7 @@ function ProductCard({ button, type, image, productName, productDescreption, dis
   const imageSrc = process.env.PUBLIC_URL + `${image}`;
   return (
     <Card to="/category">
-      <CardImage src={image} alt={productName} />
+      <CardImage src={imageSrc} alt={productName} />
       <CardFrame>
         <CardInfo>
           <ProductNameText>{productName}</ProductNameText>

@@ -12,7 +12,7 @@ import { CustomContainer } from '../layout/CustomContainer';
 
 let tempObj = [
   {
-    image: "../assets/newArrivals/pink-bag-small.png",
+    image: "/assets/newArrivals/pink-bag-small.png",
     productName: "Grande",
     productDescreption: "Blossom Pouch",
     discount: 0.5,
@@ -23,7 +23,7 @@ let tempObj = [
     rating: 4,
   },
   {
-    image: "../assets/newArrivals/pink-bag-small.png",
+    image: "/assets/newArrivals/pink-bag-small.png",
     productName: "Grande",
     productDescreption: "Blossom Pouch",
     discount: 0.5,
@@ -34,7 +34,7 @@ let tempObj = [
     rating: 3.4,
   },
   {
-    image: "../assets/newArrivals/pink-bag-small.png",
+    image: "/assets/newArrivals/pink-bag-small.png",
     productName: "Grande",
     productDescreption: "Blossom Pouch",
     discount: 0.5,
@@ -45,7 +45,7 @@ let tempObj = [
     rating: 4,
   },
   {
-    image: "../assets/newArrivals/pink-bag-small.png",
+    image: "/assets/newArrivals/pink-bag-small.png",
     productName: "Grande",
     productDescreption: "Blossom Pouch",
     discount: 0.5,
@@ -56,7 +56,7 @@ let tempObj = [
     rating: 4,
   },
   {
-    image: "../assets/newArrivals/pink-bag-small.png",
+    image: "/assets/newArrivals/pink-bag-small.png",
     productName: "Grande",
     productDescreption: "Blossom Pouch",
     discount: 0.5,
@@ -67,7 +67,7 @@ let tempObj = [
     rating: 4,
   },
   {
-    image: "../assets/newArrivals/pink-bag-small.png",
+    image: "/assets/newArrivals/pink-bag-small.png",
     productName: "Grande",
     productDescreption: "Blossom Pouch",
     discount: 0.5,
@@ -78,7 +78,7 @@ let tempObj = [
     rating: 4,
   },
   {
-    image: "../assets/newArrivals/pink-bag-small.png",
+    image: "/assets/newArrivals/pink-bag-small.png",
     productName: "Grande",
     productDescreption: "Blossom Pouch",
     discount: 0.5,
