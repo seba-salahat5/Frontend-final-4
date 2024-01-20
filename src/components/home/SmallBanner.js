@@ -6,6 +6,7 @@ const BannerImage = styled('img')(({imageHight}) => ({
     width: '100%',
     height: imageHight || 'auto',
     objectFit: 'cover',
+    minHeight: '132px',
     position: 'relative',
     zIndex: '0',
     borderRadius: '15px',
@@ -23,6 +24,7 @@ const ImageButton = styled(ButtonBase)(({ buttonHight }) => ({
     width: '100%',
     position: 'relative',
     height: buttonHight || 'auto',
+    minHeight: '132px',
     '&:hover, &.Mui-focusVisible': {
         zIndex: 0,
         '& .MuiImageMarked-root': {
@@ -35,10 +37,7 @@ const ImageButton = styled(ButtonBase)(({ buttonHight }) => ({
 
 const SmallBanner = ({ bannerHight, backgroundImage, imageAlt, children }) => {
     return (
-        //<BannerImage imageHight={'400px'} imageSrc={process.env.PUBLIC_URL + '/assets/main offer.png'} alt={'Limited Edition'} />
-        //<BannerImage imageHight={bannerHight} imageSrc={backgroundImage} alt={alternativeText} />
-
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: '156px', width: '100%' }}>
             <ImageButton focusRipple>
                 <BannerImage imageHight={bannerHight} src={process.env.PUBLIC_URL + backgroundImage} alt={imageAlt} />
                 {children}

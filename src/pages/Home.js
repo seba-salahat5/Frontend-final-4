@@ -23,6 +23,7 @@ const Home = () => {
       price: 39.49,
       showOldPrice: false,
       ratersNumber: 43,
+      productId:1,
     },
     {
       image: "/assets/newArrivals/pink-bag-small.png",
@@ -33,6 +34,7 @@ const Home = () => {
       price: 39.49,
       showOldPrice: false,
       ratersNumber: 43,
+      productId:2,
     },
     {
       image: "/assets/newArrivals/pink-bag-small.png",
@@ -43,6 +45,7 @@ const Home = () => {
       price: 39.49,
       showOldPrice: false,
       ratersNumber: 43,
+      productId:3,
     },
     {
       image: "/assets/newArrivals/pink-bag-small.png",
@@ -53,6 +56,7 @@ const Home = () => {
       price: 39.49,
       showOldPrice: false,
       ratersNumber: 43,
+      productId:4,
     },
     {
       image: "/assets/newArrivals/pink-bag-small.png",
@@ -63,6 +67,7 @@ const Home = () => {
       price: 39.49,
       showOldPrice: false,
       ratersNumber: 43,
+      productId:5,
     },
     {
       image: "/assets/newArrivals/pink-bag-small.png",
@@ -73,6 +78,7 @@ const Home = () => {
       price: 39.49,
       showOldPrice: false,
       ratersNumber: 43,
+      productId:6,
     },
   ];
 
@@ -90,7 +96,6 @@ const Home = () => {
               textsize={'52px'} 
               lineheight={'68px'} 
               textcolor={'var(--secondary1)'} 
-              maxWidth={'48%'} 
               left= {'4.5%'}
               top = {'32%'}
               bannerText={'Limited Edition Products'}/>
@@ -102,7 +107,6 @@ const Home = () => {
               textsize={'40px'} 
               lineheight={'52px'} 
               textcolor={'var(--secondary2)'} 
-              maxWidth={'34%'} 
               left = {'61%'}
               top = {'25%'}
               bannerText={'15% Off And More!'}/>
@@ -114,7 +118,6 @@ const Home = () => {
               textsize={'40px'} 
               lineheight={'52px'} 
               textcolor={'var(--primary)'} 
-              maxWidth={'46%'} 
               left= {'50%'}
               top= {'24%'}
               bannerText={'Popular In The Community!'}/>
