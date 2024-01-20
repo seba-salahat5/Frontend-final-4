@@ -2,28 +2,25 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const ButtonContainer = styled(Link)`
-  width: 280px;
-  height: 280px;
-  flex-shrink: 0;
   color: inherit;
   text-decoration: none;
-  border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 0 10px -5px rgba(0, 0, 0, 0.3);
   position: relative;
-
-  @media (max-width: 1200px) {
-    width: calc(200px + 10 * ((100vw - 440px) / 760));
-    height: calc(200px + 10 * ((100vw - 440px) / 760));
-  }
-  @media (max-width: 940px) {
-    width: 150px;
-    height: 150px;
-  }
 `;
 
 const HandPickedImage = styled.img`
-  width: 100%;
+  border-radius: 16px;
+  width: 280px;
+  height: 280px;
+  @media (max-width: 1200px) {
+    width: 200px;
+    height: 200px;
+  }
+  @media (max-width: 510px) {
+    width: 150px;
+    height: 150px;
+  }
 `;
 const HandPickedCategory = styled.h3`
   position: absolute;
@@ -40,7 +37,7 @@ const HandPickedCategory = styled.h3`
 const HandPickedButton = ({ image, category }) => {
   return (
     <ButtonContainer>
-      <HandPickedImage src={"./assets/hand-picked/" + image} alt={image} />
+      <HandPickedImage src={process.env.PUBLIC_URL +"/assets/hand-picked/" + image} alt={image} />
       <HandPickedCategory>{category}</HandPickedCategory>
     </ButtonContainer>
   );
