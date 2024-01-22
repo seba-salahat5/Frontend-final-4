@@ -9,7 +9,7 @@ export default function BottomNavigator() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box>
       <BottomNavigation
         showLabels
         value={value}
@@ -26,7 +26,7 @@ export default function BottomNavigator() {
           },
         }}
       >
-        <BottomNavigationAction label="Home" value="Home" icon={<HomeOutlinedIcon />} sx={{ color: 'inherit' }} />
+        <BottomNavigationAction label="Home" value="Home" icon={<HomeOutlinedIcon />} sx={{ color: 'inherit'}} />
         <BottomNavigationAction label="Categories" value="Categories" icon={<WidgetsOutlinedIcon />} sx={{ color: 'inherit' }} />
         <BottomNavigationAction label="Profile" value="Profile" icon={<PermIdentityRoundedIcon />} sx={{ color: 'inherit' }} />
         <BottomNavigationAction label="Cart" value="Cart" icon={<ShoppingBagOutlinedIcon />} sx={{ color: 'inherit' }} />
