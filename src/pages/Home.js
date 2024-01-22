@@ -1,6 +1,9 @@
+
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
+import BrandsList from "../components/home/BrandsList";
+import CarouselBanner from "../components/home/CarouselBanner";
 import HandPickedCollections from "../components/home/HandpickedCollections";
 import NewArrivals from "../components/home/NewArraival";
 import { CustomContainer } from "../layout/CustomContainer";
@@ -78,6 +81,16 @@ const Home = () => {
       price: 39.49,
       showOldPrice: false,
       ratersNumber: 43,
+    },
+    {
+      image: "/assets/newArrivals/pink-bag-small.png",
+      productName: "Grande",
+      productDescreption: "Blossom Pouch",
+      discount: 0.5,
+      showRating: false,
+      price: 39.49,
+      showOldPrice: false,
+      ratersNumber: 43,
       productId:6,
     },
   ];
@@ -85,6 +98,7 @@ const Home = () => {
   return (
     <>
       <CustomContainer>
+        <CarouselBanner />
         <NewArrivals cards={tempObj} />
       </CustomContainer>
       <HandPickedCollections />
@@ -125,6 +139,7 @@ const Home = () => {
           </Grid>
 
         </CardsSection>
+        <BrandsList />
       </CustomContainer>
     </>
   );

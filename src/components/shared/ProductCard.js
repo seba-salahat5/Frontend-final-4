@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import RatingStars from './RatingStars';
+import { Link } from "react-router-dom";
 
 const SharedTextStyles = styled.div`
   font-family: 'Inter', sans-serif;
@@ -9,8 +10,7 @@ const SharedTextStyles = styled.div`
   font-weight: 400;
   line-height: 1.25rem;
 `;
-
-const Card = styled.div`
+const Card = styled(Link)`
   display: flex;
   width: 17.75rem;
   height: 23.1875rem;
@@ -18,6 +18,8 @@ const Card = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 9px;
+  text-decoration: none;
+  color: inherit;
 `;
 
 const CardImage = styled.img`
@@ -87,7 +89,7 @@ const RatingText = styled(SharedTextStyles)`
 function ProductCard({ button, type, image, productName, productDescreption, discount, showLabel, isTrending, showRating, rating, price, showOldPrice, ratersNumber }) {
   const imageSrc = process.env.PUBLIC_URL + `${image}`;
   return (
-    <Card>
+    <Card to="/category">
       <CardImage src={imageSrc} alt={productName} />
       <CardFrame>
         <CardInfo>
