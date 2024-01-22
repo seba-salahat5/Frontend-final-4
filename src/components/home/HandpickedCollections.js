@@ -30,6 +30,7 @@ const HandpickedGrid = styled.div`
 const HandPickedBox = styled.div`
   background: var(--primary);
   padding: 20px 24px;
+  margin-top: 68px;
 `;
 
 const HandPickedCollections = () => {
@@ -39,7 +40,7 @@ const HandPickedCollections = () => {
         <HandPickedTitle>Handpicked Collection</HandPickedTitle>
         <HandpickedGrid>
           {handPickedData.map((item) => (
-            <HandPickedButton image={item.image} category={item.category} />
+            <HandPickedButton key={item.id} image={item.image} category={item.category} />
           ))}
         </HandpickedGrid>
       </Container>

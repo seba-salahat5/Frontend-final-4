@@ -3,8 +3,8 @@ const brandsData = [
   "prada.png",
   "h&m.png",
   "d&g.png",
-  "prada.png",
   "zara.png",
+  "biba.png",
 ];
 
 export { brandsData };
