@@ -9,6 +9,7 @@ const ImageCarousel = styled(Carousel)`
     position: relative;
     display: flex;
     justify-content: center;
+    margin-top: 16px;
 }
 .carousel-slider {
     border-radius: 16px;
