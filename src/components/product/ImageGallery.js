@@ -5,7 +5,6 @@ import { Carousel } from 'react-responsive-carousel';
 
 const ImageCarousel = styled(Carousel)`
 .carousel {
-    width: 605px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -18,6 +17,8 @@ const ImageCarousel = styled(Carousel)`
     border-radius: 16px;
 } 
 .thumb {
+    width: 75px;
+    height: 75px;
     border-radius: 8px;
 }
 .carousel .thumb.selected {
@@ -25,9 +26,9 @@ const ImageCarousel = styled(Carousel)`
 }
 `;
 
-const ImageGallery = ({ imageList }) => {
+const ImageGallery = ({ imageList, width }) => {
     return (
-        <ImageCarousel width={'605px'} thumbWidth={'75px'} dynamicHeight={'75px'} showStatus={false}>
+        <ImageCarousel width={width} thumbWidth={width * 0.12} showStatus={false}>
             {imageList.map((item) => (
                 <div key={item.id}>
                     <img src={process.env.PUBLIC_URL + item.path} alt='Gallery Item' />
