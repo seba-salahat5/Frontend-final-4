@@ -5,6 +5,7 @@ import ImageGallery from '../components/product/ImageGallery';
 import { CustomContainer } from '../layout/CustomContainer';
 import PathLine from '../components/shared/PathLine';
 import RatingStars from '../components/shared/RatingStars';
+import StateButtonGroup from '../components/product/StateButtonGroup';
 
 const Heading = styled(Typography)(() => ({
   fontWeight: '600',
@@ -63,7 +64,7 @@ const Product = () => {
   const ratersNumber = 250;
   const price = 78.66;
   const discount = 0.5;
-  //const quantity = 0;
+  const quantity = 0;
   //const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus scelerisque laoreet tortor cras molestie tincidunt malesuada malesuada. Neque, mauris duis dui id morbi magna. Cras lacus, viverra auctor in turpis est quisque eget tristique. Dolor augue mattis duis semper gravida enim eu imperdiet sit. Et pharetra platea pretium nec feugiat tincidunt quam leo tristique. Nulla enim consectetur sit et tempus, faucibus leo ac cras. Purus ut non eu mus volutpat. Eget est vel sagittis amet sit eu eu ullamcorper tellus. Leo mauris, faucibus vulputate adipiscing elementum tristique dictumst augue pellentesque. Justo, sed nunc, pretium turpis scelerisque. Enim urna etiam morbi vestibulum ac dictumst. Ac ut elementum molestie sit felis imperdiet.';
   //const relatedProduct;
   //const reviews;
@@ -96,6 +97,8 @@ const Product = () => {
               {discount * 100}%OFF
             </Heading>
           </Stack>
+
+          <StateButtonGroup initialState={quantity} />
 
         </Grid>
       </Grid>
