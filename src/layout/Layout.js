@@ -38,23 +38,27 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-      {/*       {isMobile
-        ? (
-          <>
-            <FooterAccordion>
-              <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ width: '24px', height: '24px' }} />} aria-controls="footer-content" id="footer-header">
-                <AccordionSummaryText>More about CORA’L</AccordionSummaryText>
-              </AccordionSummary>
-              <AccordionDetails sx={{ p: 0 }}>
-                <Footer />
-              </AccordionDetails>
-            </FooterAccordion>
-            <BottomNavigator />
-          </>
-        ) : (
-          <Footer />
-        )
-      } */}
+      {isMobile ? (
+        <>
+          <FooterAccordion>
+            <AccordionSummary
+              expandIcon={
+                <ExpandMoreIcon sx={{ width: "24px", height: "24px" }} />
+              }
+              aria-controls="footer-content"
+              id="footer-header"
+            >
+              <AccordionSummaryText>More about CORA’L</AccordionSummaryText>
+            </AccordionSummary>
+            <AccordionDetails sx={{ p: 0 }}>
+              <Footer />
+            </AccordionDetails>
+          </FooterAccordion>
+          <BottomNavigator />
+        </>
+      ) : (
+        <Footer />
+      )}
     </>
   );
 };
