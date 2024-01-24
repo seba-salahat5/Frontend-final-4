@@ -89,8 +89,8 @@ const RatingText = styled(SharedTextStyles)`
 function ProductCard({ button, type, image, productName, productDescreption, discount, showLabel, isTrending, showRating, rating, price, showOldPrice, ratersNumber }) {
   const imageSrc = process.env.PUBLIC_URL + `${image}`;
   return (
-    <Card to="/category">
-      <CardImage src={image} alt={productName} />
+    <Card to="/product">
+      <CardImage src={imageSrc} alt={productName} />
       <CardFrame>
         <CardInfo>
           <ProductNameText>{productName}</ProductNameText>

@@ -9,7 +9,7 @@ import Checkout from "./pages/Checkout";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Frontend-final-4">
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />

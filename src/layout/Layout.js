@@ -1,25 +1,32 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, useMediaQuery, useTheme } from '@mui/material';
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
-import BottomNavigator from '../components/footer/BottomNavigator';
+import BottomNavigator from "../components/footer/BottomNavigator";
 
 const FooterAccordion = styled(Accordion)(() => ({
-  width: '100%',
-  position: 'relative',
-  bottom: '0',
+  width: "100%",
+  position: "relative",
+  bottom: "0",
 }));
 
 const AccordionSummaryText = styled(Typography)(() => ({
-  fontSize: '14px',
-  fontWeight: '500',
-  lineHeight: '18px',
-  letterSpacing: '0em',
-  textAlign: 'left',
-  color: 'var(--summary-text)',
+  fontSize: "14px",
+  fontWeight: "500",
+  lineHeight: "18px",
+  letterSpacing: "0em",
+  textAlign: "left",
+  color: "var(--summary-text)",
 }));
 
 const Layout = () => {
@@ -31,7 +38,7 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-      {isMobile
+      {/*       {isMobile
         ? (
           <>
             <FooterAccordion>
@@ -47,7 +54,7 @@ const Layout = () => {
         ) : (
           <Footer />
         )
-      }
+      } */}
     </>
   );
 };

@@ -12,18 +12,18 @@ const CardsGrid = ({ cards }) => {
   return (
     <GridLayout>
       {cards.map((item) => (
-        <ProductCard
-          key={item.productId}
-          image={item.image}
-          productName={item.productName}
-          productDescreption={item.productDescreption}
-          discount={item.discount}
-          showRating={item.showRating}
-          price={item.price}
-          showOldPrice={item.showOldPrice}
-          ratersNumber={item.ratersNumber}
-          rating={item.rating}
-        />
+          <ProductCard
+            key={item.productId}
+            image={item.image}
+            productName={item.productName}
+            productDescreption={item.productDescreption}
+            discount={item.discount}
+            showRating={item.showRating}
+            price={item.price}
+            showOldPrice={item.showOldPrice}
+            ratersNumber={item.ratersNumber}
+            rating={item.rating}
+          />
       ))}
     </GridLayout>
   );

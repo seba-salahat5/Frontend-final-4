@@ -9,21 +9,20 @@ export default function BottomNavigator() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box sx={{
+      position: 'sticky',
+      bottom: '0px',
+      zIndex: 3,
+      color: 'var(--light-text)',
+      '&.MuiBottomNavigationAction-root.Mui-selected': {
+        color: 'var(--primary)',
+      },
+    }}>
       <BottomNavigation
         showLabels
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
-        }}
-        sx={{
-          position: 'sticky',
-          bottom: '0px',
-          zIndex: 3,
-          color: 'var(--light-text)',
-          '&.MuiBottomNavigationAction-root.Mui-selected': {
-            color: 'var(--primary)',
-          },
         }}
       >
         <BottomNavigationAction label="Home" value="Home" icon={<HomeOutlinedIcon />} sx={{ color: 'inherit' }} />

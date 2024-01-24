@@ -8,7 +8,10 @@
   --gray: #F1F1F1;
   --dark : #13101E;
   --primary: #1B4B66;
-  --hand-picked-text: #171520;
+  --highlight: #FF8C4B;
+  --vibrant: #FF404B;
+  --secondary1: #97451F;
+  --secondary2: #A53F64;
 }
 
 *{

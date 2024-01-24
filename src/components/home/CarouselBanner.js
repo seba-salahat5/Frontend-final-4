@@ -113,7 +113,7 @@ function CarouselBanner(props) {
 function Item(props) {
   return (
     <>
-      <CarouselImage src={props.item.src} alt={props.item.alt} />
+      <CarouselImage src={ process.env.PUBLIC_URL+ props.item.src} alt={props.item.alt} />
       <AdBox>
         <CarouselTitle>{props.item.carouselTitle}</CarouselTitle>
         <CarouselSubTitle>{props.item.carouselSubTitle}</CarouselSubTitle>

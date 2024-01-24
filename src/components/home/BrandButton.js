@@ -11,7 +11,7 @@ const BrandLogo = styled.img`
 const BrandsButton = ({ image }) => {
   return (
     <Link>
-      <BrandLogo src={"./assets/brands/" + image} alt="Brands Logo" />
+      <BrandLogo src={ process.env.PUBLIC_URL+"/assets/brands/" + image} alt="Brands Logo" />
     </Link>
   );
 };
