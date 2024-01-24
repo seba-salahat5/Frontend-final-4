@@ -90,14 +90,13 @@ const ButtonText = styled(SharedTextStyles)`
   line-height: 1.5rem;
 `;
 
-function NewArrivals({ cards }) {
+function NewArrivals({ isMainComponent, cards }) {
   return (
     <ArrivalLayout>
-      <TopStyle>
+      {isMainComponent && <TopStyle>
         <TitleStyle>
           <TitleTextStyle>New Arrivals</TitleTextStyle>
-        </TitleStyle>
-        <ViewAllLayout>
+        </TitleStyle><ViewAllLayout>
           <ViewAllButton to="/category">
             <ButtonText>View All</ButtonText>
             <svg
@@ -117,7 +116,7 @@ function NewArrivals({ cards }) {
             </svg>
           </ViewAllButton>
         </ViewAllLayout>
-      </TopStyle>
+      </TopStyle>}
 
       <CardsLayout>
         {cards.map((item) => (
