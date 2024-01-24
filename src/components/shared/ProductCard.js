@@ -3,7 +3,6 @@ import RatingStars from './RatingStars';
 import { Link } from "react-router-dom";
 
 const SharedTextStyles = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
   font-family: 'Inter', sans-serif;
   color: var(--Type-Low-Emphasis, #626262);
   font-size: 0.875rem;
@@ -88,6 +87,7 @@ const RatingText = styled(SharedTextStyles)`
 
 // Component
 function ProductCard({ button, type, image, productName, productDescreption, discount, showLabel, isTrending, showRating, rating, price, showOldPrice, ratersNumber }) {
+  const imageSrc = process.env.PUBLIC_URL + `${image}`;
   return (
     <Card to="/category">
       <CardImage src={image} alt={productName} />
