@@ -6,6 +6,9 @@ import { CustomContainer } from '../layout/CustomContainer';
 import PathLine from '../components/shared/PathLine';
 import RatingStars from '../components/shared/RatingStars';
 import StateButtonGroup from '../components/product/StateButtonGroup';
+import RoundedButton from '../components/shared/RoundedButton';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 
 const Heading = styled(Typography)(() => ({
   fontWeight: '600',
@@ -71,13 +74,16 @@ const Product = () => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMd = useMediaQuery('(min-width:900px) and (max-width:1300px)');
+  const isXl = useMediaQuery('(min-width:1600px)');
+  const imageWidth = isMobile ? '100%' : (isMd ? 605 : (isXl ? 905 : 805));
   return (
     <CustomContainer>
-      <Stack direction={isMobile ? 'column' : 'row'} gap={3}>
+      <Stack direction={isMobile ? 'column' : 'row'} gap={isXl ? 27 : 3} sx={{ display: 'flex', justifyContent: isXl ? 'center' : 'left' }}>
         <Stack direction={'column'}>
-          <PathLine breadcrumbs={breadcrumbs} />
-          <ImageGallery imageList={imageList} 
-          width={'605px'} />
+          {!isMobile && <PathLine breadcrumbs={breadcrumbs} />}
+          <ImageGallery imageList={imageList}
+            width={imageWidth} />
         </Stack>
         <Stack direction='column' mt={'36px'}>
           <Heading sx={{ fontSize: '34px', lineHeight: '44px', color: 'var(--dark)', }}>{productName}</Heading>
@@ -103,6 +109,29 @@ const Product = () => {
           </Stack>
 
           <StateButtonGroup initialState={quantity} mt={'40px'} />
+
+          <Stack direction={'row'} spacing={3} mt={'40px'} width={'100%'}>
+            <RoundedButton
+              buttonText={'Add To Bag'}
+              ButtonIcon={ShoppingBagOutlinedIcon}
+              onClickEvent={() => { console.log('Add to bag') }}
+              isfilled={true}
+              showLeftIcon={true}
+              showRightIcon={false}
+              is_mobile={false} 
+              width= {isMobile ? '319px' :'328px'}
+            />
+            <RoundedButton
+              buttonText={'Add To Wishlist'}
+              ButtonIcon={FavoriteBorderRoundedIcon}
+              onClickEvent={() => { console.log('Add To Wishlist') }}
+              isfilled={false}
+              showLeftIcon={true}
+              showRightIcon={false}
+              is_mobile={isMobile} 
+              width= {isMobile ? '48px' :'240px'}
+            />
+          </Stack>
 
         </Stack>
       </Stack>

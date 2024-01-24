@@ -113,7 +113,6 @@ const Home = () => {
                 lineheight={'68px'}
                 textcolor={'var(--secondary1)'}
                 left={'4.5%'}
-                top={'32%'}
                 bannerText={'Limited Edition Products'} />
             </SmallBanner>
           </Grid>
@@ -124,7 +123,6 @@ const Home = () => {
                 lineheight={'52px'}
                 textcolor={'var(--secondary2)'}
                 left={'61%'}
-                top={'25%'}
                 bannerText={'15% Off And More!'} />
             </SmallBanner>
           </Grid>
@@ -135,7 +133,6 @@ const Home = () => {
                 lineheight={'52px'}
                 textcolor={'var(--primary)'}
                 left={'50%'}
-                top={'24%'}
                 bannerText={'Popular In The Community!'} />
             </SmallBanner>
           </Grid>

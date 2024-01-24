@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 const ImageCarousel = styled(Carousel)`
 .carousel {
+    min-width: 328px;
     position: relative;
     display: flex;
     justify-content: center;

@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
 import Arrow from './Arrow';
 
-const DetailsBox = styled(Box)(({ textcolor, left, top }) => ({
+const DetailsBox = styled(Box)(({ textcolor, left}) => ({
     position: 'absolute',
     left: left,
     color: textcolor,
@@ -44,7 +44,7 @@ const BannerTitle = styled(Typography)(({ textsize, lineheight }) => ({
     },
 }));
 
-const BannerBox = ({ textsize, lineheight, textcolor, bannerText, left, top }) => {
+const BannerBox = ({ textsize, lineheight, textcolor, bannerText, left}) => {
     return (
         <DetailsBox left={left} textcolor={textcolor}>
             <BannerTitle textsize={textsize} lineheight={lineheight}>
