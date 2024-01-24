@@ -29,7 +29,7 @@ const BrandsList = () => {
         <ShopByBrandsTitle>Shop by Brands</ShopByBrandsTitle>
         <Grid container spacing={6} rowSpacing={1}>
           {brandsData.map((item) => (
-            <Grid item xs={4} sm={4} md={2}>
+            <Grid item xs={4} sm={4} md={2} key={item}>
               <BrandsButton image={item} />
             </Grid>
           ))}

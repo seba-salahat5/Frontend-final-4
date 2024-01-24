@@ -21,6 +21,7 @@ let tempObj = [
     showOldPrice: true,
     ratersNumber: 43,
     rating: 4,
+    productId: 1,
   },
   {
     image: "/assets/newArrivals/pink-bag-small.png",
@@ -32,6 +33,7 @@ let tempObj = [
     showOldPrice: true,
     ratersNumber: 43,
     rating: 3.4,
+    productId: 2,
   },
   {
     image: "/assets/newArrivals/pink-bag-small.png",
@@ -43,6 +45,7 @@ let tempObj = [
     showOldPrice: true,
     ratersNumber: 43,
     rating: 4,
+    productId: 3,
   },
   {
     image: "/assets/newArrivals/pink-bag-small.png",
@@ -54,6 +57,7 @@ let tempObj = [
     showOldPrice: true,
     ratersNumber: 43,
     rating: 4,
+    productId: 4,
   },
   {
     image: "/assets/newArrivals/pink-bag-small.png",
@@ -65,6 +69,7 @@ let tempObj = [
     showOldPrice: true,
     ratersNumber: 43,
     rating: 4,
+    productId: 5,
   },
   {
     image: "/assets/newArrivals/pink-bag-small.png",
@@ -76,6 +81,7 @@ let tempObj = [
     showOldPrice: true,
     ratersNumber: 43,
     rating: 4,
+    productId: 6,
   },
   {
     image: "/assets/newArrivals/pink-bag-small.png",
@@ -87,6 +93,7 @@ let tempObj = [
     showOldPrice: true,
     ratersNumber: 43,
     rating: 4,
+    productId: 7,
   },
 ];
 

@@ -26,7 +26,7 @@ const HandPickedCategory = styled.h3`
   position: absolute;
   padding: 16px;
   bottom: 0;
-  color: var(--hand-picked-text);
+  color: var(--text);
 
   @media (max-width: 600px) {
     font-size: 14px;

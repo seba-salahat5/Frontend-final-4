@@ -15,7 +15,7 @@ const FooterComponent = styled('div')(() => ({
   backgroundColor: 'var(--primary)',
   '@media (min-width: 900px)': {
     position: 'relative',
-    top: '2626px',
+    marginTop: '68px',
     paddingInline: '62px',
     paddingBottom: '106px',
   },
