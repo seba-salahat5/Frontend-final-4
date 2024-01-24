@@ -33,7 +33,7 @@ const CardsLayout = styled.div`
 
   /* Add custom scrollbar styles here */
   ::-webkit-scrollbar {
-    width: 5px;
+    width: 5px !important;
   }
 
   /* Track */

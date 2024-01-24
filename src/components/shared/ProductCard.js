@@ -14,7 +14,6 @@ const SharedTextStyles = styled.div`
 const Card = styled(Link)`
   display: flex;
   width: 17.75rem;
-  height: 23.1875rem;
   padding-bottom: 1.1875rem;
   flex-direction: column;
   align-items: center;
@@ -59,6 +58,7 @@ const PriceLayout = styled.div`
 
 // Apply Shared Text Styles to Components
 const ProductNameText = styled(SharedTextStyles)`
+  color: var(--Type-High-Emphasis, #171520);
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.25rem;
