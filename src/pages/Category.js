@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ListingOptions from "../components/category/ListingOptions";
 import CardsGrid from "../components/category/CardsGrid";
+import PaginationBar from '../components/category/PaginationBar';
 import { CustomContainer } from '../layout/CustomContainer';
 
 /**
@@ -121,6 +122,7 @@ const Category = () => {
     <ListLayout>
       <ListingOptions />
       <CardsGrid cards={tempObj} />
+      <PaginationBar />
     </ListLayout>
   </CustomContainer>;
 };
