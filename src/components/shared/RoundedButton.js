@@ -10,7 +10,7 @@ function RoundedButton({ buttonText, ButtonIcon, onClickEvent, isfilled, showLef
                 color: isfilled ? 'var(--bright)' : 'var(--primary)',
                 border: '1px solid var(--primary)',
                 borderRadius: '8px',
-                paddingInline: '30px',
+                paddingInline: '20px',
                 paddingBlock: '10px',
                 width: {width},
                 gap: '8px',

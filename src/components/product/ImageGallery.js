@@ -28,6 +28,7 @@ const ImageCarousel = styled(Carousel)`
 `;
 
 const ImageGallery = ({ imageList, width }) => {
+    console.log(width);
     return (
         <ImageCarousel width={width} thumbWidth={width * 0.12} showStatus={false}>
             {imageList.map((item) => (
