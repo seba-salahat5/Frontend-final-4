@@ -2,8 +2,10 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { styled, useTheme } from '@mui/material/styles';
-import { AppBar, Tabs, Tab, Typography, Box, Stack } from '@mui/material';
+import { AppBar, Tabs, Tab, Typography, Box } from '@mui/material';
 import NewArrivals from "../home/NewArraival";
+import RatingsPanel from './RatingsPanel';
+
 
 const StyledTab = styled(Tab)(({ index, current_value }) => ({
   backgroundColor: current_value === index ? 'var(--primary)' : 'var(--gray)',
@@ -112,7 +114,7 @@ export default function DescriptionSection({ description, relatedProducts, revie
           </>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-        Panel 3
+          <RatingsPanel />
         </TabPanel>
       </SwipeableViews>
     </Box>

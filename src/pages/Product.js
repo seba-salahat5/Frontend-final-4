@@ -183,7 +183,6 @@ const Product = () => {
                 width={isMobile ? '48px' : '240px'}
               />
             </Stack>
-
           </Stack>
         </Grid>
       </Grid>
