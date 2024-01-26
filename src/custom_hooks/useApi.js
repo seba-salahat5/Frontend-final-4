@@ -27,30 +27,9 @@ export function useApi(url, type, requestBody) {
             }
         }
         loadData();
-    }, [url, type]);
+    }, [url, type, requestBody]);
     return {
         data,
         error,
     };
 }
-
-/**
- * 
- * export default function useLocalStorage(){
-    return {
-        setItem: (key , value)=>{
-            try{
-            localStorage.setItem(key, JSON.stringify(value));
-        } catch (e) {
-            console.error(e);
-        }
-        getItem :(key, defaultValue) =>{
-            try {
-                let value =  localStorage.getItem(key);
-                return (value !== null) ? JSON.parse(value) : defaultValue ;
-            } catch (e) {
-                console.error(e);
-            }
-        }
-    }
- */
