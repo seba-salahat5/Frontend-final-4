@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Stack, Slider, Typography } from '@mui/material';
+import { Box, Stack, Slider, Typography, Divider, useMediaQuery, useTheme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import StarIcon from '@mui/icons-material/Star';
 
@@ -10,9 +10,12 @@ const RatingTitle = styled(Typography)(() => ({
     lineHeight: '16px',
     letterSpacing: '0em',
     textAlign: 'left',
-
+    color: 'var(--text)'
 }));
 export default function RatingsPanel({ rating }) {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
     const totalRatings = 200;
     const ratings = [
         {
@@ -38,7 +41,7 @@ export default function RatingsPanel({ rating }) {
 
     ]
     return (
-        <Stack>
+        <Stack direction={isMobile ? 'column' : 'row'} spacing={3}>
             <Box sx={{ width: 200 }}>
                 <Stack direction={'row'} sx={{ alignItems: 'center' }}>
                     <RatingTitle>{rating}</RatingTitle>
@@ -69,6 +72,68 @@ export default function RatingsPanel({ rating }) {
                         />
                     </Stack>
                 ))}
+            </Box>
+            {isMobile && <Divider sx={{width:'100%', borderBottomWidth: 'thick', marginTop: '24px', marginBottom: '24px'}} />}
+            <Box>
+                <Box mb={3}>
+                    <Stack direction={'row'} spacing={4}>
+                        <Stack direction={'row'} spacing={1} bgcolor={'var(--accent)'}>
+                            <RatingTitle sx={{ fontSize: '16px' }}>4.0</RatingTitle>
+                            <StarIcon sx={{ width: '20px', height: '20px', color: 'var(--highlight)' }} />
+                        </Stack>
+                        <Box>
+                            <RatingTitle>Vincent Lobo</RatingTitle>
+                            <RatingTitle sx={{ fontWeight: 500, color: 'var(--summary-text)' }}>20/03/2021</RatingTitle>
+                        </Box>
+                    </Stack>
+                    <Box mt={'12px'}>
+                        <RatingTitle>Must go for the class feel. </RatingTitle>
+                        <RatingTitle sx={{ fontWeight: 500, lineHeight: '18px', color: 'var(--summary-text)' }}>
+                            Totally amazing! I loved the material and the quality.
+                            It has a jolly vibe in it which makes me feel happy everytime I put it on.
+                        </RatingTitle>
+                    </Box>
+                </Box>
+                <Box mb={3}>
+                    <Stack direction={'row'} spacing={4}>
+                        <Stack direction={'row'} spacing={1} bgcolor={'var(--accent)'}>
+                            <RatingTitle sx={{ fontSize: '16px' }}>4.0</RatingTitle>
+                            <StarIcon sx={{ width: '20px', height: '20px', color: 'var(--highlight)' }} />
+                        </Stack>
+                        <Box>
+                            <RatingTitle>Vincent Lobo</RatingTitle>
+                            <RatingTitle sx={{ fontWeight: 500, color: 'var(--summary-text)' }}>20/03/2021</RatingTitle>
+                        </Box>
+                    </Stack>
+                    <Box mt={'12px'}>
+                        <RatingTitle>Must go for the class feel. </RatingTitle>
+                        <RatingTitle sx={{ fontWeight: 500, lineHeight: '18px', color: 'var(--summary-text)' }}>
+                            Totally amazing! I loved the material and the quality.
+                            It has a jolly vibe in it which makes me feel happy everytime I put it on.
+                        </RatingTitle>
+
+                    </Box>
+                </Box>
+                <Box mb={3}>
+                    <Stack direction={'row'} spacing={4}>
+                        <Stack direction={'row'} spacing={1} bgcolor={'var(--accent)'}>
+                            <RatingTitle sx={{ fontSize: '16px' }}>4.0</RatingTitle>
+                            <StarIcon sx={{ width: '20px', height: '20px', color: 'var(--highlight)' }} />
+                        </Stack>
+                        <Box>
+                            <RatingTitle>Vincent Lobo</RatingTitle>
+                            <RatingTitle sx={{ fontWeight: 500, color: 'var(--summary-text)' }}>20/03/2021</RatingTitle>
+                        </Box>
+                    </Stack>
+                    <Box mt={'12px'}>
+                        <RatingTitle>Must go for the class feel. </RatingTitle>
+                        <RatingTitle sx={{ fontWeight: 500, lineHeight: '18px', color: 'var(--summary-text)' }}>
+                            Totally amazing! I loved the material and the quality.
+                            It has a jolly vibe in it which makes me feel happy everytime I put it on.
+                        </RatingTitle>
+
+                    </Box>
+                </Box>
             </Box>
         </Stack>
     );

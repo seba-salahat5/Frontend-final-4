@@ -68,7 +68,7 @@ export default function DescriptionSection({ description, relatedProducts, revie
   };
 
   return (
-    <Box>
+    <Box mt={'55px'}> 
       <AppBar position="static" sx={{ bgcolor: 'var(--gray)', }}>
         <Tabs
           value={value}

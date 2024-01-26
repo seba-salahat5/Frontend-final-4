@@ -186,7 +186,11 @@ const Product = () => {
           </Stack>
         </Grid>
       </Grid>
-      <DescriptionSection description={currentProduct.description} relatedProducts={currentProduct.related_products} reviews={ currentProduct.ratings} />
+      <DescriptionSection
+        description={currentProduct.description}
+        relatedProducts={currentProduct.related_products}
+        reviews={currentProduct.ratings}
+      />
     </CustomContainer>
 
   );
