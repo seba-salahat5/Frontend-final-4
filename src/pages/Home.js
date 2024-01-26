@@ -103,7 +103,7 @@ const Home = () => {
     <>
       <CustomContainer>
         <CarouselBanner />
-        <NewArrivals cards={tempObj} />
+        <NewArrivals isMainComponent={true} cards={tempObj} />
       </CustomContainer>
       <HandPickedCollections />
       <CustomContainer>
