@@ -58,7 +58,7 @@ const Header = () => {
             }
             <Stack direction="row">
               <InputField placeholder="Search for products or brands....." />
-              <IconButtonsGroup />
+              <IconButtonsGroup  />
             </Stack>
           </Toolbar>
         </Container>

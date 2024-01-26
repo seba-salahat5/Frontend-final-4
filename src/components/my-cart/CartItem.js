@@ -79,17 +79,10 @@ export default function CartItem() {
             $19.00
           </Typography>
         </Grid>
-        <Grid container item xs={12}>
-          <Grid item xs={6}>
-            <Link sx={{ cursor: "pointer" }} variant="button">
-              Move to wishlist
-            </Link>
-          </Grid>
-          <Grid item xs={6}>
-            <Link sx={{ cursor: "pointer" }} variant="body2">
-              remove
-            </Link>
-          </Grid>
+        <Grid container item xs={12} sx={{ justifyContent: "flex-end" }}>
+          <Link sx={{ cursor: "pointer" }} variant="body2">
+            remove
+          </Link>
         </Grid>
       </Grid>
     </>
