@@ -3,21 +3,28 @@ import { Box, IconButton } from '@mui/material';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import PermIdentityRoundedIcon from '@mui/icons-material/PermIdentityRounded';
+import { Link } from 'react-router-dom';
 
 export default function IconButtonsGroup() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Box sx={{ flexGrow: 1 }} />
-      <Box sx={{ justifyContent: 'flex-end' }}>
-        <IconButton aria-label="wishlist" color="inherit" sx={{ px: '7px' }}>
+      <Box sx={{ justifyContent: "flex-end" }}>
+        <IconButton aria-label="wishlist" color="inherit" sx={{ px: "7px" }}>
           <FavoriteBorderRoundedIcon fontSize="medium" />
         </IconButton>
-        <IconButton aria-label="profile" color="inherit" sx={{ px: '7px' }}>
+        <IconButton aria-label="profile" color="inherit" sx={{ px: "7px" }}>
           <PermIdentityRoundedIcon fontSize="medium" />
         </IconButton>
-        <IconButton aria-label="my cart" color="inherit" sx={{ pl: '7px', pr: '0px' }}>
-          <ShoppingBagOutlinedIcon fontSize="medium" />
-        </IconButton>
+        <Link to="/mycart">
+          <IconButton
+            aria-label="my cart"
+            color="inherit"
+            sx={{ pl: "7px", pr: "0px" }}
+          >
+            <ShoppingBagOutlinedIcon fontSize="medium" />
+          </IconButton>
+        </Link>
       </Box>
     </Box>
   );
