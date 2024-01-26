@@ -9,6 +9,8 @@ import NewArrivals from "../components/home/NewArraival";
 import { CustomContainer } from "../layout/CustomContainer";
 import SmallBanner from "../components/home/SmallBanner";
 import BannerBox from '../components/home/BannerBox';
+import { useApi } from '../custom_hooks/useApi';
+
 
 const CardsSection = styled(Grid)(() => ({
   marginTop: '70px',
@@ -16,6 +18,8 @@ const CardsSection = styled(Grid)(() => ({
 }));
 
 const Home = () => {
+
+
   let tempObj = [
     {
       image: "/assets/newArrivals/pink-bag-small.png",
@@ -95,7 +99,6 @@ const Home = () => {
       productId: 7,
     },
   ];
-
   return (
     <>
       <CustomContainer>

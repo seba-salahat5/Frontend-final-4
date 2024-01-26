@@ -6,20 +6,24 @@ import MyCart from "./pages/MyCart";
 import Category from "./pages/Category";
 import Product from "./pages/Product";
 import Checkout from "./pages/Checkout";
+import UserProvider from "./context/userProvider";
 
 function App() {
+
   return (
-    <BrowserRouter basename="/Frontend-final-4">
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="/category" element={<Category />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/mycart" element={<MyCart />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter basename="/Frontend-final-4">
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/category" element={<Category />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/mycart" element={<MyCart />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 
