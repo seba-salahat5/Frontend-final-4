@@ -114,7 +114,7 @@ export default function DescriptionSection({ description, relatedProducts, revie
           </>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <RatingsPanel />
+          <RatingsPanel rating={reviews} />
         </TabPanel>
       </SwipeableViews>
     </Box>
