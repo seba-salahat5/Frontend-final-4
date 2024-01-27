@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export function useApi(url, type, requestBody) {
+// Inside the useApi hook
+
+export default function useApi(url, type) {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
+    const [requestBody, setRequestBody] = useState(null);
+
     useEffect(() => {
-        async function loadData() {
+        console.log(requestBody);
+        async function fetchData() {
             try {
                 switch (type) {
                     case 'get':
@@ -22,14 +27,20 @@ export function useApi(url, type, requestBody) {
                 }
             } catch (error) {
                 setError(error);
-            } finally {
-                // Additional cleanup or actions can be performed here
             }
         }
-        loadData();
+        if (requestBody !== null) {
+            fetchData();
+        }
+
     }, [url, type, requestBody]);
+
     return {
         data,
         error,
+        setNewRequestBody: (newRequestBody) => {
+            setRequestBody(newRequestBody);
+        },
     };
 }
+ 
