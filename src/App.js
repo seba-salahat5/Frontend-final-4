@@ -7,6 +7,8 @@ import Category from "./pages/Category";
 import Product from "./pages/Product";
 import Checkout from "./pages/Checkout";
 import UserProvider from "./context/userProvider";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
             <Route path="/product" element={<Product />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/mycart" element={<MyCart />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
           </Route>
         </Routes>
       </BrowserRouter>
