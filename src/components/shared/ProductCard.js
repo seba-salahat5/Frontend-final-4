@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import RatingStars from './RatingStars';
 import { Link } from "react-router-dom";
+import { useMediaQuery, useTheme } from '@mui/material';
 
 const SharedTextStyles = styled.div`
   font-family: 'Inter', sans-serif;
@@ -8,7 +9,7 @@ const SharedTextStyles = styled.div`
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.25rem;
+  line-height: 1.25rem; 
 `;
 const Card = styled(Link)`
   display: flex;
@@ -19,6 +20,10 @@ const Card = styled(Link)`
   gap: 9px;
   text-decoration: none;
   color: inherit;
+  @media (max-width: 510px) {
+    width: 9.375rem;
+    gap: 0.5625rem;
+  }
 `;
 
 const CardImage = styled.img`
@@ -26,6 +31,10 @@ const CardImage = styled.img`
   height: 17.875rem;
   flex-shrink: 0;
   border-radius: 3%;
+  @media (max-width: 510px) {
+    height: 9.75rem;
+    width: 9.375rem;
+  }
 `;
 
 const CardFrame = styled.div`
@@ -40,12 +49,18 @@ const CardInfo = styled.div`
   align-items: flex-start;
   gap: 8px;
   flex: 1 0 0;
+  @media (max-width: 510px) {
+    gap: 0.1875rem;
+  }
 `;
 
 const RatingsLayout = styled.div`
   display: flex;
   align-items: flex-end;
   gap: 1rem;
+  @media (max-width: 510px) {
+    gap: 0.375rem;
+  }
 `;
 
 const PriceLayout = styled.div`
@@ -53,6 +68,9 @@ const PriceLayout = styled.div`
   align-items: center;
   gap: 6px;
   align-self: stretch;
+  @media (max-width: 510px) {
+    gap: 0.375rem;
+  }
 `;
 
 // Apply Shared Text Styles to Components
@@ -61,22 +79,43 @@ const ProductNameText = styled(SharedTextStyles)`
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.25rem;
+  @media (max-width: 510px) {
+    font-size: 0.75rem;
+  }
 `;
 
 const DescriptionText = styled(SharedTextStyles)`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  @media (max-width: 510px) {
+    font-size: 0.75rem;
+  }
 `;
 
 const OldPriceText = styled(SharedTextStyles)`
   text-decoration-line: line-through;
+  @media (max-width: 510px) {
+    font-size: 0.625rem;
+  }
 `;
 
 const DiscountText = styled(SharedTextStyles)`
   color: #E21D1D;
   font-size: 1rem;
   line-height: 1.25rem;
+  @media (max-width: 510px) {
+    font-weight: 500;
+    font-size: 0.625rem;
+    white-space: nowrap;
+  }
+`;
+const PriceText = styled(SharedTextStyles)`
+  color: var(--Type-High-Emphasis, #171520);
+  font-weight: 500;
+  @media (max-width: 510px) {
+    font-size: 0.875rem;;
+  }
 `;
 
 const RatingText = styled(SharedTextStyles)`
@@ -88,6 +127,8 @@ const RatingText = styled(SharedTextStyles)`
 // Component
 function ProductCard({ button, type, image, productName, productDescreption, discount, showLabel, isTrending, showRating, rating, price, showOldPrice, ratersNumber }) {
   const imageSrc = process.env.PUBLIC_URL + `${image}`;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <Card to="/product">
       <CardImage src={imageSrc} alt={productName} />
@@ -95,14 +136,14 @@ function ProductCard({ button, type, image, productName, productDescreption, dis
         <CardInfo>
           <ProductNameText>{productName}</ProductNameText>
           <DescriptionText>{productDescreption}</DescriptionText>
-          {showRating && (
+          {showRating && !isMobile && (
             <RatingsLayout>
               <RatingStars rating={rating} />
               <RatingText>{ratersNumber} Ratings</RatingText>
             </RatingsLayout>
           )}
           <PriceLayout>
-            <div>${price}</div>
+            <PriceText>${price}</PriceText>
             {showOldPrice && (
               <>
                 <OldPriceText>${price / discount}</OldPriceText>
