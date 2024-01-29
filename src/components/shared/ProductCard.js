@@ -12,7 +12,8 @@ const SharedTextStyles = styled.div`
 `;
 const Card = styled(Link)`
   display: flex;
-  width: 17.75rem;
+  width: ${(props) => props.width || '100%'};
+  max-width: 20.875rem;
   padding-bottom: 1.1875rem;
   flex-direction: column;
   align-items: center;
@@ -22,7 +23,8 @@ const Card = styled(Link)`
 `;
 
 const CardImage = styled.img`
-  width: 17.875rem;
+width: ${(props) => props.width || '100%'};
+  max-width: 20.875rem;
   height: 17.875rem;
   flex-shrink: 0;
   border-radius: 3%;
@@ -86,11 +88,11 @@ const RatingText = styled(SharedTextStyles)`
 `;
 
 // Component
-function ProductCard({ button, type, image, productName, productDescreption, discount, showLabel, isTrending, showRating, rating, price, showOldPrice, ratersNumber }) {
+function ProductCard({ button, type, image, productName, productDescreption, discount, showLabel, isTrending, showRating, rating, price, showOldPrice, ratersNumber, width }) {
   const imageSrc = process.env.PUBLIC_URL + `${image}`;
   return (
-    <Card to="/product">
-      <CardImage src={imageSrc} alt={productName} />
+    <Card to="/product" width={width}>
+      <CardImage src={imageSrc} alt={productName} width={width} />
       <CardFrame>
         <CardInfo>
           <ProductNameText>{productName}</ProductNameText>
