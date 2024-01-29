@@ -1,8 +1,18 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import { AppBar, Toolbar, Container, Stack, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import {
+  AppBar,
+  Toolbar,
+  Container,
+  Stack,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+
 import { CustomContainer } from "./CustomContainer";
 import InputField from "../components/header/InputField.js";
 import LeftDrawer from "../components/header/LeftDrawer.js";
@@ -62,28 +72,60 @@ const Header = () => {
             }}
           >
             {isMobile ? (
-              <>
-                <Stack
-                  spacing={{ xs: 1, sm: 2 }}
-                  direction="row"
-                  sx={{ alignItems: "center" }}
-                >
-                  <LeftDrawer navItems={TOP_CATEGORIES} />
-                  <Heading>Home</Heading>
-                </Stack>
-              </>
+              !isSearchMode && (
+                <>
+                  <Stack
+                    spacing={{ xs: 1, sm: 2 }}
+                    direction="row"
+                    sx={{ alignItems: "center" }}
+                  >
+                    <LeftDrawer navItems={TOP_CATEGORIES} />
+                    <Heading>Home</Heading>
+                  </Stack>
+                </>
+              )
             ) : (
               <>
-                <Link to="./">
+                <Link to="/">
                   <CustomizedImage src={imageSrc} alt="logo" />
                 </Link>
                 <Navbar navItems={TOP_CATEGORIES} />
               </>
             )}
-            <Stack direction="row">
-              <InputField placeholder="Search for products or brands....." />
-              <IconButtonsGroup />
-            </Stack>
+            {isXSmall ? (
+              <>
+                {isSearchMode ? (
+                  <Stack direction={"row"} display={"flex"}>
+                    <IconButton
+                      aria-label="back"
+                      color="inherit"
+                      sx={{ px: "7px" }}
+                      onClick={handleBackIconClick}
+                    >
+                      <ArrowBackIosIcon />
+                    </IconButton>
+                    <InputField placeholder="Search for products or brands....." />
+                  </Stack>
+                ) : (
+                  <Stack direction={"row"} alignItems={"center"}>
+                    <IconButton
+                      aria-label="search"
+                      color="inherit"
+                      sx={{ px: "7px" }}
+                      onClick={handleSearchIconClick}
+                    >
+                      <SearchOutlinedIcon fontSize="medium" />
+                    </IconButton>
+                    <IconButtonsGroup />
+                  </Stack>
+                )}
+              </>
+            ) : (
+              <Stack direction={"row"} alignItems={"center"}>
+                <InputField placeholder="Search for products or brands....." />
+                <IconButtonsGroup />
+              </Stack>
+            )}
           </Toolbar>
         </Container>
       </CustomizedAppBar>

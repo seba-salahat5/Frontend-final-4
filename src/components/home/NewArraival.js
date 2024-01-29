@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import ProductCard from '../shared/ProductCard';
+import styled from "styled-components";
+import ProductCard from "../shared/ProductCard";
 import { Link } from "react-router-dom";
 
 const SharedTextStyles = styled.div`
@@ -91,46 +91,50 @@ const ButtonText = styled(SharedTextStyles)`
 `;
 
 function NewArrivals({ isMainComponent, cards }) {
+  /*   console.log(cards); */
   return (
     <ArrivalLayout>
-      {isMainComponent && <TopStyle>
-        <TitleStyle>
-          <TitleTextStyle>New Arrivals</TitleTextStyle>
-        </TitleStyle><ViewAllLayout>
-          <ViewAllButton to="/category">
-            <ButtonText>View All</ButtonText>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M9 4.5L16.5 12L9 19.5"
-                stroke="#13101E"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </ViewAllButton>
-        </ViewAllLayout>
-      </TopStyle>}
+      {isMainComponent && (
+        <TopStyle>
+          <TitleStyle>
+            <TitleTextStyle>New Arrivals</TitleTextStyle>
+          </TitleStyle>
+          <ViewAllLayout>
+            <ViewAllButton to="/category">
+              <ButtonText>View All</ButtonText>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M9 4.5L16.5 12L9 19.5"
+                  stroke="#13101E"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </ViewAllButton>
+          </ViewAllLayout>
+        </TopStyle>
+      )}
 
       <CardsLayout>
         {cards.map((item) => (
           <ProductCard
-            key={item.productId}
-            image={item.image}
-            productName={item.productName}
-            productDescreption={item.productDescreption}
-            discount={item.discount}
-            showRating={item.showRating}
+            key={item.product_id}
+            image={item.image[0]}
+            productName={item.name}
+            productDescreption={item.sub_title}
+            discount={item.discount_value}
+            showRating={item.ratings}
             price={item.price}
-            showOldPrice={item.showOldPrice}
-            ratersNumber={item.ratersNumber}
-            width={'17.875rem'}
+            showOldPrice={item.discount_value !== 0 ? true : false}
+            ratersNumber={item.number_of_ratings}
+            width={"17.875rem"}
           />
         ))}
       </CardsLayout>
