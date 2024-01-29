@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import RatingStars from './RatingStars';
 import { Link } from "react-router-dom";
+import RoundedButton from './RoundedButton';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
 const SharedTextStyles = styled.div`
   font-family: 'Inter', sans-serif;
@@ -88,7 +90,7 @@ const RatingText = styled(SharedTextStyles)`
 `;
 
 // Component
-function ProductCard({ button, type, image, productName, productDescreption, discount, showLabel, isTrending, showRating, rating, price, showOldPrice, ratersNumber, width }) {
+function ProductCard({ Button, type, image, productName, productDescreption, discount, showButton, isTrending, showRating, rating, price, showOldPrice, ratersNumber, width }) {
   const imageSrc = process.env.PUBLIC_URL + `${image}`;
   return (
     <Card to="/product" width={width}>
@@ -112,6 +114,16 @@ function ProductCard({ button, type, image, productName, productDescreption, dis
               </>
             )}
           </PriceLayout>
+          {showButton && <RoundedButton
+                      buttonText={'Add To Cart'}
+                      ButtonIcon={ShoppingBagOutlinedIcon}
+                      onClickEvent={() => { console.log('Add to bag') }}
+                      isfilled={false}
+                      showLeftIcon={true}
+                      showRightIcon={false}
+                      is_mobile={false}
+                      width={'151px'}
+                    />}
         </CardInfo>
         {/* Your SVG code here */}
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">

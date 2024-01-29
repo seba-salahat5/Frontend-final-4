@@ -42,7 +42,12 @@ export default function InputField({ placeholder }) {
   const navigate = useNavigate();
   const handleOptionSelected = (event, value) => {
     if (value) {
-      navigate(`/search-results/${value}`);
+      const dataToSend = {
+        page_title: 'Search Results',
+        phrase: value,
+      };
+      const queryString = new URLSearchParams(dataToSend).toString();
+      navigate(`/results/?${queryString}`);
     }
   };
   return (

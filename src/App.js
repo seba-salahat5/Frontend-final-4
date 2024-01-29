@@ -9,7 +9,7 @@ import Checkout from "./pages/Checkout";
 import UserProvider from "./context/userProvider";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import SearchPanel from "./pages/SearchPanel"
+import ResultsPanel from "./pages/ResultsPanel";
 
 function App() {
 
@@ -25,7 +25,7 @@ function App() {
             <Route path="/mycart" element={<MyCart />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/search-results/:query" element={<SearchPanel />} />
+            <Route path="/results" element={<ResultsPanel />} />
           </Route>
         </Routes>
       </BrowserRouter>

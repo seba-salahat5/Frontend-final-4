@@ -156,9 +156,9 @@ const Product = () => {
 
             <Stack direction={'row'} spacing={3} mt={'40px'} width={'100%'}>
               <RoundedButton
-                buttonText={'Add To Bag'}
+                buttonText={'Add To Cart'}
                 ButtonIcon={ShoppingBagOutlinedIcon}
-                onClickEvent={() => { console.log('Add to bag') }}
+                onClickEvent={() => { console.log('Add to cart') }}
                 isfilled={true}
                 showLeftIcon={true}
                 showRightIcon={false}
