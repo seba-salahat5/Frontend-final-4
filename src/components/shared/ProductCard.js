@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import RatingStars from './RatingStars';
+import styled from "styled-components";
+import RatingStars from "./RatingStars";
 import { Link } from "react-router-dom";
-import RoundedButton from './RoundedButton';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import RoundedButton from "./RoundedButton";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 const SharedTextStyles = styled.div`
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   color: var(--Type-Low-Emphasis, #626262);
   font-size: 0.875rem;
   font-style: normal;
@@ -14,7 +14,7 @@ const SharedTextStyles = styled.div`
 `;
 const Card = styled(Link)`
   display: flex;
-  width: ${(props) => props.width || '100%'};
+  width: ${(props) => props.width || "100%"};
   max-width: 20.875rem;
   padding-bottom: 1.1875rem;
   flex-direction: column;
@@ -25,7 +25,7 @@ const Card = styled(Link)`
 `;
 
 const CardImage = styled.img`
-width: ${(props) => props.width || '100%'};
+  width: ${(props) => props.width || "100%"};
   max-width: 20.875rem;
   height: 17.875rem;
   flex-shrink: 0;
@@ -65,12 +65,17 @@ const ProductNameText = styled(SharedTextStyles)`
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 const DescriptionText = styled(SharedTextStyles)`
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 `;
 
 const OldPriceText = styled(SharedTextStyles)`
@@ -78,7 +83,7 @@ const OldPriceText = styled(SharedTextStyles)`
 `;
 
 const DiscountText = styled(SharedTextStyles)`
-  color: #E21D1D;
+  color: #e21d1d;
   font-size: 1rem;
   line-height: 1.25rem;
 `;
@@ -86,15 +91,29 @@ const DiscountText = styled(SharedTextStyles)`
 const RatingText = styled(SharedTextStyles)`
   font-weight: 500;
   line-height: 1.125rem;
-  color: var(--Primary, #1B4B66);
+  color: var(--Primary, #1b4b66);
 `;
 
 // Component
-function ProductCard({ Button, type, image, productName, productDescreption, discount, showButton, isTrending, showRating, rating, price, showOldPrice, ratersNumber, width }) {
-  const imageSrc = process.env.PUBLIC_URL + `${image}`;
+function ProductCard({
+  Button,
+  type,
+  image,
+  productName,
+  productDescreption,
+  discount,
+  showButton,
+  isTrending,
+  showRating,
+  rating,
+  price,
+  showOldPrice,
+  ratersNumber,
+  width,
+}) {
   return (
     <Card to="/product" width={width}>
-      <CardImage src={imageSrc} alt={productName} width={width} />
+      <CardImage src={image.url} alt={productName} width={width} />
       <CardFrame>
         <CardInfo>
           <ProductNameText>{productName}</ProductNameText>
@@ -114,20 +133,36 @@ function ProductCard({ Button, type, image, productName, productDescreption, dis
               </>
             )}
           </PriceLayout>
-          {showButton && <RoundedButton
-                      buttonText={'Add To Cart'}
-                      ButtonIcon={ShoppingBagOutlinedIcon}
-                      onClickEvent={() => { console.log('Add to bag') }}
-                      isfilled={false}
-                      showLeftIcon={true}
-                      showRightIcon={false}
-                      is_mobile={false}
-                      width={'151px'}
-                    />}
+          {showButton && (
+            <RoundedButton
+              buttonText={"Add To Cart"}
+              ButtonIcon={ShoppingBagOutlinedIcon}
+              onClickEvent={() => {
+                console.log("Add to bag");
+              }}
+              isfilled={false}
+              showLeftIcon={true}
+              showRightIcon={false}
+              is_mobile={false}
+              width={"151px"}
+            />
+          )}
         </CardInfo>
         {/* Your SVG code here */}
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-          <path d="M12 20.5415C12 20.5415 2.625 15.2915 2.625 8.91651C2.62519 7.78976 3.01561 6.69785 3.72989 5.82643C4.44416 4.95501 5.4382 4.35786 6.54299 4.13652C7.64778 3.91517 8.79514 4.08329 9.78999 4.61229C10.7848 5.14129 11.5658 5.99852 12 7.03823L12 7.03824C12.4342 5.99853 13.2152 5.1413 14.21 4.6123C15.2049 4.08329 16.3522 3.91517 17.457 4.13652C18.5618 4.35786 19.5558 4.95501 20.2701 5.82643C20.9844 6.69785 21.3748 7.78976 21.375 8.91651C21.375 15.2915 12 20.5415 12 20.5415Z" stroke="#13101E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="25"
+          viewBox="0 0 24 25"
+          fill="none"
+        >
+          <path
+            d="M12 20.5415C12 20.5415 2.625 15.2915 2.625 8.91651C2.62519 7.78976 3.01561 6.69785 3.72989 5.82643C4.44416 4.95501 5.4382 4.35786 6.54299 4.13652C7.64778 3.91517 8.79514 4.08329 9.78999 4.61229C10.7848 5.14129 11.5658 5.99852 12 7.03823L12 7.03824C12.4342 5.99853 13.2152 5.1413 14.21 4.6123C15.2049 4.08329 16.3522 3.91517 17.457 4.13652C18.5618 4.35786 19.5558 4.95501 20.2701 5.82643C20.9844 6.69785 21.3748 7.78976 21.375 8.91651C21.375 15.2915 12 20.5415 12 20.5415Z"
+            stroke="#13101E"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </CardFrame>
     </Card>

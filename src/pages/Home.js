@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import BrandsList from "../components/home/BrandsList";
@@ -8,96 +8,57 @@ import NewArrivals from "../components/home/NewArraival";
 import { CustomContainer } from "../layout/CustomContainer";
 import SmallBanner from "../components/home/SmallBanner";
 import BannerBox from "../components/home/BannerBox";
+import { useGet } from "../custom_hooks/useApi";
 
 const CardsSection = styled(Grid)(() => ({
   marginTop: "70px",
 }));
 
 const Home = () => {
-  let tempObj = [
-    {
-      image: "/assets/newArrivals/pink-bag-small.png",
-      productName: "Grande",
-      productDescreption: "Blossom Pouch",
-      discount: 0.5,
-      showRating: false,
-      price: 39.49,
-      showOldPrice: false,
-      ratersNumber: 43,
-      productId: 1,
-    },
-    {
-      image: "/assets/newArrivals/pink-bag-small.png",
-      productName: "Grande",
-      productDescreption: "Blossom Pouch",
-      discount: 0.5,
-      showRating: false,
-      price: 39.49,
-      showOldPrice: false,
-      ratersNumber: 43,
-      productId: 2,
-    },
-    {
-      image: "/assets/newArrivals/pink-bag-small.png",
-      productName: "Grande",
-      productDescreption: "Blossom Pouch",
-      discount: 0.5,
-      showRating: false,
-      price: 39.49,
-      showOldPrice: false,
-      ratersNumber: 43,
-      productId: 3,
-    },
-    {
-      image: "/assets/newArrivals/pink-bag-small.png",
-      productName: "Grande",
-      productDescreption: "Blossom Pouch",
-      discount: 0.5,
-      showRating: false,
-      price: 39.49,
-      showOldPrice: false,
-      ratersNumber: 43,
-      productId: 4,
-    },
-    {
-      image: "/assets/newArrivals/pink-bag-small.png",
-      productName: "Grande",
-      productDescreption: "Blossom Pouch",
-      discount: 0.5,
-      showRating: false,
-      price: 39.49,
-      showOldPrice: false,
-      ratersNumber: 43,
-      productId: 5,
-    },
-    {
-      image: "/assets/newArrivals/pink-bag-small.png",
-      productName: "Grande",
-      productDescreption: "Blossom Pouch",
-      discount: 0.5,
-      showRating: false,
-      price: 39.49,
-      showOldPrice: false,
-      ratersNumber: 43,
-      productId: 6,
-    },
-    {
-      image: "/assets/newArrivals/pink-bag-small.png",
-      productName: "Grande",
-      productDescreption: "Blossom Pouch",
-      discount: 0.5,
-      showRating: false,
-      price: 39.49,
-      showOldPrice: false,
-      ratersNumber: 43,
-      productId: 7,
-    },
-  ];
+  /*   const [newArrivals, setNewArrivals] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiUrl = "http://158.176.1.165:3000/product/new-arrival";
+        const pageNumber = 1;
+        const numberOfItems = 10;
+
+        const response = await axios.get(
+          `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`
+        );
+        console.error("data:", response);
+        console.log(response.data);
+        setNewArrivals(response.data.items);
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); */
+
+  const [newArrivals, setNewArrivals] = useState([]);
+  const apiUrl = "http://158.176.1.165:3000/product/new-arrival";
+  const pageNumber = 1;
+  const numberOfItems = 10;
+  const { data, loading } = useGet(
+    `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`
+  );
+
+  useEffect(() => {
+    !loading && setNewArrivals(data.items);
+  }, [data, loading]);
+
   return (
     <>
       <CustomContainer>
         <CarouselBanner />
-        <NewArrivals isMainComponent={true} cards={tempObj} />
+        <NewArrivals cards={newArrivals} isMainComponent={true} />
       </CustomContainer>
       <HandPickedCollections />
       <CustomContainer>
