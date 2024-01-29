@@ -1,14 +1,8 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import {
-  AppBar,
-  Toolbar,
-  Container,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import { AppBar, Toolbar, Container, Stack, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { CustomContainer } from "./CustomContainer";
 import InputField from "../components/header/InputField.js";
 import LeftDrawer from "../components/header/LeftDrawer.js";
@@ -43,10 +37,21 @@ const Heading = styled(Typography)(() => ({
 const Header = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isXSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const imageSrc = process.env.PUBLIC_URL + `/assets/logo.png`;
+
+  const [isSearchMode, setIsSearchMode] = React.useState(false);
+
+  const handleSearchIconClick = () => {
+    setIsSearchMode(true);
+  };
+
+  const handleBackIconClick = () => {
+    setIsSearchMode(false);
+  };
   return (
     <CustomContainer>
-      <CustomizedAppBar position="static" sx={{ boxShadow: 0, py: 1 }}>
+      <CustomizedAppBar position="static" sx={{ boxShadow: 0, py: 1, mb: 2 }}>
         <Container maxWidth="xl" disableGutters>
           <Toolbar
             disableGutters

@@ -19,18 +19,6 @@ export default function IconButtonsGroup() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Box sx={{ flexGrow: 1 }} />
-
-      <IconButton aria-label="wishlist" color="inherit" sx={{ px: "7px" }}>
-        <FavoriteBorderRoundedIcon fontSize="medium" />
-      </IconButton>
-      <IconButton
-        href="/Frontend-final-4/signin"
-        aria-label="profile"
-        color="inherit"
-        sx={{ px: "7px" }}
-      >
-        <PermIdentityRoundedIcon fontSize="medium" />
-      </IconButton>
       <Box
         sx={{
           justifyContent: "flex-end",
@@ -40,6 +28,23 @@ export default function IconButtonsGroup() {
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
+      <Box sx={{ justifyContent: "flex-end" }}>
+        <IconButton 
+        href='/Frontend-final-4/results?page_title=Wishlist'
+        aria-label="wishlist" 
+        color="inherit" 
+        sx={{ px: "7px" }}
+        >
+          <FavoriteBorderRoundedIcon fontSize="medium" />
+        </IconButton>
+        <IconButton
+        href='/Frontend-final-4/signin'
+          aria-label="profile"
+          color="inherit"
+          sx={{ px: "7px" }}
+        >
+          <PermIdentityRoundedIcon fontSize="medium" />
+        </IconButton>
         <IconButton
           href="/Frontend-final-4/mycart"
           aria-label="my cart"
