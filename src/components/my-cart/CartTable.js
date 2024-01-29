@@ -46,8 +46,23 @@ const CartTable = () => {
         }}
       >
         <Grid container>
-          <CartItem />
-          <CartItem />
+          <CartItem
+            productImage={"./assets/newArrivals/duffle 1.png"}
+            brand={"Coach"}
+            productName={" Leather Couch Bag"}
+            quantity={2}
+            price={"19.00"}
+            showRemoveLink
+          />
+
+          <CartItem
+            productImage={"./assets/newArrivals/pink-bag-small.png"}
+            brand={"Coach"}
+            productName={" Leather Couch Bag"}
+            quantity={2}
+            price={"19.00"}
+            showRemoveLink
+          />
         </Grid>
       </Box>
     </>

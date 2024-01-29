@@ -15,14 +15,20 @@ const HandPickedTitle = styled.h2`
 `;
 
 const HandpickedGrid = styled.div`
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
-  justify-items: center;
-  @media (max-width: 700px) {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  justify-content: space-between;
+  @media (max-width: 920px) {
+    display: grid;
+    gap: 16px;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   }
   @media (max-width: 430px) {
+    display: grid;
+    gap: 16px;
+    justify-items: center;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 `;
@@ -40,7 +46,11 @@ const HandPickedCollections = () => {
         <HandPickedTitle>Handpicked Collection</HandPickedTitle>
         <HandpickedGrid>
           {handPickedData.map((item) => (
-            <HandPickedButton key={item.id} image={item.image} category={item.category} />
+            <HandPickedButton
+              key={item.id}
+              image={item.image}
+              category={item.category}
+            />
           ))}
         </HandpickedGrid>
       </Container>

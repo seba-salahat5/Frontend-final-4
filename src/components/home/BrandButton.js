@@ -4,14 +4,17 @@ import styled from "styled-components";
 const BrandLogo = styled.img`
   width: 168px;
   @media (max-width: 800px) {
-    width: 100px;
+    width: 95px;
   }
 `;
 
 const BrandsButton = ({ image }) => {
   return (
     <Link>
-      <BrandLogo src={ process.env.PUBLIC_URL+"/assets/brands/" + image} alt="Brands Logo" />
+      <BrandLogo
+        src={process.env.PUBLIC_URL + "/assets/brands/" + image}
+        alt="Brands Logo"
+      />
     </Link>
   );
 };
