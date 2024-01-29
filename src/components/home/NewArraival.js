@@ -130,6 +130,7 @@ function NewArrivals({ isMainComponent, cards }) {
             price={item.price}
             showOldPrice={item.showOldPrice}
             ratersNumber={item.ratersNumber}
+            width={'17.875rem'}
           />
         ))}
       </CardsLayout>

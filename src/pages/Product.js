@@ -19,14 +19,8 @@ const Heading = styled(Typography)(() => ({
 }));
 
 const Product = () => {
-
-  function handleClick(event) {
-    event.preventDefault();
-    console.info('You clicked a breadcrumb.');
-  }
-
   const breadcrumbs = [
-    <Link underline="hover" key="1" color="var(--primary)" fontWeight={'500'} href="/" onClick={handleClick}>
+    <Link href="/Frontend-final-4/" underline="hover" key="1" color="var(--primary)" fontWeight={'500'}>
       Home
     </Link>,
     <Link
@@ -34,8 +28,7 @@ const Product = () => {
       key="2"
       color="var(--primary)"
       fontWeight={'500'}
-      href="/category"
-      onClick={handleClick}
+      href="/Frontend-final-4/category"
     >
       Handbag
     </Link>,
@@ -163,9 +156,9 @@ const Product = () => {
 
             <Stack direction={'row'} spacing={3} mt={'40px'} width={'100%'}>
               <RoundedButton
-                buttonText={'Add To Bag'}
+                buttonText={'Add To Cart'}
                 ButtonIcon={ShoppingBagOutlinedIcon}
-                onClickEvent={() => { console.log('Add to bag') }}
+                onClickEvent={() => { console.log('Add to cart') }}
                 isfilled={true}
                 showLeftIcon={true}
                 showRightIcon={false}

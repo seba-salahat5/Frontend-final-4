@@ -9,7 +9,12 @@ export default function IconButtonsGroup() {
     <Box sx={{ flexGrow: 1 }}>
       <Box sx={{ flexGrow: 1 }} />
       <Box sx={{ justifyContent: "flex-end" }}>
-        <IconButton aria-label="wishlist" color="inherit" sx={{ px: "7px" }}>
+        <IconButton 
+        href='/Frontend-final-4/results?page_title=Wishlist'
+        aria-label="wishlist" 
+        color="inherit" 
+        sx={{ px: "7px" }}
+        >
           <FavoriteBorderRoundedIcon fontSize="medium" />
         </IconButton>
         <IconButton

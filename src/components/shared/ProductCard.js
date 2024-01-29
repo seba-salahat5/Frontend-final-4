@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import RatingStars from './RatingStars';
 import { Link } from "react-router-dom";
+import RoundedButton from './RoundedButton';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
 const SharedTextStyles = styled.div`
   font-family: 'Inter', sans-serif;
@@ -12,7 +14,8 @@ const SharedTextStyles = styled.div`
 `;
 const Card = styled(Link)`
   display: flex;
-  width: 17.75rem;
+  width: ${(props) => props.width || '100%'};
+  max-width: 20.875rem;
   padding-bottom: 1.1875rem;
   flex-direction: column;
   align-items: center;
@@ -22,7 +25,8 @@ const Card = styled(Link)`
 `;
 
 const CardImage = styled.img`
-  width: 17.875rem;
+width: ${(props) => props.width || '100%'};
+  max-width: 20.875rem;
   height: 17.875rem;
   flex-shrink: 0;
   border-radius: 3%;
@@ -86,11 +90,11 @@ const RatingText = styled(SharedTextStyles)`
 `;
 
 // Component
-function ProductCard({ button, type, image, productName, productDescreption, discount, showLabel, isTrending, showRating, rating, price, showOldPrice, ratersNumber }) {
+function ProductCard({ Button, type, image, productName, productDescreption, discount, showButton, isTrending, showRating, rating, price, showOldPrice, ratersNumber, width }) {
   const imageSrc = process.env.PUBLIC_URL + `${image}`;
   return (
-    <Card to="/product">
-      <CardImage src={imageSrc} alt={productName} />
+    <Card to="/product" width={width}>
+      <CardImage src={imageSrc} alt={productName} width={width} />
       <CardFrame>
         <CardInfo>
           <ProductNameText>{productName}</ProductNameText>
@@ -110,6 +114,16 @@ function ProductCard({ button, type, image, productName, productDescreption, dis
               </>
             )}
           </PriceLayout>
+          {showButton && <RoundedButton
+                      buttonText={'Add To Cart'}
+                      ButtonIcon={ShoppingBagOutlinedIcon}
+                      onClickEvent={() => { console.log('Add to bag') }}
+                      isfilled={false}
+                      showLeftIcon={true}
+                      showRightIcon={false}
+                      is_mobile={false}
+                      width={'151px'}
+                    />}
         </CardInfo>
         {/* Your SVG code here */}
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
