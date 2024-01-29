@@ -48,7 +48,7 @@ const MyCart = () => {
               justifyContent="space-around"
               alignItems="space-around"
             >
-              <PlaceOrderButton />
+              <PlaceOrderButton customWidth={"180px"} />
               <ContinueShoppingButton />
             </Grid>
           </Grid>

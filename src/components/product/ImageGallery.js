@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-responsive-carousel";
 
 const ImageCarousel = styled(Carousel)`
   .carousel {
@@ -18,7 +18,7 @@ const ImageCarousel = styled(Carousel)`
 
   .selected {
     border-radius: 16px;
-  } 
+  }
 
   .thumb {
     width: 75px;
@@ -36,16 +36,15 @@ const ImageCarousel = styled(Carousel)`
 `;
 
 const ImageGallery = ({ imageList, width }) => {
-    console.log(width);
-    return (
-        <ImageCarousel width={width} thumbWidth={width * 0.12} showStatus={false}>
-            {imageList.map((item) => (
-                <div key={item.image_id}>
-                    <img src={process.env.PUBLIC_URL + item.url} alt='Gallery Item' />
-                </div>
-            ))}
-        </ImageCarousel>
-    );
+  return (
+    <ImageCarousel width={width} thumbWidth={width * 0.12} showStatus={false}>
+      {imageList.map((item) => (
+        <div key={item.image_id}>
+          <img src={process.env.PUBLIC_URL + item.url} alt="Gallery Item" />
+        </div>
+      ))}
+    </ImageCarousel>
+  );
 };
 
 export default ImageGallery;
