@@ -105,7 +105,6 @@ const ButtonText = styled(SharedTextStyles)`
 `;
 
 function NewArrivals({ isMainComponent, cards }) {
-  /*   console.log(cards); */
   return (
     <ArrivalLayout>
       {isMainComponent && (
