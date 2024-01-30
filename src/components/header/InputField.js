@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import { InputBase, IconButton, useMediaQuery, useTheme } from '@mui/material';
+import { TextField, Autocomplete } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { useNavigate  } from 'react-router-dom';
 
 const Search = styled('div')(() => ({
   paddingLeft: '8px',
@@ -11,13 +12,22 @@ const Search = styled('div')(() => ({
   borderRadius: '4px',
   backgroundColor: 'var(--gray)',
   display: 'flex',
-  flex: '1',
+  flexGrow: 8,
   alignItems: 'center',
   justifyContent: 'flex-start',
   width: '100%',
   minWidth: '362px',
   '@media (max-width: 1064px)': {
     minWidth: '300px',
+  },
+  '@media (max-width: 599px)': {
+    minWidth: '450px',
+  },
+  '@media (max-width: 500px)': {
+    minWidth: '350px',
+  },
+  '@media (max-width: 400px)': {
+    minWidth: '250px',
   },
 }));
 
@@ -28,44 +38,52 @@ const SearchIconWrapper = styled('div')(() => ({
   height: '24px',
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'var(--text)',
-  fontFamily: 'Inter, sans-serif',
-  width: '100%',
-  paddingLeft: '8px',
-  fontSize: '14px',
-  fontWeight: '500',
-  lineHeight: '18px',
-  letterSpacing: '0em',
-  textAlign: 'left',
-  [theme.breakpoints.down('sm')]: {
-    paddingLeft: '32px',
-  },
-}));
-
-
 export default function InputField({ placeholder }) {
-  const theme = useTheme();
-  const isXSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
+  const handleOptionSelected = (event, value) => {
+    if (value) {
+      const dataToSend = {
+        page_title: 'Search Results',
+        phrase: value,
+      };
+      const queryString = new URLSearchParams(dataToSend).toString();
+      navigate(`/results/?${queryString}`);
+    }
+  };
   return (
-    <>
-      {isXSmall
-        ? (
-          <IconButton aria-label="search" color="inherit" sx={{ px: '7px' }}>
-            <SearchOutlinedIcon fontSize="medium" />
-          </IconButton>
-        ) : (
-          <Search>
-            <SearchIconWrapper>
-              <SearchOutlinedIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder={placeholder}
-              inputProps={{ 'aria-label': 'search' }}
-              name='search'
-            />
-          </Search>
-        )}
-    </>
+    <Autocomplete
+      freeSolo
+      id="search input"
+      disableClearable
+      options={searchOptions.map((option) => option.name)}
+      onChange={handleOptionSelected}
+      renderInput={(params) => (
+        <Search>
+          <SearchIconWrapper>
+            <SearchOutlinedIcon />
+          </SearchIconWrapper>
+          <TextField
+            {...params}
+            placeholder={placeholder}
+            InputProps={{
+              ...params.InputProps,
+              type: 'search',
+            }}
+            variant='standard'
+            sx={{ padding: 0, border: '0px solid' }}
+          />
+        </Search>
+      )}
+    />
   );
-};
+}
+
+const searchOptions = [
+  { "name": "Minimalist Fuzzy Hobo Bag" },
+  { "name": "Curated Bags" },
+  { "name": "Stylish Solid Handbag" },
+  { "name": "Fashionable Simple Handbag" },
+  { "name": "Hooded Sweatshirt With Slogan Print" },
+  { "name": "Women's Letter Print Hooded Sweatshirt" },
+  { "name": "Heart-Shaped Leopard Print Hoodie" },
+];

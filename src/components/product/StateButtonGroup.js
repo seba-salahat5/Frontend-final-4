@@ -17,6 +17,14 @@ const CustomButton = styled(Button)(()=>({
     padding: '0px',
     backgroundColor: 'var(--bright)',
     color: 'var(--dark)',
+    '&:hover': {
+        backgroundColor: 'var(--bright)',
+        color: 'var(--dark)',
+    },
+    '&:active': {
+        backgroundColor: 'var(--bright)',
+        color: 'var(--dark)',
+    },
 }));
 
 const StateText = styled(Typography)(()=>({

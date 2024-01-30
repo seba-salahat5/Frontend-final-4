@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -13,7 +13,18 @@ const Img = styled("img")({
   borderRadius: "8px",
 });
 
-export default function CartItem() {
+export default function CartItem({
+  productImage,
+  brand,
+  productName,
+  quantity,
+  price,
+}) {
+  const [subtotal, setSubtotal] = useState(0);
+
+  useEffect(() => {
+    setSubtotal(price * quantity);
+  }, [price, quantity]);
   return (
     <>
       <Grid item xs={7} container>
@@ -25,7 +36,7 @@ export default function CartItem() {
               paddingRight: "16px",
             }}
           >
-            <Img alt="Product Image" src="./assets/newArrivals/duffle 1.png" />
+            <Img alt="Product Image" src={productImage} />
           </ButtonBase>
         </Grid>
         <Grid item sm container>
@@ -43,13 +54,13 @@ export default function CartItem() {
                 color="#171520"
                 fontSize="1rem"
               >
-                Coach
+                {brand}
               </Typography>
               <Typography variant="body2" gutterBottom>
-                Leather Couch Bag
+                {productName}
               </Typography>
               <Typography variant="body2" color="#626262">
-                Qty- 1
+                Qty- {quantity}
               </Typography>
             </Grid>
           </Grid>
@@ -65,31 +76,25 @@ export default function CartItem() {
       >
         <Grid item>
           <Typography variant="subtitle1" component="div">
-            $19.00
+            {price}
           </Typography>
         </Grid>
 
         <Grid item>
           <Typography variant="subtitle1" component="div">
-            1
+            {quantity}
           </Typography>
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" component="div">
-            $19.00
+            {subtotal}
           </Typography>
         </Grid>
-        <Grid container item xs={12}>
-          <Grid item xs={6}>
-            <Link sx={{ cursor: "pointer" }} variant="button">
-              Move to wishlist
-            </Link>
-          </Grid>
-          <Grid item xs={6}>
-            <Link sx={{ cursor: "pointer" }} variant="body2">
-              remove
-            </Link>
-          </Grid>
+
+        <Grid container item xs={12} sx={{ justifyContent: "flex-end" }}>
+          <Link sx={{ cursor: "pointer" }} variant="body2">
+            remove
+          </Link>
         </Grid>
       </Grid>
     </>

@@ -1,0 +1,51 @@
+#### the othorization is optional
+####  all queries are required
+####  integer >0
+get http://158.176.1.165:3000/product/all?number_of_items=10&page_number=1
+##Cookie: session_token=bb6c85cf-8251-46e1-910e-03aa7d830fba
+
+####158.176.1.165
+get http://158.176.1.165:3000/product/popular?page_number=1&number_of_items=10&value=2
+##Cookie: session_token=bb6c85cf-8251-46e1-910e-03aa7d830fba
+
+#### localhost
+get http://158.176.1.165:3000/product/product-category?category_id=1&page_number=1&number_of_items=10
+
+####
+get http://158.176.1.165:3000/product/product-brand?brand_id=1&page_number=1&number_of_items=10
+####
+get http://158.176.1.165:3000/product/new-arrival?page_number=1&number_of_items=10
+####handpicked-products
+get http://158.176.1.165:3000/product/handpicked-products?page_number=1&number_of_items=10&category_id=1
+####
+get http://158.176.1.165:3000/product/limited-edition?page_number=1&number_of_items=10
+####discount-edition
+get http://158.176.1.165:3000/product/discount-edition?page_number=1&number_of_items=10&value=0.5
+####search text
+get http://158.176.1.165:3000/product/search?page_number=1&number_of_items=10&search_value="Hoodie"
+####/single-product/:product_id
+get http://158.176.1.165:3000/product/single-product/1
+#### /related_product
+get http://158.176.1.165:3000/product/related-product?category_id=1&brand_id=1
+####
+
+####send the product id, must be int
+get http://158.176.1.165:3000/product/ratings/1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

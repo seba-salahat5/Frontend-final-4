@@ -3,6 +3,8 @@ import CartTable from "../components/my-cart/CartTable";
 import { CustomContainer } from "../layout/CustomContainer";
 import OrderDetailes from "../components/shared/OrderDetails";
 import { Box, Grid } from "@mui/material";
+import ContinueShoppingButton from "../components/my-cart/ContinueShoppingButton";
+import PlaceOrderButton from "../components/my-cart/PlaceOrderButton";
 
 const MyHeaderTitle = styled.h2`
   color: var(--Primary, #1b4b66);
@@ -14,28 +16,6 @@ const SummeryTitle = styled.h3`
   font-size: 20px;
   font-weight: 600;
   margin-top: 16px;
-`;
-
-const PlaceOrderButton = styled.button`
-  border: none;
-  width: 180px;
-  padding-block: 10px;
-  border-radius: 8px;
-  background: var(--primary, #1b4b66);
-  color: var(--bright, #fff);
-  font-size: 16px;
-  font-weight: 500;
-`;
-
-const ContinueShoppingButton = styled.button`
-  width: 180px;
-  padding-block: 10px;
-  border-radius: 8px;
-  border: 2px solid var(--Primary, #1b4b66);
-  background: var(--Bright, #fff);
-  color: var(--primary, #1b4b66);
-  font-size: 16px;
-  font-weight: 500;
 `;
 
 const MyCartContainer = styled.div``;
@@ -68,8 +48,8 @@ const MyCart = () => {
               justifyContent="space-around"
               alignItems="space-around"
             >
-              <PlaceOrderButton>Place Order</PlaceOrderButton>
-              <ContinueShoppingButton>Continue Shopping</ContinueShoppingButton>
+              <PlaceOrderButton customWidth={"180px"} />
+              <ContinueShoppingButton />
             </Grid>
           </Grid>
         </Grid>

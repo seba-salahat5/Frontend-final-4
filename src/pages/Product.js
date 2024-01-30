@@ -7,6 +7,7 @@ import PathLine from '../components/shared/PathLine';
 import RatingStars from '../components/shared/RatingStars';
 import StateButtonGroup from '../components/product/StateButtonGroup';
 import RoundedButton from '../components/shared/RoundedButton';
+import DescriptionSection from '../components/product/DescriptionSection';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 
@@ -18,14 +19,8 @@ const Heading = styled(Typography)(() => ({
 }));
 
 const Product = () => {
-
-  function handleClick(event) {
-    event.preventDefault();
-    console.info('You clicked a breadcrumb.');
-  }
-
   const breadcrumbs = [
-    <Link underline="hover" key="1" color="var(--primary)" fontWeight={'500'} href="/" onClick={handleClick}>
+    <Link href="/Frontend-final-4/" underline="hover" key="1" color="var(--primary)" fontWeight={'500'}>
       Home
     </Link>,
     <Link
@@ -33,8 +28,7 @@ const Product = () => {
       key="2"
       color="var(--primary)"
       fontWeight={'500'}
-      href="/category"
-      onClick={handleClick}
+      href="/Frontend-final-4/category"
     >
       Handbag
     </Link>,
@@ -42,83 +36,129 @@ const Product = () => {
       Product
     </Typography>,
   ];
-  const imageList = [
-    {
-      path: "/assets/newArrivals/BLACK-BAG 1.png",
-      id: 1,
-    },
-    {
-      path: "/assets/newArrivals/duffle 1.png",
-      id: 2,
-    },
-    {
-      path: "/assets/newArrivals/irene-kredenets-tcVH_BwHtrc-unsplash 2.png",
-      id: 3,
-    },
-    {
-      path: "/assets/newArrivals/pink-bag-small.png",
-      id: 4,
-    },
-  ]
-
-  const productName = "Coach";
-  const productDescreption = "Leather Coach Bag with adjustable starps.";
-  const rating = 4.0;
-  const ratersNumber = 250;
-  const price = 78.66;
-  const discount = 0.5;
-  const quantity = 0;
-  //const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Risus scelerisque laoreet tortor cras molestie tincidunt malesuada malesuada. Neque, mauris duis dui id morbi magna. Cras lacus, viverra auctor in turpis est quisque eget tristique. Dolor augue mattis duis semper gravida enim eu imperdiet sit. Et pharetra platea pretium nec feugiat tincidunt quam leo tristique. Nulla enim consectetur sit et tempus, faucibus leo ac cras. Purus ut non eu mus volutpat. Eget est vel sagittis amet sit eu eu ullamcorper tellus. Leo mauris, faucibus vulputate adipiscing elementum tristique dictumst augue pellentesque. Justo, sed nunc, pretium turpis scelerisque. Enim urna etiam morbi vestibulum ac dictumst. Ac ut elementum molestie sit felis imperdiet.';
-  //const relatedProduct;
-  //const reviews;
+  const currentProduct = {
+    "product_id": 2,
+    "name": "Coach",
+    "sub_title": "Leather Coach Bag with adjustable starps.",
+    "price": 80,
+    "quantity": 20,
+    "description": "Introducing our Harmony Collection, a fusion of style and comfort. Impeccably crafted with premium fabrics, each garment offers a luxurious feel and versatile design. From casual chic to sophisticated elegance, our cloth product caters to diverse tastes. Elevate your wardrobe with the Harmony Collection, where every stitch tells a story of precision and dedication, bringing timeless aesthetics to modern trends.",
+    "category_id": 3,
+    "brand_id": 3,
+    "is_liked": "0",
+    "number_of_ratings": 3,
+    "ratings": "4.5",
+    "discount_value": 20,
+    "image": [
+      {
+        "image_id": 1,
+        "name": "Image2",
+        "url": "/assets/newArrivals/BLACK-BAG 1.png",
+        "type": true
+      },
+      {
+        "image_id": 7,
+        "name": "Image8",
+        "url": "/assets/newArrivals/duffle 1.png",
+        "type": false
+      },
+      {
+        "image_id": 14,
+        "name": "Image15",
+        "url": "/assets/newArrivals/irene-kredenets-tcVH_BwHtrc-unsplash 2.png",
+        "type": false
+      },
+      {
+        "image_id": 15,
+        "name": "Image16",
+        "url": "/assets/newArrivals/pink-bag-small.png",
+        "type": false
+      }
+    ],
+    "related_products": [
+      {
+        image: "/assets/newArrivals/pink-bag-small.png",
+        productName: "Grande",
+        productDescreption: "Blossom Pouch",
+        discount: 0.5,
+        showRating: false,
+        price: 39.49,
+        showOldPrice: false,
+        ratersNumber: 43,
+        productId: 1,
+      },
+      {
+        image: "/assets/newArrivals/pink-bag-small.png",
+        productName: "Grande",
+        productDescreption: "Blossom Pouch",
+        discount: 0.5,
+        showRating: false,
+        price: 39.49,
+        showOldPrice: false,
+        ratersNumber: 43,
+        productId: 2,
+      },
+      {
+        image: "/assets/newArrivals/pink-bag-small.png",
+        productName: "Grande",
+        productDescreption: "Blossom Pouch",
+        discount: 0.5,
+        showRating: false,
+        price: 39.49,
+        showOldPrice: false,
+        ratersNumber: 43,
+        productId: 3,
+      },
+    ]
+  }
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isMd = useMediaQuery('(min-width:900px) and (max-width:1279px)');
   const isLg = useMediaQuery('(min-width:1280px) and (max-width:1500px)');
   const isXl = useMediaQuery('(min-width:1700px)');
-  const imageWidth = isMobile ? '100%' : (isMd? 440 : (isLg ? 605 : (isXl ? 950 : 740)));
+  const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));
   return (
     <CustomContainer>
       <Grid container mt={'24px'} spacing={1}>
         <Grid item xs={12} md={6} xl={7}>
           <Stack direction={'column'} spacing={2}>
             {!isMobile && <PathLine breadcrumbs={breadcrumbs} />}
-            <ImageGallery imageList={imageList}
+            <ImageGallery imageList={currentProduct.image}
               width={imageWidth} />
           </Stack>
         </Grid>
         <Grid item xs={12} md={6} xl={5}>
           <Stack direction='column' mt={'36px'}>
-            <Heading sx={{ fontSize: '34px', lineHeight: '44px', color: 'var(--dark)', }}>{productName}</Heading>
-            <Heading sx={{ fontSize: '20px', lineHeight: '26px', color: 'var(--summary-text)' }}>{productDescreption}</Heading>
+            <Heading sx={{ fontSize: '34px', lineHeight: '44px', color: 'var(--dark)', }}>{currentProduct.name}</Heading>
+            <Heading sx={{ fontSize: '20px', lineHeight: '26px', color: 'var(--summary-text)' }}>{currentProduct.sub_title}</Heading>
 
             <Stack mt={'32px'} direction={'row'} alignItems={'center'} spacing={2}>
-              <RatingStars rating={rating} space={'8px'} />
+              <RatingStars rating={Number(currentProduct.ratings)} space={'8px'} />
               <Typography sx={{ fontSize: '16px', lineHeight: '20px', fontWeight: '400', color: 'var(--light-text)' }}>
-                ({ratersNumber}) Ratings
+                ({currentProduct.number_of_ratings}) Ratings
               </Typography>
             </Stack>
 
             <Stack mt={'24px'} direction={'row'} alignItems={'center'} spacing={2}>
               <Heading sx={{ fontSize: '40px', lineHeight: '52px', fontWeight: '700', color: 'var(--text)' }}>
-                ${price * discount}
+                ${currentProduct.price * (currentProduct.discount_value / 100)}
               </Heading>
               <Heading sx={{ fontSize: '34px', lineHeight: '26px', textAlign: 'Right', color: 'var(--light-text)', textDecoration: 'line-through' }}>
-                ${price}
+                ${currentProduct.price}
               </Heading>
               <Heading sx={{ fontSize: '20px', lineHeight: '26px', textAlign: 'Right', color: 'var(--vibrant)' }}>
-                {discount * 100}%OFF
+                {currentProduct.discount_value}%OFF
               </Heading>
             </Stack>
 
-            <StateButtonGroup initialState={quantity} mt={'40px'} />
+            <StateButtonGroup initialState={currentProduct.quantity} mt={'40px'} />
 
             <Stack direction={'row'} spacing={3} mt={'40px'} width={'100%'}>
               <RoundedButton
-                buttonText={'Add To Bag'}
+                buttonText={'Add To Cart'}
                 ButtonIcon={ShoppingBagOutlinedIcon}
-                onClickEvent={() => { console.log('Add to bag') }}
+                onClickEvent={() => { console.log('Add to cart') }}
                 isfilled={true}
                 showLeftIcon={true}
                 showRightIcon={false}
@@ -136,13 +176,14 @@ const Product = () => {
                 width={isMobile ? '48px' : '240px'}
               />
             </Stack>
-
           </Stack>
         </Grid>
       </Grid>
-
-
-
+      <DescriptionSection
+        description={currentProduct.description}
+        relatedProducts={currentProduct.related_products}
+        reviews={currentProduct.ratings}
+      />
     </CustomContainer>
 
   );
