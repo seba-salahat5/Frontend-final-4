@@ -125,11 +125,12 @@ function ProductCard({
             </RatingsLayout>
           )}
           <PriceLayout>
-            <div>${price}</div>
+            {!showOldPrice && <div>${price}</div>}
             {showOldPrice && (
               <>
-                <OldPriceText>${price / discount}</OldPriceText>
-                <DiscountText>{discount * 100}% OFF</DiscountText>
+                <div>${price - (price * (discount / 100))}</div>
+                <OldPriceText>${price}</OldPriceText>
+                <DiscountText>{discount}% OFF</DiscountText>
               </>
             )}
           </PriceLayout>

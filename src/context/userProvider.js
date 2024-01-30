@@ -4,13 +4,10 @@ const UserContext = createContext(null);
 
 export default function UserProvider({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [currentUser, setCurrentUser] = useState();
+    const [session_token, setSessionToken] = useState();
 
-    function signIn({ email, password }) {
-        setCurrentUser({
-            "email": email,
-            "password": password,
-        })
+    function signIn({ tokin }) {
+        setSessionToken(tokin);
     }
 
     function toggleIsLoggedIn() {
@@ -22,7 +19,7 @@ export default function UserProvider({ children }) {
                 isLoggedIn: isLoggedIn,
                 toggleIsLoggedIn,
                 signIn,
-                currentUser,
+                session_token,
             }}
         >
             {children}
