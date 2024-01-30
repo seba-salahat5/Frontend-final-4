@@ -9,6 +9,7 @@ import { CustomContainer } from "../layout/CustomContainer";
 import SmallBanner from "../components/home/SmallBanner";
 import BannerBox from "../components/home/BannerBox";
 import { useGet } from "../custom_hooks/useApi";
+import { useNavigate } from "react-router-dom";
 
 const CardsSection = styled(Grid)(() => ({
   marginTop: "70px",
@@ -16,6 +17,8 @@ const CardsSection = styled(Grid)(() => ({
 
 const Home = () => {
   const [newArrivals, setNewArrivals] = useState([]);
+  const navigate = useNavigate();
+
   const apiUrl = "http://158.176.1.165:3000/product/new-arrival";
   const pageNumber = 1;
   const numberOfItems = 10;
@@ -42,6 +45,7 @@ const Home = () => {
               bannerHight={"400px"}
               backgroundImage={"/assets/main offer.png"}
               imageAlt={"Limited Edition Products"}
+              onClickEvent={()=>{navigate('/results?page_title=LimitedEditions')}}
             >
               <BannerBox
                 textsize={"52px"}

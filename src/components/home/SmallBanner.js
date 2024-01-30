@@ -35,9 +35,10 @@ const ImageButton = styled(ButtonBase)(({ buttonHight }) => ({
 
 
 
-const SmallBanner = ({ bannerHight, backgroundImage, imageAlt, children }) => {
+const SmallBanner = ({ bannerHight, backgroundImage, imageAlt, children, onClickEvent }) => {
+    
     return (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: '156px', width: '100%' }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: '156px', width: '100%' }} onClick={onClickEvent}>
             <ImageButton focusRipple>
                 <BannerImage imageHight={bannerHight} src={process.env.PUBLIC_URL + backgroundImage} alt={imageAlt} />
                 {children}
