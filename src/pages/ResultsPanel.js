@@ -1,12 +1,12 @@
 import { useLocation } from 'react-router-dom';
 import { Link, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
 import { CustomContainer } from '../layout/CustomContainer';
 import PathLine from '../components/shared/PathLine';
 import ProductCard from '../components/shared/ProductCard';
+import EmptyPanel from '../components/shared/EmptyPanel';
 
 let tempObj = [
   {
@@ -95,15 +95,7 @@ let tempObj = [
   },
 ];
 
-const StyledImg = styled('img')(() => ({
-  width: '350px',
-  height: '350px',
-  borderRadius: '16px',
-  '@media (max-width: 1200px)': {
-    width: '242.54px',
-    height: '245.04px',
-  },
-}));
+
 
 const ResultsPanel = () => {
   const { search } = useLocation();
@@ -133,28 +125,7 @@ const ResultsPanel = () => {
       {!isMobile && <PathLine breadcrumbs={breadcrumbs} />}
       {
         tempObj.length === 0 ? (
-          <Box sx={{ textAlign: 'center', my: 4 }}>
-            <StyledImg src={process.env.PUBLIC_URL + emptyPageData.image} alt={'Results Not Found'} />
-            <Typography sx={{
-              mt: '24px',
-              fontFamily: 'Inter',
-              fontSize: '28px',
-              fontWeight: 700,
-              lineHeight: '26px',
-            }}>
-              {emptyPageData.heading}
-            </Typography>
-            <Typography
-              sx={{
-                mt: '16px',
-                fontFamily: 'Inter',
-                fontSize: '14px',
-                fontWeight: 500,
-                lineHeight: '18px',
-              }}>
-              {emptyPageData.text}
-            </Typography>
-          </Box>
+          <EmptyPanel image={emptyPageData.image} heading={emptyPageData.heading} text={emptyPageData.text} />
         ) : (
           <Box sx={{ flexGrow: 1, mt: 3 }}>
             <Grid container spacing={{ xs: 1, sm: 2, md: 3, xl: 4 }}>

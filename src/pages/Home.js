@@ -15,33 +15,6 @@ const CardsSection = styled(Grid)(() => ({
 }));
 
 const Home = () => {
-  /*   const [newArrivals, setNewArrivals] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const apiUrl = "http://158.176.1.165:3000/product/new-arrival";
-        const pageNumber = 1;
-        const numberOfItems = 10;
-
-        const response = await axios.get(
-          `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`
-        );
-        console.error("data:", response);
-        console.log(response.data);
-        setNewArrivals(response.data.items);
-
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []); */
-
   const [newArrivals, setNewArrivals] = useState([]);
   const apiUrl = "http://158.176.1.165:3000/product/new-arrival";
   const pageNumber = 1;

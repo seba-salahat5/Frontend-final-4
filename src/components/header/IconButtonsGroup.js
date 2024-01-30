@@ -23,7 +23,7 @@ export default function IconButtonsGroup() {
         sx={{
           justifyContent: "flex-end",
           position: "relative",
-          display: "inline-block", // Added this to keep them in the same line
+          display: "inline-block",
         }}
       >
         <Box
@@ -42,13 +42,14 @@ export default function IconButtonsGroup() {
             <FavoriteBorderRoundedIcon fontSize="medium" />
           </IconButton>
           <IconButton
-            href="/Frontend-final-4/signin"
-            aria-label="profile"
-            color="inherit"
-            sx={{ px: "7px" }}
-          >
-            <PermIdentityRoundedIcon fontSize="medium" />
-          </IconButton>
+              href="/Frontend-final-4/signin"
+              aria-label="profile"
+              id="profile"
+              color="inherit"
+              sx={{ px: "7px" }}
+            >
+              <PermIdentityRoundedIcon fontSize="medium" />
+            </IconButton>
           <Box
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
