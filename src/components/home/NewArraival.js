@@ -11,6 +11,9 @@ const ArrivalLayout = styled.div`
   width: 100%;
   height: 29.6875rem;
   flex-shrink: 0;
+  @media (max-width: 510px) {
+    height: auto;
+  }
 `;
 
 const TopStyle = styled.div`
@@ -28,6 +31,11 @@ const CardsLayout = styled.div`
   align-items: flex-start;
   gap: 2.5rem;
   overflow-x: scroll;
+
+  @media (max-width: 510px) {
+    gap: auto;
+    height: auto;
+  }
 
   /* Add custom scrollbar styles here */
   ::-webkit-scrollbar {
@@ -65,6 +73,9 @@ const TitleTextStyle = styled(SharedTextStyles)`
   color: var(--Dark, #13101e);
   font-size: 2.125rem;
   line-height: 2.75rem;
+  @media (max-width: 510px) {
+    font-size: 0.875rem;
+  }
 `;
 
 const ViewAllLayout = styled.div`
@@ -88,6 +99,9 @@ const ButtonText = styled(SharedTextStyles)`
   text-align: center;
   font-size: 0.875rem;
   line-height: 1.5rem;
+  @media (max-width: 510px) {
+    font-size: 0.75rem;
+  }
 `;
 
 function NewArrivals({ isMainComponent, cards }) {
