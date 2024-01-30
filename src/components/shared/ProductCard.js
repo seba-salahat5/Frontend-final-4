@@ -138,12 +138,7 @@ const RatingText = styled(SharedTextStyles)`
 `;
 
 // Component
-function ProductCard({ button, type, image, productName, productDescreption, discount, showLabel, isTrending, showRating, rating, price, showOldPrice, ratersNumber }) {
-  const imageSrc = process.env.PUBLIC_URL + `${image}`;
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-function ProductCard({
-  Button,
+function ProductCard({ Button,
   type,
   image,
   productName,
@@ -156,8 +151,11 @@ function ProductCard({
   price,
   showOldPrice,
   ratersNumber,
-  width,
-}) {
+  width }) {
+  const imageSrc = process.env.PUBLIC_URL + `${image}`;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  
   return (
     <Card to="/product" width={width}>
       <CardImage src={image.url} alt={productName} width={width} />
