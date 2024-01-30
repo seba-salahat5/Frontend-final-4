@@ -1,9 +1,17 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components'
 import React from 'react';
 import PathLine from '../components/shared/PathLine';
-import { Link, Typography, Stack, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Link, Typography } from '@mui/material';
+import AddressForm from '../components/checkout/AddressForm';
 import { useNavigate } from 'react-router-dom';
-import { Button, Menu, MenuItem, TextField } from '@mui/material';
+import { CustomContainer } from '../layout/CustomContainer';
+import DropdownForm from '../components/checkout/DropdownForm';
+import OrderDetailes from "../components/shared/OrderDetails";
+import { Box, Grid } from "@mui/material";
+
+const StyledPathLine = styled.div`
+  margin-top: 2.438rem;
+`;
 
 const ListTitle = styled.h1`
   color: var(--Primary, #1B4B66);
@@ -13,99 +21,169 @@ const ListTitle = styled.h1`
   font-weight: 600;
   line-height: 2.75rem;
   margin-top: 1.438rem;
-  margin-bottom; 2.37rem;
+  margin-bottom: 2.37rem;
 `;
-const StyledPathLine = styled.div`
-  margin-top: 2.438rem;
+
+const CheckoutLayout = styled.h1`
+  display: flex;
+  flex-direction: row;
+  gap: 8.8rem;
 `;
-const CheckoutFormContainer = styled('div')(({ theme }) => ({
-  width: '44.4rem',
-  height: '23.5rem',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  padding: theme.spacing(2),
-}));
 
-const FormSegment = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  gap: '1.9375rem',
-});
+const Buttons = styled.h1`
+  display: flex;
+  width: 44.375rem;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
 
-const InputField = styled(TextField)({
-  color: (theme) =>
-    theme.palette.type === 'dark' ? '#fff' : theme.palette.text.primary,
-  fontFamily: 'Inter',
-  fontSize: '1rem',
-  fontWeight: 500,
-  lineHeight: '1.25rem',
-});
+const BackButton = styled.button`
+  display: flex;
+  width: 8.5rem;
+  padding: 0.625rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: -5.625rem;
+  flex-shrink: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
+const NextButton = styled.button`
+  display: flex;
+  width: 8.5rem;
+  padding: 0.625rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: var(--Primary, #1B4B66);
+  border:0;
+`;
+const sharedTextStyle = css`
+  text-align: center;
+  font-family: Inter;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.5rem;
+`;
+const UnderlinedText = styled.span`
+  ${sharedTextStyle}
+  color: ${(props) => props.theme.Primary || '#1B4B66'};
+  text-decoration-line: underline;
+`;
+const NextText = styled.span`
+  ${sharedTextStyle}
+  color: var(--Bright, #FFF);
+`;
+
+const RightLayout = styled.button`
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background-color: var(--Bright, #FFF);
+  border: 0;
+  width: 25.8rem;
+`;
+
+const SummeryTitle = styled.h3`
+  color: var(--dark, #13101e);
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 16px;
+`;
 
 
 const Checkout = () => {
+  const [showForm, setShowForm] = React.useState(false);
+  const [showPayment, setShowPayment] = React.useState(false);
   const navigate = useNavigate();
 
-  const handleClick = (event) => {
-    event.preventDefault();
-    // Navigate to the home link
-    navigate('/');
+  const handleClick = () => {
+    setShowForm(!showForm);
   };
+
+  const handlePayment = () => {
+    setShowPayment(!showPayment);
+  };
+
   const breadcrumbs = [
-    <Link underline="hover" key="1" color="var(--primary)" fontWeight={'500'} href="/" onClick={handleClick}>
+    <Link
+      underline="hover"
+      key="1"
+      color="var(--primary)"
+      fontWeight={'500'}
+      href="/"
+      onClick={(event) => {
+        event.preventDefault();
+        navigate('/');
+      }}
+    >
       Home
     </Link>,
     <Typography key="2" color="var(--summary-text)">
       Checkout
     </Typography>,
   ];
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const isMd = useMediaQuery('(min-width:900px) and (max-width:1279px)');
-  const isLg = useMediaQuery('(min-width:1280px) and (max-width:1500px)');
-  const isXl = useMediaQuery('(min-width:1700px)');
-  const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  return <div>{!isMobile &&
-    <StyledPathLine><PathLine breadcrumbs={breadcrumbs} /></StyledPathLine>}
-    <ListTitle>Handbags</ListTitle>
-    <Button onClick={handleMenu}>Open Checkout</Button>
-    <Menu
-      anchorEl={anchorEl}
-      open={Boolean(anchorEl)}
-      onClose={handleClose}
-      component={CheckoutFormContainer}
-    >
-      <FormSegment>
-        <InputField label="Full Name" variant="outlined" />
-      </FormSegment>
-      <FormSegment>
-        <InputField
-          label="Mobile Number"
-          variant="outlined"
-          placeholder="+11"
-        />
-        <InputField label="Enter Number" variant="outlined" />
-      </FormSegment>
-      <FormSegment>
-        <InputField label="Email Address" variant="outlined" />
-        <InputField label="State" variant="outlined" />
-      </FormSegment>
-      <FormSegment>
-        <InputField label="City" variant="outlined" />
-        <InputField label="Pin Code" variant="outlined" />
-      </FormSegment>
-    </Menu>
+  return (
+    <CustomContainer>
+      <StyledPathLine>
+        <PathLine breadcrumbs={breadcrumbs} />
+      </StyledPathLine>
+      <ListTitle>Handbags</ListTitle>
+      <CheckoutLayout>
+        <div>
+          <DropdownForm showForm={showForm} handleClick={handleClick} name={"Add New Address"} />
+          {showForm && <AddressForm />}
+          <DropdownForm showForm={showPayment} handleClick={handlePayment} name={"Select Payment Method"} />
+          <Buttons>
+            <BackButton>
+              <UnderlinedText>Back to Cart</UnderlinedText>
+            </BackButton>
+            <NextButton>
+              <NextText>Next</NextText>
+            </NextButton>
+          </Buttons>
+        </div>
+        <RightLayout>
+          <SummeryTitle>Order Summary</SummeryTitle>
+          <Grid container>
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  my: 0,
+                  display: "flex",
+                  p: 1,
+                  borderBottom: "1px solid #626262",
+                }}
+              ></Box>
+            </Grid>
+          </Grid>
 
-  </div>;
+          <Grid container>
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  my: 3,
+                  display: "flex",
+                  p: 1,
+                  borderBottom: "1px solid #626262",
+                }}
+              >
+                <SummeryTitle>Order Details</SummeryTitle>
+              </Box>
+              <OrderDetailes />
+            </Grid>
+          </Grid>
+        </RightLayout>
+      </CheckoutLayout>
+    </CustomContainer >
+  );
 };
 
 export default Checkout;

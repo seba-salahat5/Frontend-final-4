@@ -1,5 +1,4 @@
-
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import BrandsList from "../components/home/BrandsList";
@@ -9,13 +8,37 @@ import NewArrivals from "../components/home/NewArraival";
 import { CustomContainer } from "../layout/CustomContainer";
 import SmallBanner from "../components/home/SmallBanner";
 import BannerBox from '../components/home/BannerBox';
+import axios from 'axios';
 
 const CardsSection = styled(Grid)(() => ({
   marginTop: '70px',
-
 }));
 
 const Home = () => {
+  const [newArrivals, setNewArrivals] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiUrl = 'http://158.176.1.165:3000/product/new-arrival';
+        const pageNumber = 1;
+        const numberOfItems = 10;
+
+        const response = await axios.get(`${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`);
+        console.error('data:', response);
+        setNewArrivals(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   let tempObj = [
     {
       image: "/assets/newArrivals/pink-bag-small.png",
@@ -100,7 +123,7 @@ const Home = () => {
     <>
       <CustomContainer>
         <CarouselBanner />
-        <NewArrivals cards={tempObj} />
+        <NewArrivals cards={loading ? tempObj : tempObj} />
       </CustomContainer>
       <HandPickedCollections />
       <CustomContainer>
@@ -136,7 +159,6 @@ const Home = () => {
                 bannerText={'Popular In The Community!'} />
             </SmallBanner>
           </Grid>
-
         </CardsSection>
       </CustomContainer>
     </>

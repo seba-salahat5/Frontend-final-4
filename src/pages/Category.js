@@ -146,8 +146,9 @@ const Category = () => {
   const isXl = useMediaQuery('(min-width:1700px)');
   const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));
   return <CustomContainer>
-    {!isMobile && <CarouselBanner /> &&
-    <StyledPathLine><PathLine breadcrumbs={breadcrumbs} /></StyledPathLine>}
+    <CarouselBanner />
+    {!isMobile &&
+      <StyledPathLine><PathLine breadcrumbs={breadcrumbs} /></StyledPathLine>}
     <ListTitle>Handbags</ListTitle>
     <ListLayout>
       {!isMobile && <ListingOptions />}
