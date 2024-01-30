@@ -88,7 +88,7 @@ const Home = () => {
               />
             </SmallBanner>
           </Grid>
-        </CardsSection>
+        </CardsSection> 
       </CustomContainer>
     </>
   );
