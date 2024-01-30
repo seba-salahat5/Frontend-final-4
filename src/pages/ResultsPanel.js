@@ -9,10 +9,6 @@ import EmptyPanel from '../components/shared/EmptyPanel';
 
 import { useGet } from "../custom_hooks/useApi";
 
-let tempObj = [
-];
-
-
 
 const ResultsPanel = () => {
   const [viewProducts, setViewProducts] = useState([]);
@@ -20,12 +16,16 @@ const ResultsPanel = () => {
   const params = new URLSearchParams(search);
 
   const pageTitle = params.get('page_title');
-  const apiUrl = "http://158.176.1.165:3000/product/limited-edition";
+  const apiRoute = params.get('route');
+  const value = params.get('value');
+  const apiUrl = `http://158.176.1.165:3000/product/${apiRoute}`;
   const pageNumber = 1;
   const numberOfItems = 10;
-  const { data, loading } = useGet(
-    `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`
-  );
+
+  const urlEndpoint = value !== undefined
+  ? `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}&value=${value}`
+  : `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`;
+  const { data, loading } = useGet(urlEndpoint);
 
   useEffect(() => {
     !loading && setViewProducts(data.items);
@@ -58,7 +58,7 @@ const ResultsPanel = () => {
           <Box sx={{ flexGrow: 1, mt: 3 }}>
             <Grid container spacing={{ xs: 1, sm: 2, md: 3, xl: 4 }}>
               {viewProducts.map((item) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={item.productId}>
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={item.product_id}>
                   <ProductCard
                     key={item.product_id}
                     image={item.image[0]}
@@ -69,7 +69,7 @@ const ResultsPanel = () => {
                     price={item.price}
                     showOldPrice={item.discount_value !== 0 ? true : false}
                     ratersNumber={item.number_of_ratings}
-                    rating={item.ratings}
+                    rating={parseFloat(item.ratings)}
                   />
                 </Grid>
 

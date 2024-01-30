@@ -45,7 +45,7 @@ const Home = () => {
               bannerHight={"400px"}
               backgroundImage={"/assets/main offer.png"}
               imageAlt={"Limited Edition Products"}
-              onClickEvent={()=>{navigate('/results?page_title=LimitedEditions')}}
+              onClickEvent={()=>{navigate('/results?page_title=Limited Editions&route=limited-edition')}}
             >
               <BannerBox
                 textsize={"52px"}
@@ -61,6 +61,7 @@ const Home = () => {
               bannerHight={"228px"}
               backgroundImage={"/assets/offer1.png"}
               imageAlt={"15% Off And More!"}
+              onClickEvent={()=>{navigate('/results?page_title=15% Off And More!&route=discount-edition&value=15')}}
             >
               <BannerBox
                 textsize={"40px"}
