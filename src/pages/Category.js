@@ -5,7 +5,7 @@ import PaginationBar from '../components/category/PaginationBar';
 import { CustomContainer } from '../layout/CustomContainer';
 import CarouselBanner from '../components/category/CategoryBanner';
 import PathLine from '../components/shared/PathLine';
-import { Link, Typography, Stack, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Link, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 /**
  * fix ScrollBar in new arraivals
@@ -141,10 +141,10 @@ const Category = () => {
   ];
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const isMd = useMediaQuery('(min-width:900px) and (max-width:1279px)');
+  /*const isMd = useMediaQuery('(min-width:900px) and (max-width:1279px)');
   const isLg = useMediaQuery('(min-width:1280px) and (max-width:1500px)');
   const isXl = useMediaQuery('(min-width:1700px)');
-  const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));
+  const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));*/
   return <CustomContainer>
     <CarouselBanner />
     {!isMobile &&

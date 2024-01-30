@@ -28,8 +28,11 @@ export default function SignIn() {
         toggleIsLoggedIn();
         navigate("/");
       }
+      else {
+        console.log(error);
+      }
     }
-  }, [data, error]);
+  }, [data,error, signIn, navigate, toggleIsLoggedIn]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

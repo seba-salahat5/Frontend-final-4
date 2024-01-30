@@ -88,19 +88,17 @@ const ProductNameText = styled(SharedTextStyles)`
     font-size: 0.75rem;
   }
   display: -webkit-box;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 
 `;
 
 const DescriptionText = styled(SharedTextStyles)`
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+overflow: hidden;
   @media (max-width: 510px) {
     font-size: 0.75rem;
   }
@@ -152,10 +150,10 @@ function ProductCard({ Button,
   showOldPrice,
   ratersNumber,
   width }) {
-  const imageSrc = process.env.PUBLIC_URL + `${image}`;
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  
+
   return (
     <Card to="/product" width={width}>
       <CardImage src={image.url} alt={productName} width={width} />
@@ -170,10 +168,10 @@ function ProductCard({ Button,
             </RatingsLayout>
           )}
           <PriceLayout>
-            {!showOldPrice && <div>${price}</div>}
+            {!showOldPrice && <PriceText>${price}</PriceText>}
             {showOldPrice && (
               <>
-                <div>${price - (price * (discount / 100))}</div>
+                <PriceText>${(price - (price * (discount / 100))).toFixed(2)}</PriceText>
                 <OldPriceText>${price}</OldPriceText>
                 <DiscountText>{discount}% OFF</DiscountText>
               </>
