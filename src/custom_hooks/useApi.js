@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-// Inside the useApi hook
-
 export function usePost(url) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [requestBody, setRequestBody] = useState(null);
-  console.log("url : ", url);
 
   useEffect(() => {
-    console.log(requestBody);
     async function fetchData() {
       try {
         const postResponse = await axios.post(url, requestBody);

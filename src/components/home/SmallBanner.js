@@ -1,7 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import { Box, ButtonBase } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 const BannerImage = styled("img")(({ imageHight }) => ({
   width: "100%",
@@ -34,41 +33,15 @@ const ImageButton = styled(ButtonBase)(({ buttonHight }) => ({
   },
 }));
 
-const SmallBanner = ({
-  bannerHight,
-  backgroundImage,
-  imageAlt,
-  children,
-  category,
-}) => {
-  const navigate = useNavigate();
-
-  const categoryLink = `/category?&category=${category}`;
-
-  const handleButtonClick = () => {
-    // Redirect to the categoryLink when the button is clicked
-    navigate(categoryLink);
-  };
-
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexWrap: "wrap",
-        minWidth: "156px",
-        width: "100%",
-      }}
-    >
-      <ImageButton focusRipple onClick={handleButtonClick}>
-        <BannerImage
-          imageHight={bannerHight}
-          src={process.env.PUBLIC_URL + backgroundImage}
-          alt={imageAlt}
-        />
-        {children}
-      </ImageButton>
-    </Box>
-  );
-};
-
+const SmallBanner = ({ bannerHight, backgroundImage, imageAlt, children, onClickEvent }) => {
+    
+    return (
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: '156px', width: '100%' }} onClick={onClickEvent}>
+            <ImageButton focusRipple>
+                <BannerImage imageHight={bannerHight} src={process.env.PUBLIC_URL + backgroundImage} alt={imageAlt} />
+                {children}
+            </ImageButton>
+        </Box>
+    );
+}
 export default SmallBanner;

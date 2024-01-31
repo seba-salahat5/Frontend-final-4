@@ -9,40 +9,16 @@ import { CustomContainer } from "../layout/CustomContainer";
 import SmallBanner from "../components/home/SmallBanner";
 import BannerBox from "../components/home/BannerBox";
 import { useGet } from "../custom_hooks/useApi";
+import { useNavigate } from "react-router-dom";
 
 const CardsSection = styled(Grid)(() => ({
   marginTop: "70px",
 }));
 
 const Home = () => {
-  /*   const [newArrivals, setNewArrivals] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const apiUrl = "http://158.176.1.165:3000/product/new-arrival";
-        const pageNumber = 1;
-        const numberOfItems = 10;
-
-        const response = await axios.get(
-          `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`
-        );
-        console.error("data:", response);
-        console.log(response.data);
-        setNewArrivals(response.data.items);
-
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []); */
-
   const [newArrivals, setNewArrivals] = useState([]);
+  const navigate = useNavigate();
+
   const apiUrl = "http://158.176.1.165:3000/product/new-arrival";
   const pageNumber = 1;
   const numberOfItems = 10;
@@ -69,7 +45,7 @@ const Home = () => {
               bannerHight={"400px"}
               backgroundImage={"/assets/main offer.png"}
               imageAlt={"Limited Edition Products"}
-              category={"limited-edition"}
+              onClickEvent={()=>{navigate('/results?page_title=Limited Editions&route=limited-edition')}}
             >
               <BannerBox
                 textsize={"52px"}
@@ -85,7 +61,7 @@ const Home = () => {
               bannerHight={"228px"}
               backgroundImage={"/assets/offer1.png"}
               imageAlt={"15% Off And More!"}
-              category={"discount-edition"}
+              onClickEvent={()=>{navigate('/results?page_title=Products with 15% Sale&route=discount-edition&value=15')}}
             >
               <BannerBox
                 textsize={"40px"}
@@ -101,6 +77,7 @@ const Home = () => {
               bannerHight={"228px"}
               backgroundImage={"/assets/offer2.png"}
               imageAlt={"Popular In The Community!"}
+              onClickEvent={()=>{navigate('/results?page_title=Popular Products&route=popular&value=4.5')}}
             >
               <BannerBox
                 textsize={"40px"}
@@ -111,7 +88,7 @@ const Home = () => {
               />
             </SmallBanner>
           </Grid>
-        </CardsSection>
+        </CardsSection> 
       </CustomContainer>
     </>
   );

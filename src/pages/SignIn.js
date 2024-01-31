@@ -13,17 +13,26 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { usePost } from "../custom_hooks/useApi";
+import { useUser } from "../context/userProvider";
+import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 export default function SignIn() {
-  const { data, error, setNewRequestBody } = usePost(
-    "http://158.176.1.165:3000/auth/login",
-    "post"
-  );
-
+  const { data, error, setNewRequestBody } = usePost("http://158.176.1.165:3000/auth/login");
+  const {toggleIsLoggedIn,signIn} = useUser();
+  const navigate = useNavigate();
   React.useEffect(() => {
-    console.log(data, error);
-  }, [data, error]);
+    if(data){
+      if(data.msg){
+        signIn(data.session_token);
+        toggleIsLoggedIn();
+        navigate("/");
+      }
+      else {
+        console.log(error);
+      }
+    }
+  }, [data,error, signIn, navigate, toggleIsLoggedIn]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
