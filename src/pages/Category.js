@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import ListingOptions from "../components/category/ListingOptions";
 import CardsGrid from "../components/category/CardsGrid";
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useGet } from "../custom_hooks/useApi";
 
-import PaginationBar from '../components/category/PaginationBar';
-import { CustomContainer } from '../layout/CustomContainer';
-import CarouselBanner from '../components/category/CategoryBanner';
-import PathLine from '../components/shared/PathLine';
-import { Link, Typography, useMediaQuery, useTheme } from '@mui/material';
+import PaginationBar from "../components/category/PaginationBar";
+import { CustomContainer } from "../layout/CustomContainer";
+import CarouselBanner from "../components/category/CategoryBanner";
+import PathLine from "../components/shared/PathLine";
+import { Link, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 /**
  * fix ScrollBar in new arraivals
@@ -67,6 +67,7 @@ const Category = () => {
     apiUrl = `http://158.176.1.165:3000/product/${categoryType}`;
     const pageNumber = 1;
     const numberOfItems = 10;
+    categotyTitle = "New Arrival";
     urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`;
   }
   const [categoryItems, setCategoryItems] = useState([]);
@@ -75,26 +76,22 @@ const Category = () => {
   useEffect(() => {
     !loading && setCategoryItems(data);
   }, [data, loading]);
-
-  return (
-    <CustomContainer>
-      <ListTitle>{categotyTitle}</ListTitle>
-      <ListLayout>
-        <ListingOptions />
-        <CardsGrid cards={categoryItems.items} />
-        <PaginationBar />
-      </ListLayout>
-    </CustomContainer>
-  );
   const navigate = useNavigate();
 
   const handleClick = (event) => {
     event.preventDefault();
     // Navigate to the home link
-    navigate('/');
+    navigate("/");
   };
   const breadcrumbs = [
-    <Link underline="hover" key="1" color="var(--primary)" fontWeight={'500'} href="/" onClick={handleClick}>
+    <Link
+      underline="hover"
+      key="1"
+      color="var(--primary)"
+      fontWeight={"500"}
+      href="/"
+      onClick={handleClick}
+    >
       Home
     </Link>,
     <Typography key="2" color="var(--summary-text)">
@@ -107,17 +104,22 @@ const Category = () => {
   const isLg = useMediaQuery('(min-width:1280px) and (max-width:1500px)');
   const isXl = useMediaQuery('(min-width:1700px)');
   const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));*/
-  return <CustomContainer>
-    <CarouselBanner />
-    {!isMobile &&
-      <StyledPathLine><PathLine breadcrumbs={breadcrumbs} /></StyledPathLine>}
-    <ListTitle>Handbags</ListTitle>
-    <ListLayout>
-      {!isMobile && <ListingOptions />}
-      <CardsGrid cards={tempObj} />
-      <PaginationBar />
-    </ListLayout>
-  </CustomContainer>;
+  return (
+    <CustomContainer>
+      <CarouselBanner />
+      {!isMobile && (
+        <StyledPathLine>
+          <PathLine breadcrumbs={breadcrumbs} />
+        </StyledPathLine>
+      )}
+      <ListTitle>{categotyTitle}</ListTitle>
+      <ListLayout>
+        {!isMobile && <ListingOptions />}
+        <CardsGrid cards={categoryItems.items} />
+        <PaginationBar />
+      </ListLayout>
+    </CustomContainer>
+  );
 };
 
 export default Category;
