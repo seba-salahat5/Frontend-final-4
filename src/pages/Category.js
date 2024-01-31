@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import ListingOptions from "../components/category/ListingOptions";
 import CardsGrid from "../components/category/CardsGrid";
+
+import PaginationBar from '../components/category/PaginationBar';
+import { CustomContainer } from '../layout/CustomContainer';
+import CarouselBanner from '../components/category/CategoryBanner';
+import PathLine from '../components/shared/PathLine';
+
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useGet } from "../custom_hooks/useApi";
-
-import PaginationBar from "../components/category/PaginationBar";
-import { CustomContainer } from "../layout/CustomContainer";
-import CarouselBanner from "../components/category/CategoryBanner";
-import PathLine from "../components/shared/PathLine";
 import { Link, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 /**
@@ -76,28 +77,6 @@ const Category = () => {
   useEffect(() => {
     !loading && setCategoryItems(data);
   }, [data, loading]);
-  const navigate = useNavigate();
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    // Navigate to the home link
-    navigate("/");
-  };
-  const breadcrumbs = [
-    <Link
-      underline="hover"
-      key="1"
-      color="var(--primary)"
-      fontWeight={"500"}
-      href="/"
-      onClick={handleClick}
-    >
-      Home
-    </Link>,
-    <Typography key="2" color="var(--summary-text)">
-      Handbag
-    </Typography>,
-  ];
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   /*const isMd = useMediaQuery('(min-width:900px) and (max-width:1279px)');
@@ -108,9 +87,7 @@ const Category = () => {
     <CustomContainer>
       <CarouselBanner />
       {!isMobile && (
-        <StyledPathLine>
-          <PathLine breadcrumbs={breadcrumbs} />
-        </StyledPathLine>
+        <StyledPathLine><PathLine/></StyledPathLine>}
       )}
       <ListTitle>{categotyTitle}</ListTitle>
       <ListLayout>

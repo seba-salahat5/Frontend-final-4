@@ -55,7 +55,7 @@ function a11yProps(index) {
   };
 }
 
-export default function DescriptionSection({ description, relatedProducts, reviews }) {
+export default function DescriptionSection({ description, relatedProducts, ratings, reviews, avgRating }) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
@@ -110,11 +110,11 @@ export default function DescriptionSection({ description, relatedProducts, revie
             >
               You Might Also Like
             </Typography>
-            <NewArrivals isMainComponent={false} cards={relatedProducts} />
+            {relatedProducts.length !== 0 &&<NewArrivals isMainComponent={false} cards={relatedProducts} />}
           </>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <RatingsPanel rating={reviews} />
+          <RatingsPanel ratings ={ratings} reviews={reviews} avgRating={avgRating} />
         </TabPanel>
       </SwipeableViews>
     </Box>

@@ -139,6 +139,7 @@ const RatingText = styled(SharedTextStyles)`
 function ProductCard({ Button,
   type,
   image,
+  productId,
   productName,
   productDescreption,
   discount,
@@ -155,7 +156,7 @@ function ProductCard({ Button,
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Card to="/product" width={width}>
+    <Card to={`/product?product_id=${productId}`} width={width}>
       <CardImage src={image.url} alt={productName} width={width} />
       <CardFrame>
         <CardInfo>

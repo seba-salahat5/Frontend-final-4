@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 export default function IconButtonsGroup() {
   const [isHovering, setIsHovering] = useState(false);
   const navigate = useNavigate();
-
   const handleMouseOver = () => {
     setIsHovering(true);
   };
@@ -44,14 +43,14 @@ export default function IconButtonsGroup() {
             <FavoriteBorderRoundedIcon fontSize="medium" />
           </IconButton>
           <IconButton
-            onClick={() => { navigate('/signin') }}
-            aria-label="profile"
-            id="profile"
-            color="inherit"
-            sx={{ px: "7px" }}
-          >
-            <PermIdentityRoundedIcon fontSize="medium" />
-          </IconButton>
+              onClick={() => { navigate('/signin') }}
+              aria-label="profile"
+              id="profile"
+              color="inherit"
+              sx={{ px: "7px" }}
+            >
+              <PermIdentityRoundedIcon fontSize="medium" />
+            </IconButton>
           <Box
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}

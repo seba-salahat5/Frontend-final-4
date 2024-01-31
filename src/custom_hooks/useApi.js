@@ -30,7 +30,7 @@ export function usePost(url) {
 }
 
 export function useGet(url) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -39,7 +39,6 @@ export function useGet(url) {
       try {
         const response = await axios.get(url);
         setData(response.data);
-
         setLoading(false);
       } catch (error) {
         setError(error);
