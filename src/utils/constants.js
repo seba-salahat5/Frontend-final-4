@@ -20,3 +20,4 @@ export const LOGOS = [
 ];
 
 export const COLLECTIONS = ['Featured', 'Brands', 'Trendy'];
+export const DEBOUNCE_VALUE = 300;
