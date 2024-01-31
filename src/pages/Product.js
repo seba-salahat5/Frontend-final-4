@@ -37,7 +37,7 @@ const Product = () => {
   
   const { search } = useLocation();
   const params = new URLSearchParams(search);
-  const baseUrl = "http://158.176.1.165:3000/product";
+  const baseUrl = "https://group4.iscovat.bid/product";
 
   const product_id = params.get('product_id');
   const { data: productData, loading: productLoading } = useGet(`${baseUrl}/single-product/${parseInt(product_id)}`);

@@ -54,7 +54,7 @@ const Header = () => {
   const isXSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const imageSrc = process.env.PUBLIC_URL + `/assets/logo.png`;
   const [isSearchMode, setIsSearchMode] = React.useState(false);
-  const { data, loading } = useGet(`http://158.176.1.165:3000/product/search?page_number=1&number_of_items=20&search_value=${inputValue}`);
+  const { data, loading } = useGet(`https://group4.iscovat.bid/product/search?page_number=1&number_of_items=20&search_value=${inputValue}`);
 
   const navigate = useNavigate();
 
