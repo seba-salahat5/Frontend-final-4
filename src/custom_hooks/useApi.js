@@ -29,7 +29,7 @@ export function usePost(url) {
   };
 }
 
-export function useGet(url) {
+export function useGet(url, session_token) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -37,7 +37,10 @@ export function useGet(url) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(url);
+        const response = session_token ? 
+        await axios.get(url, {headers: {Authorization: `Bearer ${session_token}`}})
+        : await axios.get(url);
+        console.log(response);
         setData(response.data);
         setLoading(false);
       } catch (error) {
@@ -47,7 +50,7 @@ export function useGet(url) {
     };
 
     fetchData();
-  }, [url]);
+  }, [url, session_token]);
 
   return {
     data,

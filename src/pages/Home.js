@@ -10,6 +10,7 @@ import SmallBanner from "../components/home/SmallBanner";
 import BannerBox from "../components/home/BannerBox";
 import { useGet } from "../custom_hooks/useApi";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/userProvider";
 
 const CardsSection = styled(Grid)(() => ({
   marginTop: "70px",
@@ -18,13 +19,16 @@ const CardsSection = styled(Grid)(() => ({
 const Home = () => {
   const [newArrivals, setNewArrivals] = useState([]);
   const navigate = useNavigate();
-
+  const {isLoggedIn, session_token} = useUser();
   const apiUrl = "https://group4.iscovat.bid/product/new-arrival";
   const pageNumber = 1;
   const numberOfItems = 10;
-  const { data, loading } = useGet(
-    `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`
-  );
+
+  const requsetProps = [`${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`];
+  isLoggedIn && requsetProps.push(session_token);
+
+  console.log("requsetProps", requsetProps);
+  const { data, loading } = useGet(...requsetProps);
 
   useEffect(() => {
     !loading && setNewArrivals(data.items);

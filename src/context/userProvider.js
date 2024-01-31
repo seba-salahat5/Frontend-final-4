@@ -6,7 +6,8 @@ export default function UserProvider({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [session_token, setSessionToken] = useState();
 
-    function signIn({ tokin }) {
+    function signIn( tokin ) {
+        console.log("tokin", tokin);
         setSessionToken(tokin);
     }
 
