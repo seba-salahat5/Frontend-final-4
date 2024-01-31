@@ -57,7 +57,7 @@ const Product = () => {
 
   const product_id = params.get('product_id');
   const { data: currentProductData, loading: currentProductLoading } = useGet(`${baseUrl}/single-product/${parseInt(product_id)}`);
-  const { data: relatedProductsData, loading: relatedProductsLoading, error: relatedProductsError } = useGet(`${baseUrl}/related_product?category_id=${categoryId}&brand_id=${brandId}`);
+  const { data: relatedProductsData, loading: relatedProductsLoading, error: relatedProductsError } = useGet(`${baseUrl}/related-product?category_id=${categoryId}&brand_id=${brandId}`);
 
   useEffect(() => {
     if (!currentProductLoading && currentProductData) {
@@ -73,9 +73,10 @@ const Product = () => {
       setRelatedProduct([]);
     }
     if (!relatedProductsLoading && relatedProductsData) {
-      setRelatedProduct(relatedProductsData);
+      setRelatedProduct(relatedProductsData.items);
     }
   }, [relatedProductsData, relatedProductsLoading, relatedProductsError, currentProduct]);
+
   return (
     <>
     {currentProduct &&(
@@ -141,7 +142,7 @@ const Product = () => {
           </Grid>
           <DescriptionSection
             description={currentProduct.description }
-            relatedProducts={relatedProducts || []}
+            relatedProducts={relatedProducts}
             reviews={currentProduct.ratings}
           />
         </CustomContainer>
