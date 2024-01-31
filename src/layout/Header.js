@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import {
   AppBar,
@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { CustomContainer } from "./CustomContainer";
 import InputField from "../components/header/InputField.js";
@@ -21,7 +21,7 @@ import Navbar from "../components/header/Navbar.js";
 import IconButtonsGroup from "../components/header/IconButtonsGroup.js";
 import { TOP_CATEGORIES } from "../utils/constants.js";
 import { useDebounce } from "../custom_hooks/useDebounce.js";
-import {useGet} from "../custom_hooks/useApi.js";
+import { useGet } from "../custom_hooks/useApi.js";
 
 const CustomizedAppBar = styled(AppBar)(() => ({
   width: "100%",
@@ -55,16 +55,24 @@ const Header = () => {
   const imageSrc = process.env.PUBLIC_URL + `/assets/logo.png`;
   const [isSearchMode, setIsSearchMode] = React.useState(false);
   const { data, loading } = useGet(`http://158.176.1.165:3000/product/search?page_number=1&number_of_items=20&search_value=${inputValue}`);
-  
+
+  const navigate = useNavigate();
+
   const { DebouncedAction } = useDebounce((term) => {
     setInputValue(term);
   });
 
   useEffect(() => {
-    if(inputValue !== ''){
+    if (inputValue !== '' && data !== null) {
       !loading && setInputOptions(data.items);
     }
   }, [data, loading, inputValue]);
+
+  
+  const handleSearchOptionSelected = (selectedOption) => {
+    let selectedProduct = inputOptions.filter(option => option.name === selectedOption);
+    navigate(`/product?product_id=${selectedProduct[0].product_id}`);
+  };
 
   const handleSearchIconClick = () => {
     setIsSearchMode(true);
@@ -119,11 +127,19 @@ const Header = () => {
                     >
                       <ArrowBackIosIcon />
                     </IconButton>
-                    <InputField placeholder="Search for products or brands....." inputOptions={inputOptions} onInput={
-                  (inputValue) => {
-                    DebouncedAction(inputValue);
-                  }
-                }  />
+                    <InputField
+                      placeholder="Search for products or brands....."
+                      inputOptions={inputOptions}
+                      onInput={
+                        (inputValue) => {
+                          DebouncedAction(inputValue);
+                        }
+                      }
+                      onValueSelected = {
+                        (selectedOption) => {
+                          handleSearchOptionSelected(selectedOption);
+                        }
+                      } />
                   </Stack>
                 ) : (
                   <Stack direction={"row"} alignItems={"center"}>
@@ -141,11 +157,19 @@ const Header = () => {
               </>
             ) : (
               <Stack direction={"row"} alignItems={"center"}>
-                <InputField placeholder="Search for products or brands....." inputOptions={inputOptions} onInput={
-                  (inputValue) => {
-                    DebouncedAction(inputValue);
+                <InputField
+                  placeholder="Search for products or brands....."
+                  inputOptions={inputOptions}
+                  onInput={
+                    (inputValue) => {
+                      DebouncedAction(inputValue);
+                    }
                   }
-                } />
+                  onValueSelected = {
+                    (selectedOption) => {
+                      handleSearchOptionSelected(selectedOption);
+                    }
+                  } />
                 <IconButtonsGroup />
               </Stack>
             )}

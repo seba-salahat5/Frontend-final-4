@@ -40,7 +40,7 @@ const ImageGallery = ({ imageList, width }) => {
     <ImageCarousel width={width} thumbWidth={width * 0.12} showStatus={false}>
       {imageList.map((item) => (
         <div key={item.image_id}>
-          <img src={process.env.PUBLIC_URL + item.url} alt="Gallery Item" />
+          <img src={item.url} alt={item.name} />
         </div>
       ))}
     </ImageCarousel>

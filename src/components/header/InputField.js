@@ -2,7 +2,6 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { TextField, Autocomplete } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(() => ({
   paddingLeft: '8px',
@@ -38,23 +37,14 @@ const SearchIconWrapper = styled('div')(() => ({
   height: '24px',
 }));
 
-export default function InputField({ placeholder, inputOptions,onInput }) {
-  const navigate = useNavigate();
+export default function InputField({ placeholder, inputOptions, onInput, onValueSelected }) {
   const handleOptionSelected = (event, value) => {
-    if (value) {
-      const dataToSend = {
-        page_title: 'Search Results',
-        phrase: value,
-      };
-      const queryString = new URLSearchParams(dataToSend).toString();
-      navigate(`/results/?${queryString}`);
-    }
+    onValueSelected(value)
   };
 
   const handleInputChange = (event) => {
     onInput(event.target.value)
   };
-
   return (
     <Autocomplete
       freeSolo
