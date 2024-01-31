@@ -2,6 +2,7 @@ import Carousel from "react-material-ui-carousel";
 import { carouselData } from "../../utils/carouselData";
 import styled from "styled-components";
 import EastIcon from "@mui/icons-material/East";
+import { Link } from "react-router-dom";
 
 const CarouselImage = styled.img`
   width: 100%;
@@ -82,6 +83,7 @@ const CustomedButton = styled.button`
   font: inherit;
   position: absolute;
   bottom: 55px;
+  cursor: pointer;
   @media (max-width: 1000px) {
     bottom: 20px;
   }
@@ -111,16 +113,23 @@ function CarouselBanner(props) {
 }
 
 function Item(props) {
+  const category = "handpicked-products";
+  const categoryLink = `/category?id=1&category=${category}`;
   return (
     <>
-      <CarouselImage src={ process.env.PUBLIC_URL+ props.item.src} alt={props.item.alt} />
-      <AdBox>
-        <CarouselTitle>{props.item.carouselTitle}</CarouselTitle>
-        <CarouselSubTitle>{props.item.carouselSubTitle}</CarouselSubTitle>
-        <CustomedButton>
-          <CustomedEastIcon /> See more
-        </CustomedButton>
-      </AdBox>
+      <CarouselImage
+        src={process.env.PUBLIC_URL + props.item.src}
+        alt={props.item.alt}
+      />
+      <Link to={categoryLink}>
+        <AdBox>
+          <CarouselTitle>{props.item.carouselTitle}</CarouselTitle>
+          <CarouselSubTitle>{props.item.carouselSubTitle}</CarouselSubTitle>
+          <CustomedButton>
+            <CustomedEastIcon /> See more
+          </CustomedButton>
+        </AdBox>
+      </Link>
     </>
   );
 }
