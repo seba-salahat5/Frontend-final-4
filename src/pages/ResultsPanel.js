@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
-import { Link, Typography, Box, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 
 import { CustomContainer } from '../layout/CustomContainer';
 import PathLine from '../components/shared/PathLine';
@@ -31,15 +31,6 @@ const ResultsPanel = () => {
     !loading && setViewProducts(data.items);
   }, [data, loading]);
 
-  const breadcrumbs = [
-    <Link href="/Frontend-final-4/" underline="hover" key="1" color="var(--primary)" fontWeight={'500'}>
-      Home
-    </Link>,
-    <Typography key="3" color="var(--summary-text)">
-      {pageTitle}
-    </Typography>,
-  ];
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -50,7 +41,7 @@ const ResultsPanel = () => {
   }
   return (
     <CustomContainer>
-      {!isMobile && <PathLine breadcrumbs={breadcrumbs} />}
+      {!isMobile && <PathLine />}
       {
         viewProducts.length === 0 ? (
           <EmptyPanel image={emptyPageData.image} heading={emptyPageData.heading} text={emptyPageData.text} />

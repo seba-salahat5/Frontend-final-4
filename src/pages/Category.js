@@ -5,8 +5,7 @@ import PaginationBar from '../components/category/PaginationBar';
 import { CustomContainer } from '../layout/CustomContainer';
 import CarouselBanner from '../components/category/CategoryBanner';
 import PathLine from '../components/shared/PathLine';
-import { Link, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useMediaQuery, useTheme } from '@mui/material';
 /**
  * fix ScrollBar in new arraivals
  * fix star counter
@@ -124,21 +123,6 @@ const StyledPathLine = styled.div`
 `;
 
 const Category = () => {
-  const navigate = useNavigate();
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    // Navigate to the home link
-    navigate('/');
-  };
-  const breadcrumbs = [
-    <Link underline="hover" key="1" color="var(--primary)" fontWeight={'500'} href="/" onClick={handleClick}>
-      Home
-    </Link>,
-    <Typography key="2" color="var(--summary-text)">
-      Handbag
-    </Typography>,
-  ];
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   /*const isMd = useMediaQuery('(min-width:900px) and (max-width:1279px)');
@@ -148,7 +132,7 @@ const Category = () => {
   return <CustomContainer>
     <CarouselBanner />
     {!isMobile &&
-      <StyledPathLine><PathLine breadcrumbs={breadcrumbs} /></StyledPathLine>}
+      <StyledPathLine><PathLine/></StyledPathLine>}
     <ListTitle>Handbags</ListTitle>
     <ListLayout>
       {!isMobile && <ListingOptions />}

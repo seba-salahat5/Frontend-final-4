@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import { Link, Typography, Stack, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Typography, Stack, Grid, useMediaQuery, useTheme } from '@mui/material';
 
 import ImageGallery from '../components/product/ImageGallery';
 import { CustomContainer } from '../layout/CustomContainer';
@@ -13,7 +13,6 @@ import DescriptionSection from '../components/product/DescriptionSection';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import { useGet } from "../custom_hooks/useApi";
-//import axios from 'axios';
 
 const Heading = styled(Typography)(() => ({
   fontWeight: '600',
@@ -23,23 +22,6 @@ const Heading = styled(Typography)(() => ({
 }));
 
 const Product = () => {
-  const breadcrumbs = [
-    <Link href="/Frontend-final-4/" underline="hover" key="1" color="var(--primary)" fontWeight={'500'}>
-      Home
-    </Link>,
-    <Link
-      underline="hover"
-      key="2"
-      color="var(--primary)"
-      fontWeight={'500'}
-      href="/Frontend-final-4/category"
-    >
-      Handbag
-    </Link>,
-    <Typography key="3" color="var(--summary-text)">
-      Product
-    </Typography>,
-  ];
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isMd = useMediaQuery('(min-width:900px) and (max-width:1279px)');
@@ -84,7 +66,7 @@ const Product = () => {
           <Grid container mt={'24px'} spacing={1}>
             <Grid item xs={12} md={6} xl={7}>
               <Stack direction={'column'} spacing={2}>
-                {!isMobile && <PathLine breadcrumbs={breadcrumbs} />}
+                {!isMobile && <PathLine />}
                 <ImageGallery imageList={currentProduct.image}
                   width={imageWidth} />
               </Stack>
@@ -142,7 +124,7 @@ const Product = () => {
           </Grid>
           <DescriptionSection
             description={currentProduct.description }
-            relatedProducts={relatedProducts}
+            relatedProducts={relatedProducts || []}
             reviews={currentProduct.ratings}
           />
         </CustomContainer>
