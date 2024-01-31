@@ -10,6 +10,7 @@ import RoundedButton from '../components/shared/RoundedButton';
 import DescriptionSection from '../components/product/DescriptionSection';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import { useNavigate } from 'react-router-dom';
 
 const Heading = styled(Typography)(() => ({
   fontWeight: '600',
@@ -19,6 +20,7 @@ const Heading = styled(Typography)(() => ({
 }));
 
 const Product = () => {
+  const navigate = useNavigate();
   const breadcrumbs = [
     <Link href="/Frontend-final-4/" underline="hover" key="1" color="var(--primary)" fontWeight={'500'}>
       Home
@@ -28,7 +30,10 @@ const Product = () => {
       key="2"
       color="var(--primary)"
       fontWeight={'500'}
-      href="/Frontend-final-4/category"
+      onClick={(event) => {
+        event.preventDefault();
+        navigate('/category');
+      }}
     >
       Handbag
     </Link>,
