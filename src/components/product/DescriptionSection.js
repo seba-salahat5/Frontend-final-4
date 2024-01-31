@@ -110,7 +110,7 @@ export default function DescriptionSection({ description, relatedProducts, revie
             >
               You Might Also Like
             </Typography>
-            <NewArrivals isMainComponent={false} cards={relatedProducts} />
+            {relatedProducts.length !== 0 &&<NewArrivals isMainComponent={false} cards={relatedProducts} />}
           </>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>

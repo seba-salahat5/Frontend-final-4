@@ -47,16 +47,35 @@ const Product = () => {
   const isXl = useMediaQuery('(min-width:1700px)');
   const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));
 
+  const [currentProduct, setCurrentProduct] = useState(null);
+  const [categoryId, setCategoryId] = useState(0);
+  const [brandId, setBrandId] = useState(0);
+  const [relatedProducts, setRelatedProduct] = useState(null);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
+  const baseUrl = "http://158.176.1.165:3000/product";
 
   const product_id = params.get('product_id');
-  const { data, loading } = useGet(`http://158.176.1.165:3000/product/single-product/${parseInt(product_id)}`);
-  const [currentProduct, setCurrentProduct] = useState(null);
-  useEffect(() => {
-    !loading && setCurrentProduct(data);
-  }, [data, loading]);
+  const { data: currentProductData, loading: currentProductLoading } = useGet(`${baseUrl}/single-product/${parseInt(product_id)}`);
+  const { data: relatedProductsData, loading: relatedProductsLoading, error: relatedProductsError } = useGet(`${baseUrl}/related_product?category_id=${categoryId}&brand_id=${brandId}`);
 
+  useEffect(() => {
+    if (!currentProductLoading && currentProductData) {
+      setCurrentProduct(currentProductData);
+      setCategoryId(parseInt(currentProductData.category_id));
+      setBrandId(parseInt(currentProductData.brand_id));
+    }
+  }, [currentProductData, currentProductLoading]);
+
+  
+  useEffect(() => {
+    if(relatedProductsError){
+      setRelatedProduct([]);
+    }
+    if (!relatedProductsLoading && relatedProductsData) {
+      setRelatedProduct(relatedProductsData);
+    }
+  }, [relatedProductsData, relatedProductsLoading, relatedProductsError, currentProduct]);
   return (
     <>
     {currentProduct &&(
@@ -70,7 +89,7 @@ const Product = () => {
               </Stack>
             </Grid>
             <Grid item xs={12} md={6} xl={5}>
-              <Stack direction='column' mt={'36px'}>
+              <Stack direction='column' mt={'50px'}>
                 <Heading sx={{ fontSize: '34px', lineHeight: '44px', color: 'var(--dark)', }}>{currentProduct.name}</Heading>
                 <Heading sx={{ fontSize: '20px', lineHeight: '26px', color: 'var(--summary-text)' }}>{currentProduct.sub_title}</Heading>
     
@@ -121,8 +140,8 @@ const Product = () => {
             </Grid>
           </Grid>
           <DescriptionSection
-            description={currentProduct.description}
-            relatedProducts={currentProduct.related_products}
+            description={currentProduct.description }
+            relatedProducts={relatedProducts || []}
             reviews={currentProduct.ratings}
           />
         </CustomContainer>
