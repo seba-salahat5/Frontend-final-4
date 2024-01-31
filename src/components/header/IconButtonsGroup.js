@@ -4,10 +4,11 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import PermIdentityRoundedIcon from "@mui/icons-material/PermIdentityRounded";
 import MyCartHover from "../my-cart/MyCartHover";
+import { useNavigate } from "react-router-dom";
 
 export default function IconButtonsGroup() {
   const [isHovering, setIsHovering] = useState(false);
-
+  const navigate = useNavigate();
   const handleMouseOver = () => {
     setIsHovering(true);
   };
@@ -34,7 +35,7 @@ export default function IconButtonsGroup() {
           }}
         >
           <IconButton
-            href="/Frontend-final-4/results?page_title=Wishlist"
+            onClick={() => { navigate('/results?page_title=Wishlist') }}
             aria-label="wishlist"
             color="inherit"
             sx={{ px: "7px" }}
@@ -42,7 +43,7 @@ export default function IconButtonsGroup() {
             <FavoriteBorderRoundedIcon fontSize="medium" />
           </IconButton>
           <IconButton
-              href="/Frontend-final-4/signin"
+              onClick={() => { navigate('/signin') }}
               aria-label="profile"
               id="profile"
               color="inherit"
@@ -56,7 +57,7 @@ export default function IconButtonsGroup() {
             sx={{ pl: "7px", pr: "0px" }}
           >
             <IconButton
-              href="/Frontend-final-4/mycart"
+              onClick={() => { navigate('/mycart') }}
               aria-label="my cart"
               color="inherit"
             >
