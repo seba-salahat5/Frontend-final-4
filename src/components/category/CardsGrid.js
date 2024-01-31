@@ -20,6 +20,7 @@ const CardsGrid = ({ cards }) => {
         <ProductCard
           key={item.productId}
           image={item.image}
+          productId={item.productId}
           productName={item.productName}
           productDescreption={item.productDescreption}
           discount={item.discount}
