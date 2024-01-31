@@ -34,11 +34,17 @@ const HandPickedCategory = styled.h3`
   }
 `;
 
-const HandPickedButton = ({ image, category }) => {
+const HandPickedButton = ({ image, categoryName, id }) => {
+  const category = "handpicked-products";
+  const categoryLink = `/category?id=${id}&category=${category}`;
+
   return (
-    <ButtonContainer>
-      <HandPickedImage src={process.env.PUBLIC_URL +"/assets/hand-picked/" + image} alt={image} />
-      <HandPickedCategory>{category}</HandPickedCategory>
+    <ButtonContainer to={categoryLink}>
+      <HandPickedImage
+        src={process.env.PUBLIC_URL + "/assets/hand-picked/" + image}
+        alt={image}
+      />
+      <HandPickedCategory>{categoryName}</HandPickedCategory>
     </ButtonContainer>
   );
 };

@@ -13,6 +13,7 @@ import DescriptionSection from '../components/product/DescriptionSection';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import { useGet } from "../custom_hooks/useApi";
+import { useNavigate } from 'react-router-dom';
 
 const Heading = styled(Typography)(() => ({
   fontWeight: '600',

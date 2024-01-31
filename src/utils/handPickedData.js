@@ -1,23 +1,23 @@
 const handPickedData = [
   {
     image: "personal-care.png",
-    category: "Personal Care",
-    id: '1'
+    categoryName: "Personal Care",
+    id: "1",
   },
   {
     image: "handbags.png",
-    category: "Handags",
-    id:'2',
+    categoryName: "Handags",
+    id: "12",
   },
   {
     image: "wrist-watches.png",
-    category: "Wrist Watches",
-    id: '3',
+    categoryName: "Wrist Watches",
+    id: "1",
   },
   {
     image: "sun-glasses.png",
-    category: "Sun Glasses",
-    id:'4',
+    categoryName: "Sun Glasses",
+    id: "12",
   },
 ];
 

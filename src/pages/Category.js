@@ -1,104 +1,23 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import ListingOptions from "../components/category/ListingOptions";
 import CardsGrid from "../components/category/CardsGrid";
+
 import PaginationBar from '../components/category/PaginationBar';
 import { CustomContainer } from '../layout/CustomContainer';
 import CarouselBanner from '../components/category/CategoryBanner';
 import PathLine from '../components/shared/PathLine';
-import { useMediaQuery, useTheme } from '@mui/material';
+
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useGet } from "../custom_hooks/useApi";
+import { Link, Typography, useMediaQuery, useTheme } from "@mui/material";
+
 /**
  * fix ScrollBar in new arraivals
  * fix star counter
  * fix mui number of cards font
  * fix mui dropdown font-color
  */
-
-let tempObj = [
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 1,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 3.4,
-    productId: 2,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 3,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 4,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 5,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 6,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 7,
-  },
-];
 
 const ListLayout = styled.div`
   display: flex;
@@ -123,23 +42,61 @@ const StyledPathLine = styled.div`
 `;
 
 const Category = () => {
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+
+  const id = params.get("id");
+  const categoryType = params.get("category");
+
+  let apiUrl;
+  let urlEndpoint;
+  let categotyTitle;
+
+  if (categoryType === "product-brand") {
+    const apiUrl = `https://group4.iscovat.bid/product/${categoryType}`;
+    const pageNumber = 1;
+    const numberOfItems = 10;
+    categotyTitle = "Brand";
+    urlEndpoint = `${apiUrl}?brand_id=${id}&page_number=${pageNumber}&number_of_items=${numberOfItems}`;
+  } else if (categoryType === "handpicked-products") {
+    apiUrl = `https://group4.iscovat.bid/product/${categoryType}`;
+    const pageNumber = 1;
+    const numberOfItems = 10;
+    categotyTitle = "Handpicked Collection";
+    urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}&category_id=${id}`;
+  } else if (categoryType === "new-arrival") {
+    apiUrl = `https://group4.iscovat.bid/product/${categoryType}`;
+    const pageNumber = 1;
+    const numberOfItems = 10;
+    categotyTitle = "New Arrival";
+    urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`;
+  }
+  const [categoryItems, setCategoryItems] = useState([]);
+  const { data, loading } = useGet(urlEndpoint);
+
+  useEffect(() => {
+    !loading && setCategoryItems(data);
+  }, [data, loading]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   /*const isMd = useMediaQuery('(min-width:900px) and (max-width:1279px)');
   const isLg = useMediaQuery('(min-width:1280px) and (max-width:1500px)');
   const isXl = useMediaQuery('(min-width:1700px)');
   const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));*/
-  return <CustomContainer>
-    <CarouselBanner />
-    {!isMobile &&
-      <StyledPathLine><PathLine/></StyledPathLine>}
-    <ListTitle>Handbags</ListTitle>
-    <ListLayout>
-      {!isMobile && <ListingOptions />}
-      <CardsGrid cards={tempObj} />
-      <PaginationBar />
-    </ListLayout>
-  </CustomContainer>;
+  return (
+    <CustomContainer>
+      <CarouselBanner />
+      {!isMobile && (
+        <StyledPathLine><PathLine/></StyledPathLine>}
+      )}
+      <ListTitle>{categotyTitle}</ListTitle>
+      <ListLayout>
+        {!isMobile && <ListingOptions />}
+        <CardsGrid cards={categoryItems.items} />
+        <PaginationBar />
+      </ListLayout>
+    </CustomContainer>
+  );
 };
 
 export default Category;
