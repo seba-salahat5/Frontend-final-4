@@ -48,8 +48,9 @@ const HandPickedCollections = () => {
           {handPickedData.map((item) => (
             <HandPickedButton
               key={item.id}
+              id={item.id}
               image={item.image}
-              category={item.category}
+              categoryName={item.categoryName}
             />
           ))}
         </HandpickedGrid>

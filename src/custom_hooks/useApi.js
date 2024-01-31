@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Inside the useApi hook
 
-export function usePost(url, type) {
+export function usePost(url) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [requestBody, setRequestBody] = useState(null);
@@ -22,7 +22,7 @@ export function usePost(url, type) {
     if (requestBody !== null) {
       fetchData();
     }
-  }, [url, type, requestBody]);
+  }, [url, requestBody]);
 
   return {
     data,
@@ -42,7 +42,6 @@ export function useGet(url) {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
-/*         console.log(response.data); */
         setData(response.data);
 
         setLoading(false);

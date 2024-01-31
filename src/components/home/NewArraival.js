@@ -91,7 +91,7 @@ const ButtonText = styled(SharedTextStyles)`
 `;
 
 function NewArrivals({ isMainComponent, cards }) {
-  /*   console.log(cards); */
+  const categoryLink = `/category?category=${"new-arrival"}`;
   return (
     <ArrivalLayout>
       {isMainComponent && (
@@ -100,7 +100,7 @@ function NewArrivals({ isMainComponent, cards }) {
             <TitleTextStyle>New Arrivals</TitleTextStyle>
           </TitleStyle>
           <ViewAllLayout>
-            <ViewAllButton to="/category">
+            <ViewAllButton to={categoryLink}>
               <ButtonText>View All</ButtonText>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

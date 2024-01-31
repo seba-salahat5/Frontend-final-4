@@ -8,11 +8,13 @@ const BrandLogo = styled.img`
   }
 `;
 
-const BrandsButton = ({ image }) => {
+const BrandsButton = ({ image, id }) => {
+  const category = "product-brand";
+  const categoryLink = `/category?id=${id}&category=${category}`;
   return (
-    <Link>
+    <Link to={categoryLink}>
       <BrandLogo
-        src={process.env.PUBLIC_URL + "/assets/brands/" + image}
+        src={process.env.PUBLIC_URL + "/assets/brands/" + image + ".png"}
         alt="Brands Logo"
       />
     </Link>

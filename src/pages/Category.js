@@ -1,8 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import ListingOptions from "../components/category/ListingOptions";
 import CardsGrid from "../components/category/CardsGrid";
-import PaginationBar from '../components/category/PaginationBar';
-import { CustomContainer } from '../layout/CustomContainer';
+import PaginationBar from "../components/category/PaginationBar";
+import { CustomContainer } from "../layout/CustomContainer";
+import { useEffect, useState } from "react";
+import { useGet } from "../custom_hooks/useApi";
+import { useLocation } from "react-router-dom";
 
 /**
  * fix ScrollBar in new arraivals
@@ -10,93 +13,6 @@ import { CustomContainer } from '../layout/CustomContainer';
  * fix mui number of cards font
  * fix mui dropdown font-color
  */
-
-let tempObj = [
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 1,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 3.4,
-    productId: 2,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 3,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 4,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 5,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 6,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 7,
-  },
-];
 
 const ListLayout = styled.div`
   display: flex;
@@ -117,14 +33,64 @@ const ListTitle = styled.h1`
 `;
 
 const Category = () => {
-  return<CustomContainer>
-    <ListTitle>Handbags</ListTitle>
-    <ListLayout>
-      <ListingOptions />
-      <CardsGrid cards={tempObj} />
-      <PaginationBar />
-    </ListLayout>
-  </CustomContainer>;
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+
+  const id = params.get("id");
+  const categoryType = params.get("category");
+
+  let apiUrl;
+  let urlEndpoint;
+  let categotyTitle;
+
+  if (categoryType === "product-brand") {
+    const apiUrl = `http://158.176.1.165:3000/product/${categoryType}`;
+    const pageNumber = 1;
+    const numberOfItems = 10;
+    categotyTitle = "Brand";
+    urlEndpoint = `${apiUrl}?brand_id=${id}&page_number=${pageNumber}&number_of_items=${numberOfItems}`;
+  } else if (categoryType === "handpicked-products") {
+    apiUrl = `http://158.176.1.165:3000/product/${categoryType}`;
+    const pageNumber = 1;
+    const numberOfItems = 10;
+    categotyTitle = "Handpicked Collection";
+    urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}&category_id=${id}`;
+  } else if (categoryType === "limited-edition") {
+    apiUrl = `http://158.176.1.165:3000/product/${categoryType}`;
+    const pageNumber = 1;
+    const numberOfItems = 10;
+    categotyTitle = "Limited Edition Collection";
+    urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`;
+  } else if (categoryType === "discount-edition") {
+    apiUrl = `http://158.176.1.165:3000/product/${categoryType}`;
+    const pageNumber = 1;
+    const numberOfItems = 10;
+    const value = 0.5;
+    categotyTitle = "Discount Collection";
+    urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}&value=${value}`;
+  } else if (categoryType === "new-arrival") {
+    apiUrl = `http://158.176.1.165:3000/product/${categoryType}`;
+    const pageNumber = 1;
+    const numberOfItems = 10;
+    urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`;
+  }
+  const [categoryItems, setCategoryItems] = useState([]);
+  const { data, loading } = useGet(urlEndpoint);
+
+  useEffect(() => {
+    !loading && setCategoryItems(data);
+  }, [data, loading]);
+
+  return (
+    <CustomContainer>
+      <ListTitle>{categotyTitle}</ListTitle>
+      <ListLayout>
+        <ListingOptions />
+        <CardsGrid cards={categoryItems.items} />
+        <PaginationBar />
+      </ListLayout>
+    </CustomContainer>
+  );
 };
 
 export default Category;

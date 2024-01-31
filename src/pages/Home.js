@@ -69,6 +69,7 @@ const Home = () => {
               bannerHight={"400px"}
               backgroundImage={"/assets/main offer.png"}
               imageAlt={"Limited Edition Products"}
+              category={"limited-edition"}
             >
               <BannerBox
                 textsize={"52px"}
@@ -84,6 +85,7 @@ const Home = () => {
               bannerHight={"228px"}
               backgroundImage={"/assets/offer1.png"}
               imageAlt={"15% Off And More!"}
+              category={"discount-edition"}
             >
               <BannerBox
                 textsize={"40px"}
