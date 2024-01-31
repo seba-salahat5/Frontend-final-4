@@ -7,10 +7,10 @@ import { CustomContainer } from '../layout/CustomContainer';
 import CarouselBanner from '../components/category/CategoryBanner';
 import PathLine from '../components/shared/PathLine';
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useGet } from "../custom_hooks/useApi";
-import { Link, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 /**
  * fix ScrollBar in new arraivals
@@ -87,7 +87,7 @@ const Category = () => {
     <CustomContainer>
       <CarouselBanner />
       {!isMobile && (
-        <StyledPathLine><PathLine/></StyledPathLine>}
+        <StyledPathLine><PathLine/></StyledPathLine>
       )}
       <ListTitle>{categotyTitle}</ListTitle>
       <ListLayout>

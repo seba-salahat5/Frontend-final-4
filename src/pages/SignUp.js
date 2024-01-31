@@ -13,11 +13,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { usePost } from "../custom_hooks/useApi";
+import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
   const { data, error, setNewRequestBody } = usePost("https://group4.iscovat.bid/auth/register");
+  const navigate = useNavigate();
   React.useEffect(() => {
     console.log(data, error);
   }, [data, error]);
