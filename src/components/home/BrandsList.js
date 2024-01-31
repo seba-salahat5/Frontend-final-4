@@ -25,7 +25,7 @@ const ByBrandsBox = styled.div`
 
 const BrandsList = () => {
   const [brands, setBrands] = useState([]);
-  const { data, loading } = useGet("https://158.176.1.165:3000/brand");
+  const { data, loading } = useGet("http://158.176.1.165:3000/brand");
 
   useEffect(() => {
     !loading && setBrands(data);

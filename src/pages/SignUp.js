@@ -17,7 +17,7 @@ import { usePost } from "../custom_hooks/useApi";
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const { data, error, setNewRequestBody } = usePost("https://158.176.1.165:3000/auth/register");
+  const { data, error, setNewRequestBody } = usePost("http://158.176.1.165:3000/auth/register");
   React.useEffect(() => {
     console.log(data, error);
   }, [data, error]);

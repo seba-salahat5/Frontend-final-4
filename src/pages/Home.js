@@ -19,7 +19,7 @@ const Home = () => {
   const [newArrivals, setNewArrivals] = useState([]);
   const navigate = useNavigate();
 
-  const apiUrl = "https://158.176.1.165:3000/product/new-arrival";
+  const apiUrl = "http://158.176.1.165:3000/product/new-arrival";
   const pageNumber = 1;
   const numberOfItems = 10;
   const { data, loading } = useGet(

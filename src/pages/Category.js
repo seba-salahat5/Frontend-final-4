@@ -52,19 +52,19 @@ const Category = () => {
   let categotyTitle;
 
   if (categoryType === "product-brand") {
-    const apiUrl = `https://158.176.1.165:3000/product/${categoryType}`;
+    const apiUrl = `http://158.176.1.165:3000/product/${categoryType}`;
     const pageNumber = 1;
     const numberOfItems = 10;
     categotyTitle = "Brand";
     urlEndpoint = `${apiUrl}?brand_id=${id}&page_number=${pageNumber}&number_of_items=${numberOfItems}`;
   } else if (categoryType === "handpicked-products") {
-    apiUrl = `https://158.176.1.165:3000/product/${categoryType}`;
+    apiUrl = `http://158.176.1.165:3000/product/${categoryType}`;
     const pageNumber = 1;
     const numberOfItems = 10;
     categotyTitle = "Handpicked Collection";
     urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}&category_id=${id}`;
   } else if (categoryType === "new-arrival") {
-    apiUrl = `https://158.176.1.165:3000/product/${categoryType}`;
+    apiUrl = `http://158.176.1.165:3000/product/${categoryType}`;
     const pageNumber = 1;
     const numberOfItems = 10;
     categotyTitle = "New Arrival";
