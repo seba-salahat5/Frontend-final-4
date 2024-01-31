@@ -18,7 +18,7 @@ const ResultsPanel = () => {
   const pageTitle = params.get('page_title');
   const apiRoute = params.get('route');
   const value = params.get('value');
-  const apiUrl = `http://158.176.1.165:3000/product/${apiRoute}`;
+  const apiUrl = `https://158.176.1.165:3000/product/${apiRoute}`;
   const pageNumber = 1;
   const numberOfItems = 10;
 
