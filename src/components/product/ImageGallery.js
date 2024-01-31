@@ -21,8 +21,8 @@ const ImageCarousel = styled(Carousel)`
   }
 
   .thumb {
-    width: 75px;
-    height: 75px;
+    width: ${({ width }) => width * 0.12}px;
+    height: ${({ width }) => width * 0.12}px;
     border-radius: 8px;
   }
 

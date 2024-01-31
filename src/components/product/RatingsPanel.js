@@ -12,49 +12,43 @@ const RatingTitle = styled(Typography)(() => ({
     textAlign: 'left',
     color: 'var(--text)'
 }));
-export default function RatingsPanel({ rating }) {
+export default function RatingsPanel({ ratings, reviews, avgRating }) {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-    const totalRatings = 200;
-    const ratings = [
-        {
-            rating: "5.0",
-            count: 170,
-        },
-        {
-            rating: "4.0",
-            count: 150,
-        },
-        {
-            rating: "3.0",
-            count: 100,
-        },
-        {
-            rating: "2.0",
-            count: 50,
-        },
-        {
-            rating: "1.0",
-            count: 30,
-        },
+    const totalRatings = ratings.length || 1;
+    const ratingsMap = {};
+    const result = [];
 
-    ]
+    if(ratings){
+        ratings.forEach(({ rating_value, countRating }) => {
+            ratingsMap[rating_value] = countRating;
+        });
+    
+        for (let i = 5; i >= 1; i--) {
+            const countRating = ratingsMap[i] || 0;
+            const rating_value = `${i}.0`;
+            result.push({
+                rating_value,
+                countRating,
+            });
+        }
+    }
     return (
         <Stack direction={isMobile ? 'column' : 'row'} spacing={3}>
-            <Box sx={{ width: 200 }}>
+            {ratings &&             <Box sx={{ width: 200 }}>
                 <Stack direction={'row'} sx={{ alignItems: 'center' }}>
-                    <RatingTitle>{rating}</RatingTitle>
+                    <RatingTitle>{avgRating || "0.0"}</RatingTitle>
                     <StarIcon sx={{ width: '20px', height: '20px', color: 'var(--highlight)' }} />
                     <RatingTitle>Average Rating</RatingTitle>
                 </Stack>
-                {ratings.map((item) => (
-                    <Stack key={item.rating} direction="row" sx={{ mb: 1, gap: '8px' }} alignItems="center">
-                        {item.rating}
+                {result.map((item) => (
+                    <Stack key={item.rating_value} direction="row" sx={{ mb: 1, gap: '8px' }} alignItems="center">
+                        {item.rating_value}
                         <Slider
                             max={100}
                             min={0}
-                            value={(item.count / totalRatings) * 100}
+                            value={(item.countRating / totalRatings) * 100}
                             aria-label="Disabled slider"
                             sx={{
                                 '& .MuiSlider-rail': {
@@ -72,69 +66,29 @@ export default function RatingsPanel({ rating }) {
                         />
                     </Stack>
                 ))}
-            </Box>
-            {isMobile && <Divider sx={{width:'100%', borderBottomWidth: 'thick', marginTop: '24px', marginBottom: '24px'}} />}
-            <Box>
-                <Box mb={3}>
-                    <Stack direction={'row'} spacing={4}>
-                        <Stack direction={'row'} spacing={1} bgcolor={'var(--accent)'}>
-                            <RatingTitle sx={{ fontSize: '16px' }}>4.0</RatingTitle>
-                            <StarIcon sx={{ width: '20px', height: '20px', color: 'var(--highlight)' }} />
+            </Box>}
+            {isMobile && <Divider sx={{ width: '100%', borderBottomWidth: 'thick', marginTop: '24px', marginBottom: '24px' }} />}
+            {reviews && <Box>
+                {reviews.map((item) => (
+                    <Box mb={3} key={item.rating_id}>
+                        <Stack direction={'row'} spacing={4}>
+                            <Stack direction={'row'} spacing={1} bgcolor={'var(--accent)'}>
+                                <RatingTitle sx={{ fontSize: '16px' }}>{item.rating_value}</RatingTitle>
+                                <StarIcon sx={{ width: '20px', height: '20px', color: 'var(--highlight)' }} />
+                            </Stack>
+                            <Box>
+                                <RatingTitle>{item.first_name} {item.last_name}</RatingTitle>
+                                <RatingTitle sx={{ fontWeight: 500, color: 'var(--summary-text)' }}>{item.date}</RatingTitle>
+                            </Box>
                         </Stack>
-                        <Box>
-                            <RatingTitle>Vincent Lobo</RatingTitle>
-                            <RatingTitle sx={{ fontWeight: 500, color: 'var(--summary-text)' }}>20/03/2021</RatingTitle>
+                        <Box mt={'12px'}>
+                            <RatingTitle>
+                                {item.comment}
+                            </RatingTitle>
                         </Box>
-                    </Stack>
-                    <Box mt={'12px'}>
-                        <RatingTitle>Must go for the class feel. </RatingTitle>
-                        <RatingTitle sx={{ fontWeight: 500, lineHeight: '18px', color: 'var(--summary-text)' }}>
-                            Totally amazing! I loved the material and the quality.
-                            It has a jolly vibe in it which makes me feel happy everytime I put it on.
-                        </RatingTitle>
                     </Box>
-                </Box>
-                <Box mb={3}>
-                    <Stack direction={'row'} spacing={4}>
-                        <Stack direction={'row'} spacing={1} bgcolor={'var(--accent)'}>
-                            <RatingTitle sx={{ fontSize: '16px' }}>4.0</RatingTitle>
-                            <StarIcon sx={{ width: '20px', height: '20px', color: 'var(--highlight)' }} />
-                        </Stack>
-                        <Box>
-                            <RatingTitle>Vincent Lobo</RatingTitle>
-                            <RatingTitle sx={{ fontWeight: 500, color: 'var(--summary-text)' }}>20/03/2021</RatingTitle>
-                        </Box>
-                    </Stack>
-                    <Box mt={'12px'}>
-                        <RatingTitle>Must go for the class feel. </RatingTitle>
-                        <RatingTitle sx={{ fontWeight: 500, lineHeight: '18px', color: 'var(--summary-text)' }}>
-                            Totally amazing! I loved the material and the quality.
-                            It has a jolly vibe in it which makes me feel happy everytime I put it on.
-                        </RatingTitle>
-
-                    </Box>
-                </Box>
-                <Box mb={3}>
-                    <Stack direction={'row'} spacing={4}>
-                        <Stack direction={'row'} spacing={1} bgcolor={'var(--accent)'}>
-                            <RatingTitle sx={{ fontSize: '16px' }}>4.0</RatingTitle>
-                            <StarIcon sx={{ width: '20px', height: '20px', color: 'var(--highlight)' }} />
-                        </Stack>
-                        <Box>
-                            <RatingTitle>Vincent Lobo</RatingTitle>
-                            <RatingTitle sx={{ fontWeight: 500, color: 'var(--summary-text)' }}>20/03/2021</RatingTitle>
-                        </Box>
-                    </Stack>
-                    <Box mt={'12px'}>
-                        <RatingTitle>Must go for the class feel. </RatingTitle>
-                        <RatingTitle sx={{ fontWeight: 500, lineHeight: '18px', color: 'var(--summary-text)' }}>
-                            Totally amazing! I loved the material and the quality.
-                            It has a jolly vibe in it which makes me feel happy everytime I put it on.
-                        </RatingTitle>
-
-                    </Box>
-                </Box>
-            </Box>
+                ))}
+            </Box>}
         </Stack>
     );
 }

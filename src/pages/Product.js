@@ -30,34 +30,39 @@ const Product = () => {
   const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));
 
   const [currentProduct, setCurrentProduct] = useState(null);
+  const [relatedProducts, setRelatedProduct] = useState([]);
+  const [ratings, setRatigns] = useState(null);
   const [categoryId, setCategoryId] = useState(0);
   const [brandId, setBrandId] = useState(0);
-  const [relatedProducts, setRelatedProduct] = useState(null);
+  
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const baseUrl = "http://158.176.1.165:3000/product";
 
   const product_id = params.get('product_id');
-  const { data: currentProductData, loading: currentProductLoading } = useGet(`${baseUrl}/single-product/${parseInt(product_id)}`);
-  const { data: relatedProductsData, loading: relatedProductsLoading, error: relatedProductsError } = useGet(`${baseUrl}/related-product?category_id=${categoryId}&brand_id=${brandId}`);
-
-  useEffect(() => {
-    if (!currentProductLoading && currentProductData) {
-      setCurrentProduct(currentProductData);
-      setCategoryId(parseInt(currentProductData.category_id));
-      setBrandId(parseInt(currentProductData.brand_id));
-    }
-  }, [currentProductData, currentProductLoading]);
-
+  const { data: productData, loading: productLoading } = useGet(`${baseUrl}/single-product/${parseInt(product_id)}`);
+  const { data: relatedData, loading: relatedLoading } = useGet(`${baseUrl}/related-product?category_id=${categoryId}&brand_id=${brandId}`);
+  const { data: ratingData, loading: ratingLoading} = useGet(`${baseUrl}/ratings/${parseInt(product_id)}`);
   
   useEffect(() => {
-    if(relatedProductsError){
-      setRelatedProduct([]);
+    if (!productLoading && productData) {
+      setCurrentProduct(productData);
+      setCategoryId(parseInt(productData.category_id));
+      setBrandId(parseInt(productData.brand_id));
     }
-    if (!relatedProductsLoading && relatedProductsData) {
-      setRelatedProduct(relatedProductsData.items);
+  }, [productData, productLoading]);
+
+  useEffect(() => {
+    if (!relatedLoading && relatedData) {
+      setRelatedProduct(relatedData.items);
     }
-  }, [relatedProductsData, relatedProductsLoading, relatedProductsError, currentProduct]);
+  }, [relatedData, relatedLoading, currentProduct]);
+
+  useEffect(() => {
+    if (!ratingLoading && ratingData) {
+      setRatigns(ratingData);
+    }
+  }, [ratingData, ratingLoading, currentProduct]);
 
   return (
     <>
@@ -124,8 +129,10 @@ const Product = () => {
           </Grid>
           <DescriptionSection
             description={currentProduct.description }
-            relatedProducts={relatedProducts || []}
-            reviews={currentProduct.ratings}
+            relatedProducts={relatedProducts}
+            ratings={ratings? ratings.countRating : []} 
+            reviews={ratings? ratings.ratingData : []}
+            avgRating = {currentProduct.ratings}
           />
         </CustomContainer>
     )}
