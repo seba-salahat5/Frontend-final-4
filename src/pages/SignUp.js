@@ -13,11 +13,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { usePost } from "../custom_hooks/useApi";
+import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const { data, error, setNewRequestBody } = usePost("http://158.176.1.165:3000/auth/register");
+  const { data, error, setNewRequestBody } = usePost("https://group4.iscovat.bid/auth/register");
+  const navigate = useNavigate();
   React.useEffect(() => {
     console.log(data, error);
   }, [data, error]);
@@ -123,7 +125,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/Frontend-final-4/signin" variant="body2">
+                <Link onClick={() => { navigate('/signin') }} variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

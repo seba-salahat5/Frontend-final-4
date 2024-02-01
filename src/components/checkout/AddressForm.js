@@ -7,7 +7,7 @@ const CheckoutFormContainer = styled('div')(({ theme }) => ({
     height: '23.5rem',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    //alignItems: 'center',
     alignItems: 'flex-start',
     gap: '1.25rem',
     marginTop: '1.5rem',

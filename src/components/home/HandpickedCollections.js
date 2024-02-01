@@ -45,11 +45,12 @@ const HandPickedCollections = () => {
       <Container maxWidth="xl" disableGutters>
         <HandPickedTitle>Handpicked Collection</HandPickedTitle>
         <HandpickedGrid>
-          {handPickedData.map((item) => (
+          {handPickedData.map((item, index) => (
             <HandPickedButton
-              key={item.id}
+              key={index}
+              id={item.id}
               image={item.image}
-              category={item.category}
+              categoryName={item.categoryName}
             />
           ))}
         </HandpickedGrid>

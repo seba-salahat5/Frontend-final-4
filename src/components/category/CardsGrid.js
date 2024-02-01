@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import ProductCard from '../shared/ProductCard';
+import styled from "styled-components";
+import ProductCard from "../shared/ProductCard";
 
 const GridLayout = styled.div`
   width: 57.25rem;
@@ -16,10 +16,11 @@ const GridLayout = styled.div`
 const CardsGrid = ({ cards }) => {
   return (
     <GridLayout>
-      {cards.map((item) => (
+      {cards?.map((item) => (
         <ProductCard
           key={item.product_id}
           image={item.image[0]}
+          productId={item.product_id}
           productName={item.name}
           productDescreption={item.sub_title}
           discount={item.discount_value}
@@ -32,6 +33,6 @@ const CardsGrid = ({ cards }) => {
       ))}
     </GridLayout>
   );
-}
+};
 
 export default CardsGrid;

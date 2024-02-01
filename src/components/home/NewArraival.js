@@ -105,6 +105,7 @@ const ButtonText = styled(SharedTextStyles)`
 `;
 
 function NewArrivals({ isMainComponent, cards }) {
+  const categoryLink = `/category?category=${"new-arrival"}`;
   return (
     <ArrivalLayout>
       {isMainComponent && (
@@ -140,6 +141,7 @@ function NewArrivals({ isMainComponent, cards }) {
           <ProductCard
             key={item.product_id}
             image={item.image[0]}
+            productId={item.product_id}
             productName={item.name}
             productDescreption={item.sub_title}
             discount={item.discount_value}

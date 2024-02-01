@@ -14,10 +14,10 @@ const LeftDrawer = ({ navItems }) => {
   return (<>
     <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} onClick={() => setOpenDrawer(false)}>
+        {navItems.slice(0, 5).map((item) => (
+          <ListItem key={item.id} onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-              <CustomizedLink to="/">{item}</CustomizedLink>
+              <CustomizedLink to={`/category?id=${item.id}&category=${item.name}`}>{item.name}</CustomizedLink>
             </ListItemText>
           </ListItem>
         ))}

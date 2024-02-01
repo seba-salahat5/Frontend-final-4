@@ -1,7 +1,8 @@
 import BrandsButton from "./BrandButton";
-import { brandsData } from "../../utils/brandsData";
 import { Container, Grid } from "@mui/material";
 import styled from "styled-components";
+import { useGet } from "../../custom_hooks/useApi";
+import { useEffect, useState } from "react";
 
 const ShopByBrandsTitle = styled.h2`
   color: var(--Dark, #13101e);
@@ -23,14 +24,21 @@ const ByBrandsBox = styled.div`
 `;
 
 const BrandsList = () => {
+  const [brands, setBrands] = useState([]);
+  const { data, loading } = useGet("https://group4.iscovat.bid/brand");
+
+  useEffect(() => {
+    !loading && setBrands(data);
+  }, [data, loading]);
+
   return (
     <ByBrandsBox>
       <Container maxWidth="xl" disableGutters>
         <ShopByBrandsTitle>Shop by Brands</ShopByBrandsTitle>
         <Grid container spacing={6} rowSpacing={1}>
-          {brandsData.map((item) => (
-            <Grid item xs={4} sm={4} md={2} key={item}>
-              <BrandsButton image={item} />
+          {brands.map((item) => (
+            <Grid item xs={4} sm={4} md={2} key={item.brand_id}>
+              <BrandsButton image={item.name} id={item.brand_id} />
             </Grid>
           ))}
         </Grid>

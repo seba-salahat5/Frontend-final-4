@@ -1,9 +1,7 @@
 import styled, { css } from 'styled-components'
 import React from 'react';
 import PathLine from '../components/shared/PathLine';
-import { Link, Typography } from '@mui/material';
 import AddressForm from '../components/checkout/AddressForm';
-import { useNavigate } from 'react-router-dom';
 import { CustomContainer } from '../layout/CustomContainer';
 import DropdownForm from '../components/checkout/DropdownForm';
 import OrderDetailes from "../components/shared/OrderDetails";
@@ -101,8 +99,6 @@ const SummeryTitle = styled.h3`
 const Checkout = () => {
   const [showForm, setShowForm] = React.useState(false);
   const [showPayment, setShowPayment] = React.useState(false);
-  const navigate = useNavigate();
-
   const handleClick = () => {
     setShowForm(!showForm);
   };
@@ -111,29 +107,10 @@ const Checkout = () => {
     setShowPayment(!showPayment);
   };
 
-  const breadcrumbs = [
-    <Link
-      underline="hover"
-      key="1"
-      color="var(--primary)"
-      fontWeight={'500'}
-      href="/"
-      onClick={(event) => {
-        event.preventDefault();
-        navigate('/');
-      }}
-    >
-      Home
-    </Link>,
-    <Typography key="2" color="var(--summary-text)">
-      Checkout
-    </Typography>,
-  ];
-
   return (
     <CustomContainer>
       <StyledPathLine>
-        <PathLine breadcrumbs={breadcrumbs} />
+        <PathLine />
       </StyledPathLine>
       <ListTitle>Handbags</ListTitle>
       <CheckoutLayout>

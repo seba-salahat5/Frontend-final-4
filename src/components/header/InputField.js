@@ -2,7 +2,6 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { TextField, Autocomplete } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import { useNavigate  } from 'react-router-dom';
 
 const Search = styled('div')(() => ({
   paddingLeft: '8px',
@@ -38,24 +37,20 @@ const SearchIconWrapper = styled('div')(() => ({
   height: '24px',
 }));
 
-export default function InputField({ placeholder }) {
-  const navigate = useNavigate();
+export default function InputField({ placeholder, inputOptions, onInput, onValueSelected }) {
   const handleOptionSelected = (event, value) => {
-    if (value) {
-      const dataToSend = {
-        page_title: 'Search Results',
-        phrase: value,
-      };
-      const queryString = new URLSearchParams(dataToSend).toString();
-      navigate(`/results/?${queryString}`);
-    }
+    onValueSelected(value)
+  };
+
+  const handleInputChange = (event) => {
+    onInput(event.target.value)
   };
   return (
     <Autocomplete
       freeSolo
       id="search input"
       disableClearable
-      options={searchOptions.map((option) => option.name)}
+      options={inputOptions === undefined ? [] :inputOptions.map((option) => option.name)}
       onChange={handleOptionSelected}
       renderInput={(params) => (
         <Search>
@@ -71,6 +66,7 @@ export default function InputField({ placeholder }) {
             }}
             variant='standard'
             sx={{ padding: 0, border: '0px solid' }}
+            onInput={handleInputChange}
           />
         </Search>
       )}
@@ -78,7 +74,7 @@ export default function InputField({ placeholder }) {
   );
 }
 
-const searchOptions = [
+/*const searchOptions = [
   { "name": "Minimalist Fuzzy Hobo Bag" },
   { "name": "Curated Bags" },
   { "name": "Stylish Solid Handbag" },
@@ -86,4 +82,6 @@ const searchOptions = [
   { "name": "Hooded Sweatshirt With Slogan Print" },
   { "name": "Women's Letter Print Hooded Sweatshirt" },
   { "name": "Heart-Shaped Leopard Print Hoodie" },
-];
+];*/
+
+
