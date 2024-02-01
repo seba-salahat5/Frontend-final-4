@@ -65,6 +65,7 @@ const MyCartHover = () => {
         {cartData &&
           cartData.map((items) => (
             <HoverCartItem
+              product_id={items.product_id}
               productImage={items.image[0].url}
               brand={items.name}
               productName={items.sub_title}

@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 const StyledInputRoot = styled("div")`
   display: flex;
   align-items: center;
-  width: 60px;
+  width: 100px;
   margin-block: 5px;
   padding-block: 3px;
   border: 1px solid var(--dark);
@@ -21,7 +21,7 @@ const StyledInput = styled("input")`
     theme.palette.mode === "dark" ? "#c7d0dd" : "#434d5b"};
   outline: 0;
   min-width: 0;
-  width: 80px;
+  width: 100px;
   text-align: center;
 
   &:focus {
@@ -68,11 +68,9 @@ const StyledButton = styled("button")`
 `;
 
 const QuantityInput = React.forwardRef(function CustomNumberInput(
-  { initialQuantity = 1, onChange, ...props },
-  ref
-) {
+  { initialQuantity = 1, onChange, product_id, ...props }, ref) {
   const [quantity, setQuantity] = React.useState(initialQuantity);
-
+  
   const handleQuantityChange = (value) => {
     setQuantity(value);
     if (onChange) {
@@ -83,7 +81,7 @@ const QuantityInput = React.forwardRef(function CustomNumberInput(
   return (
     <BaseNumberInput
       value={quantity}
-      onValueChange={handleQuantityChange}
+      onChange={handleQuantityChange}
       slots={{
         root: StyledInputRoot,
         input: StyledInput,

@@ -5,6 +5,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import QuantityInput from "./QuantityInput";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
+import { usePost } from "../../custom_hooks/useApi";
 
 const Img = styled("img")({
   margin: "auto",
@@ -15,6 +16,7 @@ const Img = styled("img")({
 });
 
 const HoverCartItem = ({
+  product_id,
   productImage,
   brand,
   productName,
@@ -22,9 +24,21 @@ const HoverCartItem = ({
   price,
 }) => {
   const [itemQuantity, setItemQuantity] = useState(quantity);
+  const [route, setRoute] = useState('');
+  const {setNewRequestBody} = usePost(`https://group4.iscovat.bid/cart/${route}`, 'patch');
 
   const handleQuantityChange = (newQuantity) => {
     setItemQuantity(newQuantity);
+    if(newQuantity < itemQuantity){
+      setRoute("/decrease-quantity");
+    }
+    else {
+      setRoute('/increase-quantity');
+    }
+    setNewRequestBody({
+      "product_id":product_id,
+      "quantity":1
+    });
   };
 
   return (
@@ -68,6 +82,7 @@ const HoverCartItem = ({
               <QuantityInput
                 initialQuantity={itemQuantity}
                 onChange={handleQuantityChange}
+                product_id = {product_id}
               />
             </Typography>
           </Grid>
