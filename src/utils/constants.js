@@ -48,6 +48,12 @@ export const CATEGORIES = [
         id: 12
     },
 ];
+
+export const COLLECTIONS = [
+    { id: 1, name: 'Featured', targetComponent: 'handpicked' },
+    { id: 2, name: 'Brands', targetComponent: 'brands' },
+    { id: 3, name: 'Trendy', targetComponent: 'cards' },
+];
 export const LOGOS = [
     {
         "name": "Facebook",
@@ -67,5 +73,4 @@ export const LOGOS = [
     }
 ];
 
-export const COLLECTIONS = ['Featured', 'Brands', 'Trendy'];
 export const DEBOUNCE_VALUE = 300;
