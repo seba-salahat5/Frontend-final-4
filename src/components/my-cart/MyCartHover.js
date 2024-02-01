@@ -26,22 +26,7 @@ const MyCartHover = () => {
     <>
       <SmallMyCartBox>
         <HoverCartItem
-          productImage={"./assets/newArrivals/BLACK-BAG 1.png"}
-          brand={"Coach"}
-          productName={" Leather Couch Bag"}
-          quantity={2}
-          price={"19.00"}
-        />
-
-        <HoverCartItem
-          productImage={"./assets/newArrivals/duffle 1.png"}
-          brand={"Coach"}
-          productName={" Leather Couch Bag"}
-          quantity={2}
-          price={"19.00"}
-        />
-        <HoverCartItem
-          productImage={"./assets/newArrivals/pink-bag-small.png"}
+          productImage={"./assets/newArrivals/pink-bag-small.png"}nn
           brand={"Coach"}
           productName={" Leather Couch Bag"}
           quantity={2}

@@ -7,9 +7,12 @@ const GridLayout = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
   gap: 4.25rem 2rem;
   @media (max-width: 510px) {
-    gap: 1.375rem;  // Add 'rem' unit
+    gap: 1.375rem; // Add 'rem' unit
     width: 20.125rem;
-    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));  // Change to auto-fit
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(45%, 1fr)
+    ); // Change to auto-fit
   }
 `;
 
@@ -18,16 +21,17 @@ const CardsGrid = ({ cards }) => {
     <GridLayout>
       {cards?.map((item) => (
         <ProductCard
-          key={item.productId}
-          image={item.image}
-          productId={item.productId}
-          productName={item.productName}
-          productDescreption={item.productDescreption}
-          discount={item.discount}
-          showRating={item.showRating}
+          key={item.product_id}
+          image={item.image[0]}
+          productId={item.product_id}
+          productName={item.name}
+          productDescreption={item.sub_title}
+          discount={item.discount_value}
+          showRating={true}
           price={item.price}
           showOldPrice={item.discount_value !== 0 ? true : false}
           ratersNumber={item.number_of_ratings}
+          rating={parseFloat(item.ratings)}
         />
       ))}
     </GridLayout>

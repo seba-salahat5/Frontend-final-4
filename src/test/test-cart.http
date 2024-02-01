@@ -1,0 +1,28 @@
+####works
+get http://158.176.1.165:3000/cart
+Cookie: session_token=bb6c85cf-8251-46e1-910e-03aa7d830fba
+#### works####myTokenGoesHere
+####
+#   "product_id":8, int  numper >0
+ #   "quantity":7 int numper >0
+####
+post http://158.176.1.165:3000/cart
+Content-Type: application/json
+Cookie: session_token=bb6c85cf-8251-46e1-910e-03aa7d830fba
+
+{
+    "product_id":1,
+    "quantity":5
+}
+
+####
+PATCH http://158.176.1.165:3000/cart
+Content-Type: application/json
+Cookie: session_token=bb6c85cf-8251-46e1-910e-03aa7d830fba
+
+{
+    "product_id":1,
+    "quantity":5
+}
+#### product_id integer number should be >0
+DELETE  http://158.176.1.165:3000/cart?product_id=1

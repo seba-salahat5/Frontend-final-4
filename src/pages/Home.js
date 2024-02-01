@@ -45,7 +45,11 @@ const Home = () => {
               bannerHight={"400px"}
               backgroundImage={"/assets/main offer.png"}
               imageAlt={"Limited Edition Products"}
-              onClickEvent={()=>{navigate('/results?page_title=Limited Editions&route=limited-edition')}}
+              onClickEvent={() => {
+                navigate(
+                  "/results?page_title=Limited Editions&route=limited-edition"
+                );
+              }}
             >
               <BannerBox
                 textsize={"52px"}
@@ -61,7 +65,11 @@ const Home = () => {
               bannerHight={"228px"}
               backgroundImage={"/assets/offer1.png"}
               imageAlt={"15% Off And More!"}
-              onClickEvent={()=>{navigate('/results?page_title=Products with 15% Sale&route=discount-edition&value=15')}}
+              onClickEvent={() => {
+                navigate(
+                  "/results?page_title=Products with 15% Sale&route=discount-edition&value=15"
+                );
+              }}
             >
               <BannerBox
                 textsize={"40px"}
@@ -77,7 +85,11 @@ const Home = () => {
               bannerHight={"228px"}
               backgroundImage={"/assets/offer2.png"}
               imageAlt={"Popular In The Community!"}
-              onClickEvent={()=>{navigate('/results?page_title=Popular Products&route=popular&value=4.5')}}
+              onClickEvent={() => {
+                navigate(
+                  "/results?page_title=Popular Products&route=popular&value=4.5"
+                );
+              }}
             >
               <BannerBox
                 textsize={"40px"}
@@ -88,7 +100,7 @@ const Home = () => {
               />
             </SmallBanner>
           </Grid>
-        </CardsSection> 
+        </CardsSection>
       </CustomContainer>
     </>
   );

@@ -2,10 +2,10 @@ import styled from "styled-components";
 import ListingOptions from "../components/category/ListingOptions";
 import CardsGrid from "../components/category/CardsGrid";
 
-import PaginationBar from '../components/category/PaginationBar';
-import { CustomContainer } from '../layout/CustomContainer';
-import CarouselBanner from '../components/category/CategoryBanner';
-import PathLine from '../components/shared/PathLine';
+import PaginationBar from "../components/category/PaginationBar";
+import { CustomContainer } from "../layout/CustomContainer";
+import CarouselBanner from "../components/category/CategoryBanner";
+import PathLine from "../components/shared/PathLine";
 
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -87,7 +87,9 @@ const Category = () => {
     <CustomContainer>
       <CarouselBanner />
       {!isMobile && (
-        <StyledPathLine><PathLine/></StyledPathLine>
+        <StyledPathLine>
+          <PathLine />
+        </StyledPathLine>
       )}
       <ListTitle>{categotyTitle}</ListTitle>
       <ListLayout>

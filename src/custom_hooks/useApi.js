@@ -29,14 +29,18 @@ export function usePost(url) {
   };
 }
 
-export function useGet(url) {
+export function useGet(url, session_token) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
+        /*         console.log("Request URL:", url);
+        console.log("Authorization Header:", `Bearer ${session_token}`); */
+        /*         axios.defaults.headers.common["Authorization"] =
+          "Bearer " + session_token; */
+          
         const response = await axios.get(url);
         setData(response.data);
         setLoading(false);
@@ -45,10 +49,8 @@ export function useGet(url) {
         setLoading(false);
       }
     };
-
     fetchData();
-  }, [url]);
-
+  }, [url, session_token]);
   return {
     data,
     error,
