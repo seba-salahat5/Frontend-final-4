@@ -13,6 +13,13 @@ const Img = styled("img")({
   borderRadius: "8px",
 });
 
+const CustomTypography = styled(Typography)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px; /* Set your desired maximum width */
+`;
+
 export default function CartItem({
   productImage,
   brand,
@@ -48,20 +55,20 @@ export default function CartItem({
             sx={{ marginBlock: "auto" }}
           >
             <Grid item>
-              <Typography
+              <CustomTypography
                 gutterBottom
                 variant="h3"
                 color="#171520"
                 fontSize="1rem"
               >
                 {brand}
-              </Typography>
-              <Typography variant="body2" gutterBottom>
+              </CustomTypography>
+              <CustomTypography variant="body2" gutterBottom>
                 {productName}
-              </Typography>
-              <Typography variant="body2" color="#626262">
+              </CustomTypography>
+              <CustomTypography variant="body2" color="#626262">
                 Qty- {quantity}
-              </Typography>
+              </CustomTypography>
             </Grid>
           </Grid>
         </Grid>
@@ -75,20 +82,20 @@ export default function CartItem({
         justifyContent="space-between"
       >
         <Grid item>
-          <Typography variant="subtitle1" component="div">
-            {price}
-          </Typography>
+          <CustomTypography variant="subtitle1" component="div">
+            {price} <span>$</span>
+          </CustomTypography>
         </Grid>
 
         <Grid item>
-          <Typography variant="subtitle1" component="div">
+          <CustomTypography variant="subtitle1" component="div">
             {quantity}
-          </Typography>
+          </CustomTypography>
         </Grid>
         <Grid item>
-          <Typography variant="subtitle1" component="div">
+          <CustomTypography variant="subtitle1" component="div">
             {subtotal}
-          </Typography>
+          </CustomTypography>
         </Grid>
 
         <Grid container item xs={12} sx={{ justifyContent: "flex-end" }}>

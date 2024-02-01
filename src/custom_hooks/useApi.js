@@ -30,7 +30,7 @@ export function usePost(url) {
   };
 }
 
-export function useGet(url) {
+export function useGet(url, session_token) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,10 +49,8 @@ export function useGet(url) {
         setLoading(false);
       }
     };
-
     fetchData();
   }, [url, session_token]);
-
   return {
     data,
     error,

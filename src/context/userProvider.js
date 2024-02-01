@@ -1,7 +1,5 @@
 import { createContext, useContext, useState } from "react";
-
 const UserContext = createContext(null);
-
 export default function UserProvider({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     function signIn( tokin ) {
@@ -26,5 +24,5 @@ export default function UserProvider({ children }) {
     );
 }
 export const useUser = () => {
-    return useContext(UserContext);
+  return useContext(UserContext);
 };

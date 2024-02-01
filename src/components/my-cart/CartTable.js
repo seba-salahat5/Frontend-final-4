@@ -11,7 +11,8 @@ const StyledLabel = styled.label`
   line-height: 20px;
 `;
 
-const CartTable = () => {
+const CartTable = ({ cartData, productQuantity }) => {
+  /*   console.log("Product Data : ", cartData); */
   return (
     <>
       <Box
@@ -46,23 +47,16 @@ const CartTable = () => {
         }}
       >
         <Grid container>
-          <CartItem
-            productImage={"./assets/newArrivals/duffle 1.png"}
-            brand={"Coach"}
-            productName={" Leather Couch Bag"}
-            quantity={2}
-            price={"19.00"}
-            showRemoveLink
-          />
-
-          <CartItem
-            productImage={"./assets/newArrivals/pink-bag-small.png"}
-            brand={"Coach"}
-            productName={" Leather Couch Bag"}
-            quantity={2}
-            price={"19.00"}
-            showRemoveLink
-          />
+          {cartData && (
+            <CartItem
+              productImage={cartData.image[0].url}
+              brand={cartData.name}
+              productName={cartData.description}
+              quantity={productQuantity}
+              price={cartData.price}
+              showRemoveLink
+            />
+          )}
         </Grid>
       </Box>
     </>

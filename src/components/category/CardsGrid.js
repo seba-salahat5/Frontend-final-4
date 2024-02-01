@@ -7,9 +7,12 @@ const GridLayout = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
   gap: 4.25rem 2rem;
   @media (max-width: 510px) {
-    gap: 1.375rem;  // Add 'rem' unit
+    gap: 1.375rem; // Add 'rem' unit
     width: 20.125rem;
-    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));  // Change to auto-fit
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(45%, 1fr)
+    ); // Change to auto-fit
   }
 `;
 
