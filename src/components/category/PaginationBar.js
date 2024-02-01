@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Layout = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const Tabs = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   border-radius: 0.75rem;
-  background: var(--Grey, #F1F1F1);
+  background: var(--Grey, #f1f1f1);
 `;
 
 const TabsLayout = styled.div`
@@ -28,7 +28,7 @@ const Tab = styled.div`
   padding: 0.375rem 1.125rem;
   align-items: flex-start;
   gap: 0.625rem;
-  background: var(--Grey, #F1F1F1);
+  background: var(--Grey, #f1f1f1);
   cursor: pointer;
 
   ${(props) =>
@@ -45,7 +45,7 @@ const MoveTabLayout = styled.div`
   padding: 0.25rem;
   justify-content: center;
   border-radius: 0.75rem;
-  background: var(--Grey, #F1F1F1);
+  background: var(--Grey, #f1f1f1);
 `;
 
 const MoveTab = styled.div`
@@ -74,7 +74,7 @@ const TabText = styled.p`
 
 const PaginationBar = ({ countOfItems }) => {
   const navigate = useNavigate();
-  const { type, number_of_items, page_number } = useParams();
+  const { type, number_of_items, page_number, id } = useParams();
   const [activeTab, setActiveTab] = useState(Number(page_number) - 1 || 0);
   const numberOfTabs = Math.ceil(countOfItems / number_of_items);
 
@@ -85,8 +85,11 @@ const PaginationBar = ({ countOfItems }) => {
   const handleTabClick = (index) => {
     setActiveTab(index);
 
-    // Update the URL with the new page number
-    navigate(`/category/${type}/${number_of_items}/${index + 1}`);
+    if (id) {
+      navigate(`/category/${type}/${number_of_items}/${index + 1}/${id}`);
+    } else {
+      navigate(`/category/${type}/${number_of_items}/${index + 1}`);
+    }
   };
 
   const handleNextTabClick = () => {
@@ -112,9 +115,15 @@ const PaginationBar = ({ countOfItems }) => {
   const renderTabs = () => {
     const tabs = [];
 
-    const startOffset = Math.max(0, activeTab - Math.floor(numberOfTabsToShow / 2));
+    const startOffset = Math.max(
+      0,
+      activeTab - Math.floor(numberOfTabsToShow / 2)
+    );
     const startIndex = Math.min(startOffset, numberOfTabs - numberOfTabsToShow);
-    const endIndex = Math.min(numberOfTabs - 1, startIndex + numberOfTabsToShow - 1);
+    const endIndex = Math.min(
+      numberOfTabs - 1,
+      startIndex + numberOfTabsToShow - 1
+    );
 
     for (let i = startIndex; i <= endIndex; i++) {
       tabs.push(
@@ -137,9 +146,7 @@ const PaginationBar = ({ countOfItems }) => {
             </MoveTab>
           </MoveTabLayout>
         )}
-        <Tabs>
-          {renderTabs()}
-        </Tabs>
+        <Tabs>{renderTabs()}</Tabs>
         {activeTab < numberOfTabs - 1 && (
           <MoveTabLayout>
             <MoveTab onClick={handleNextTabClick}>

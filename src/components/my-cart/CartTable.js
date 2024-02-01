@@ -11,8 +11,7 @@ const StyledLabel = styled.label`
   line-height: 20px;
 `;
 
-const CartTable = ({ cartData, productQuantity }) => {
-  /*   console.log("Product Data : ", cartData); */
+const CartTable = ({ cartData }) => {
   return (
     <>
       <Box
@@ -47,16 +46,17 @@ const CartTable = ({ cartData, productQuantity }) => {
         }}
       >
         <Grid container>
-          {cartData && (
+          {cartData.map((items) => (
             <CartItem
-              productImage={cartData.image[0].url}
-              brand={cartData.name}
-              productName={cartData.description}
-              quantity={productQuantity}
-              price={cartData.price}
+              key={items.product_id}
+              productImage={items.image[0].url}
+              brand={items.name}
+              productName={items.description}
+              quantity={items.cart_quantity}
+              price={items.price}
               showRemoveLink
             />
-          )}
+          ))}
         </Grid>
       </Box>
     </>

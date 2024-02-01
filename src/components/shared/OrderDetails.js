@@ -20,32 +20,29 @@ const OrderGrand = styled.h4`
   font-weight: 600;
 `;
 
-const OrderDetailes = ({ cartData, productQuantity, productDiscount }) => {
+const OrderDetailes = ({ cartData }) => {
   const [subtotal, setSubtotal] = useState(0);
-
-  useEffect(() => {
-    if (cartData && cartData.price !== undefined) {
-      setSubtotal(cartData.price * productQuantity);
-    }
-  }, [cartData, productQuantity]);
-
   const [discount, setDiscount] = useState(0);
-
-  useEffect(() => {
-    if (cartData && cartData.price !== undefined) {
-      setDiscount((productDiscount / 100) * cartData.price * productQuantity);
-    }
-  }, [cartData, productDiscount, productQuantity]);
-
   const [totalGrand, setTotalGrand] = useState(0);
 
   useEffect(() => {
-    if (cartData && productDiscount !== undefined) {
-      setTotalGrand(() => {
-        return productDiscount !== 0 ? subtotal - discount : subtotal;
-      });
+    if (cartData && cartData.length > 0) {
+      const totalSubtotal = cartData.reduce(
+        (acc, item) => acc + item.price * item.cart_quantity,
+        0
+      );
+      setSubtotal(totalSubtotal);
+      const totalDiscount = cartData.reduce(
+        (acc, item) =>
+          acc + (item.discount_value / 100) * item.price * item.cart_quantity,
+        0
+      );
+      setDiscount(totalDiscount);
+      setTotalGrand(
+        totalDiscount !== 0 ? totalSubtotal - totalDiscount : totalSubtotal
+      );
     }
-  }, [cartData, subtotal, discount, productDiscount]);
+  }, [cartData]);
 
   return (
     <>

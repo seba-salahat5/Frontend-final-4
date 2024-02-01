@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "../context/userProvider";
 
+let session_token = localStorage.getItem("session_token");
+
 export function usePost(url) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -10,9 +12,14 @@ export function usePost(url) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const postResponse = await axios.post(url, requestBody);
+        const postResponse = session_token
+          ? await axios.post(url, requestBody, {
+              headers: { Authorization: `Bearer ${session_token}` },
+            })
+          : await axios.post(url, requestBody);
         setData(postResponse.data);
       } catch (error) {
+        console.log(error);
         setError(error);
       }
     }
@@ -30,21 +37,23 @@ export function usePost(url) {
   };
 }
 
-export function useGet(url, session_token) {
+export function useGet(url) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  let session_token = localStorage.getItem('session_token');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("Request URL:", url);
-        console.log("Authorization Header:", `Bearer ${session_token}`);
-        const response =session_token ? await axios.get(url, { headers: { Authorization: `Bearer ${session_token}` } })
-         : await axios.get(url);
+        const response = session_token
+          ? await axios.get(url, {
+              headers: { Authorization: `Bearer ${session_token}` },
+            })
+          : await axios.get(url);
         setData(response.data);
         setLoading(false);
       } catch (error) {
+        console.log(error);
         setError(error);
         setLoading(false);
       }

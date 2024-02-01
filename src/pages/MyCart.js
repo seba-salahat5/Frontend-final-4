@@ -6,8 +6,9 @@ import { Box, Grid } from "@mui/material";
 import ContinueShoppingButton from "../components/my-cart/ContinueShoppingButton";
 import PlaceOrderButton from "../components/my-cart/PlaceOrderButton";
 import { useLocation } from "react-router-dom";
-import { useGet } from "../custom_hooks/useApi";
+import { useGet, usePost } from "../custom_hooks/useApi";
 import { useEffect, useState } from "react";
+import EmptyPanel from "../components/shared/EmptyPanel";
 
 const MyHeaderTitle = styled.h2`
   color: var(--Primary, #1b4b66);
@@ -26,63 +27,56 @@ const MyCart = () => {
   const [cartData, setCartData] = useState();
 
   const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const productId = params.get("productId");
-  const productQuantity = params.get("productQuantity");
-  const productDiscount = params.get("productDiscount");
 
-  const baseUrl = "https://group4.iscovat.bid/product";
-  const { data, loading } = useGet(
-    `${baseUrl}/single-product/${parseInt(productId)}`
-  );
+  const { data, loading, error } = useGet("https://group4.iscovat.bid/cart/");
 
   useEffect(() => {
     if (!loading && data) {
+      console.log(data);
       setCartData(data);
+    } else {
+      setCartData([]);
     }
   }, [data, loading]);
 
   return (
     <CustomContainer>
       <MyHeaderTitle>My Cart</MyHeaderTitle>
-      <MyCartContainer>
-        <Grid container spacing={{ xs: 3, md: 17 }}>
-          <Grid item xs={12} md={7}>
-            <CartTable
-              cartData={cartData}
-              productQuantity={productQuantity}
-            />
-          </Grid>
+      {cartData ? (
+        <MyCartContainer>
+          <Grid container spacing={{ xs: 3, md: 17 }}>
+            <Grid item xs={12} md={7}>
+              <CartTable cartData={cartData} />
+            </Grid>
 
-          <Grid item xs={12} md={5}>
-            <Box
-              sx={{
-                my: 3,
-                display: "flex",
-                p: 1,
-                borderBottom: "1px solid #626262",
-              }}
-            >
-              <SummeryTitle>Order Summary</SummeryTitle>
-            </Box>
-            <OrderDetailes
-              cartData={cartData}
-              productQuantity={productQuantity}
-              productDiscount={productDiscount}
-            />
-            <Grid
-              my={5}
-              container
-              direction="row"
-              justifyContent="space-around"
-              alignItems="space-around"
-            >
-              <PlaceOrderButton customWidth={"180px"} />
-              <ContinueShoppingButton />
+            <Grid item xs={12} md={5}>
+              <Box
+                sx={{
+                  my: 3,
+                  display: "flex",
+                  p: 1,
+                  borderBottom: "1px solid #626262",
+                }}
+              >
+                <SummeryTitle>Order Summary</SummeryTitle>
+              </Box>
+              <OrderDetailes cartData={cartData} />
+              <Grid
+                my={5}
+                container
+                direction="row"
+                justifyContent="space-around"
+                alignItems="space-around"
+              >
+                <PlaceOrderButton customWidth={"180px"} />
+                <ContinueShoppingButton />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </MyCartContainer>
+        </MyCartContainer>
+      ) : (
+        <EmptyPanel />
+      )}
     </CustomContainer>
   );
 };

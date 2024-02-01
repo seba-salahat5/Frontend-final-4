@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import QuantityInput from "./QuantityInput";
 import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
 
 const Img = styled("img")({
   margin: "auto",
@@ -20,6 +21,12 @@ const HoverCartItem = ({
   quantity,
   price,
 }) => {
+  const [itemQuantity, setItemQuantity] = useState(quantity);
+
+  const handleQuantityChange = (newQuantity) => {
+    setItemQuantity(newQuantity);
+  };
+
   return (
     <Grid
       item
@@ -58,7 +65,10 @@ const HoverCartItem = ({
               {productName}
             </Typography>
             <Typography variant="body2" color="#626262">
-              <QuantityInput />
+              <QuantityInput
+                initialQuantity={itemQuantity}
+                onChange={handleQuantityChange}
+              />
             </Typography>
           </Grid>
         </Grid>

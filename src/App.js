@@ -10,10 +10,9 @@ import UserProvider from "./context/userProvider";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import ResultsPanel from "./pages/ResultsPanel";
-import { ScrollProvider } from './context/ScrollContext';
+import { ScrollProvider } from "./context/ScrollContext";
 
 function App() {
-
   return (
     <UserProvider>
       <ScrollProvider>
@@ -21,7 +20,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="/category/:type/:number_of_items/:pageNumber" element={<Category />} />
+              <Route
+                path="/category/:type?/:number_of_items?/:pageNumber?/:id?"
+                element={<Category />}
+              />
               <Route path="/product" element={<Product />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/mycart" element={<MyCart />} />

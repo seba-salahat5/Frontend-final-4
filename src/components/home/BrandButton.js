@@ -10,7 +10,8 @@ const BrandLogo = styled.img`
 
 const BrandsButton = ({ image, id }) => {
   const category = "product-brand";
-  const categoryLink = `/category?id=${id}&category=${category}`;
+
+  const categoryLink = `/category/${category}/20/1/${id}`;
   return (
     <Link to={categoryLink}>
       <BrandLogo

@@ -67,9 +67,23 @@ const StyledButton = styled("button")`
   }
 `;
 
-const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
+const QuantityInput = React.forwardRef(function CustomNumberInput(
+  { initialQuantity = 1, onChange, ...props },
+  ref
+) {
+  const [quantity, setQuantity] = React.useState(initialQuantity);
+
+  const handleQuantityChange = (value) => {
+    setQuantity(value);
+    if (onChange) {
+      onChange(value);
+    }
+  };
+
   return (
     <BaseNumberInput
+      value={quantity}
+      onValueChange={handleQuantityChange}
       slots={{
         root: StyledInputRoot,
         input: StyledInput,
@@ -91,6 +105,4 @@ const NumberInput = React.forwardRef(function CustomNumberInput(props, ref) {
   );
 });
 
-export default function QuantityInput() {
-  return <NumberInput aria-label="Quantity Input" min={1} max={99} />;
-}
+export default QuantityInput;

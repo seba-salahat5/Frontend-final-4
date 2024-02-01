@@ -1,19 +1,24 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import { Typography, Stack, Grid, useMediaQuery, useTheme } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import {
+  Typography,
+  Stack,
+  Grid,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
-import ImageGallery from '../components/product/ImageGallery';
-import { CustomContainer } from '../layout/CustomContainer';
-import PathLine from '../components/shared/PathLine';
-import RatingStars from '../components/shared/RatingStars';
-import StateButtonGroup from '../components/product/StateButtonGroup';
-import RoundedButton from '../components/shared/RoundedButton';
-import DescriptionSection from '../components/product/DescriptionSection';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
-import { useGet } from "../custom_hooks/useApi";
-import { useUser } from '../context/userProvider';
+import ImageGallery from "../components/product/ImageGallery";
+import { CustomContainer } from "../layout/CustomContainer";
+import PathLine from "../components/shared/PathLine";
+import RatingStars from "../components/shared/RatingStars";
+import StateButtonGroup from "../components/product/StateButtonGroup";
+import RoundedButton from "../components/shared/RoundedButton";
+import DescriptionSection from "../components/product/DescriptionSection";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import { useGet, usePost } from "../custom_hooks/useApi";
 
 const Heading = styled(Typography)(() => ({
   fontWeight: "600",
@@ -22,6 +27,7 @@ const Heading = styled(Typography)(() => ({
 }));
 
 const Product = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isMd = useMediaQuery("(min-width:900px) and (max-width:1279px)");
@@ -48,12 +54,30 @@ const Product = () => {
   const params = new URLSearchParams(search);
   const baseUrl = "https://group4.iscovat.bid/product";
 
-  const product_id = params.get('product_id');
-  const { data: productData, loading: productLoading } = useGet(`${baseUrl}/single-product/${parseInt(product_id)}`);
-  const { data: relatedData, loading: relatedLoading } = useGet(`${baseUrl}/related-product?category_id=${categoryId}&brand_id=${brandId}`);
-  const { data: ratingData, loading: ratingLoading} = useGet(`${baseUrl}/ratings/${parseInt(product_id)}`);
-  const apiUrl = "https://group4.iscovat.bid/wishlist/products?page_number=1&number_of_items=20";
+  const product_id = params.get("product_id");
+  const { data: productData, loading: productLoading } = useGet(
+    `${baseUrl}/single-product/${parseInt(product_id)}`
+  );
+  const { data: relatedData, loading: relatedLoading } = useGet(
+    `${baseUrl}/related-product?category_id=${categoryId}&brand_id=${brandId}`
+  );
+  const { data: ratingData, loading: ratingLoading } = useGet(
+    `${baseUrl}/ratings/${parseInt(product_id)}`
+  );
+  const apiUrl =
+    "https://group4.iscovat.bid/wishlist/products?page_number=1&number_of_items=20";
   const { data: wishlistItems, loading: loadingWishlist } = useGet(apiUrl);
+
+  const { setNewRequestBody } = usePost(
+    "https://group4.iscovat.bid/cart/"
+  );
+  const handleAddToCart = () => {
+    setNewRequestBody({
+      product_id: productData.product_id,
+      quantity: userQuantity,
+    });
+    alert("Your product added to the cart!");
+  };
 
   useEffect(() => {
     if (!productLoading && productData) {
@@ -81,11 +105,6 @@ const Product = () => {
     setUserQuantity(newState);
   };
 
-  const handleAddToCart = () => {
-    navigate(
-      `/mycart?productId=${productData.product_id}&productQuantity=${userQuantity}&productDiscount=${productData.discount_value}`
-    );
-  };
   useEffect(() => {
     console.log("hello");
     if (!loadingWishlist && wishlistItems) {
