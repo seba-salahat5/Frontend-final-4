@@ -27,7 +27,6 @@ const Home = () => {
   const requsetProps = [`${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`];
   isLoggedIn && requsetProps.push(session_token);
 
-  console.log("requsetProps", requsetProps);
   const { data, loading } = useGet(...requsetProps);
 
   useEffect(() => {

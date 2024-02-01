@@ -37,10 +37,10 @@ export function useGet(url, session_token) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = session_token ? 
-        await axios.get(url, {headers: {Authorization: `Bearer ${session_token}`}})
-        : await axios.get(url);
-        console.log(response);
+        console.log("Request URL:", url);
+        console.log("Authorization Header:", `Bearer ${session_token}`);
+        axios.defaults.headers.common["Authorization"] = "Bearer " + session_token;
+        const response = await axios.get(url);
         setData(response.data);
         setLoading(false);
       } catch (error) {

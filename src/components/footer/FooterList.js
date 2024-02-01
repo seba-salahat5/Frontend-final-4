@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { List, ListItem, ListItemText } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const CustomizedListText = styled(ListItemText)(() => ({
     fontSize: '16px',
@@ -11,12 +12,13 @@ const CustomizedListText = styled(ListItemText)(() => ({
     color: 'var(--light-text)',
 }))
 const FooterList = ({ list }) => {
+    const navigate = useNavigate();
     return (
         <List>
             {list.map((listItem) => (
-                <ListItem key={listItem} sx={{ p: '0px' }}>
+                <ListItem key={listItem.id} sx={{ p: '0px' }} onClick={() => { navigate(`/category?id=${listItem.id}&category=${listItem.name}`) }}>
                     <CustomizedListText>
-                        {listItem}
+                        {listItem.name}
                     </CustomizedListText>
                 </ListItem>
             ))}

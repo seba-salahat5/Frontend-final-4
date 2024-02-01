@@ -1,5 +1,53 @@
-export const TOP_CATEGORIES = ['Handbags', 'Watches', 'Skincare', 'Jewellery', 'Apparels'];
-export const CATEGORIES = ['Handbags', 'Watches', 'Skincare', 'Jewellery', 'Apparels', 'Personal Care', 'Makeup', 'Eye Wear', 'Shoes', 'Sports'];
+export const CATEGORIES = [
+    {
+        name: 'Handbags',
+        id: 1
+    },
+    {
+        name: 'Watches',
+        id: 2
+    },
+    {
+        name: 'Skincare',
+        id: 3
+    },
+    {
+        name: 'Jewellery',
+        id: 4
+    },
+    {
+        name: 'Apparels',
+        id: 5
+    },
+    {
+        name: 'Personal Care',
+        id: 6
+    },
+    {
+        name: 'Wrist Watches',
+        id: 7
+    },
+    {
+        name: 'Sun Glasses',
+        id: 8
+    },
+    {
+        name: 'Eye Wear',
+        id: 9
+    },
+    {
+        name: 'Shoes',
+        id: 10
+    },
+    {
+        name: 'Makeup',
+        id: 11
+    },
+    {
+        name: 'Sports',
+        id: 12
+    },
+];
 export const LOGOS = [
     {
         "name": "Facebook",
