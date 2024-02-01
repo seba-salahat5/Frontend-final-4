@@ -1,23 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import ListingOptions from "../components/category/ListingOptions";
 import CardsGrid from "../components/category/CardsGrid";
-
 import PaginationBar from '../components/category/PaginationBar';
 import { CustomContainer } from '../layout/CustomContainer';
 import CarouselBanner from '../components/category/CategoryBanner';
 import PathLine from '../components/shared/PathLine';
-
-import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useGet } from "../custom_hooks/useApi";
-import { useMediaQuery, useTheme } from "@mui/material";
-
-/**
- * fix ScrollBar in new arraivals
- * fix star counter
- * fix mui number of cards font
- * fix mui dropdown font-color
- */
+import { Link, Typography, Stack, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useGet } from '../custom_hooks/useApi.js'
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 
 const ListLayout = styled.div`
   display: flex;
@@ -42,68 +34,56 @@ const StyledPathLine = styled.div`
 `;
 
 const Category = () => {
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
+  const navigate = useNavigate();
+  const [items, setItems] = useState([]);
+  const [fetchError, setFetchError] = useState(null);
+  const url = 'http://158.176.1.165:3000/product/';
+  const { type, number_of_items, pageNumber } = useParams();
+  const [countOfItems, setCountOfItems] = useState(20);
 
-  const id = params.get("id");
-  const categoryType = params.get("category");
-
-  let apiUrl;
-  let urlEndpoint;
-  let categotyTitle;
-
-  if (categoryType === "product-brand") {
-    const apiUrl = `https://group4.iscovat.bid/product/${categoryType}`;
-    const pageNumber = 1;
-    const numberOfItems = 10;
-    categotyTitle = "Brand";
-    urlEndpoint = `${apiUrl}?brand_id=${id}&page_number=${pageNumber}&number_of_items=${numberOfItems}`;
-  } else if (categoryType === "handpicked-products") {
-    apiUrl = `https://group4.iscovat.bid/product/${categoryType}`;
-    const pageNumber = 1;
-    const numberOfItems = 10;
-    categotyTitle = "Handpicked Collection";
-    urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}&category_id=${id}`;
-  } else if (categoryType === "new-arrival") {
-    apiUrl = `https://group4.iscovat.bid/product/${categoryType}`;
-    const pageNumber = 1;
-    const numberOfItems = 10;
-    categotyTitle = "New Arrival";
-    urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`;
-  } else {
-    apiUrl = `https://group4.iscovat.bid/product/`;
-    const pageNumber = 1;
-    const numberOfItems = 10;
-    categotyTitle = categoryType;
-    urlEndpoint = `${apiUrl}product-category?category_id=${id}&page_number=${pageNumber}&number_of_items=${numberOfItems}`;
-  }
-  const [categoryItems, setCategoryItems] = useState([]);
-  const { data, loading } = useGet(urlEndpoint);
+  // Use the custom hook directly within the component
+  const { data, error, loading } = useGet(`${url}/${type}?page_number=${pageNumber}&number_of_items=${number_of_items}`);
 
   useEffect(() => {
-    !loading && setCategoryItems(data);
-    console.log(data);
+    if (!loading && error) {
+      setFetchError(error);
+    } else if (!loading && data) {
+      setItems(data.items);
+      setCountOfItems(data.items_count)
+      setFetchError(null);
+    }
   }, [data, loading]);
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    // Navigate to the home link
+    navigate('/');
+  };
+  const breadcrumbs = [
+    <Link underline="hover" key="1" color="var(--primary)" fontWeight={'500'} href="/" onClick={handleClick}>
+      Home
+    </Link>,
+    <Typography key="2" color="var(--summary-text)">
+      Handbag
+    </Typography>,
+  ];
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  /*const isMd = useMediaQuery('(min-width:900px) and (max-width:1279px)');
+  const isMd = useMediaQuery('(min-width:900px) and (max-width:1279px)');
   const isLg = useMediaQuery('(min-width:1280px) and (max-width:1500px)');
   const isXl = useMediaQuery('(min-width:1700px)');
-  const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));*/
-  return (
-    <CustomContainer>
-      <CarouselBanner />
-      {!isMobile && (
-        <StyledPathLine><PathLine/></StyledPathLine>
-      )}
-      <ListTitle>{categotyTitle}</ListTitle>
-      <ListLayout>
-        {!isMobile && <ListingOptions />}
-        <CardsGrid cards={categoryItems.items} />
-        <PaginationBar />
-      </ListLayout>
-    </CustomContainer>
-  );
+  const imageWidth = isMobile ? '100%' : (isMd ? 440 : (isLg ? 605 : (isXl ? 950 : 740)));
+  return <CustomContainer>
+    <CarouselBanner />
+    {!isMobile &&
+      <StyledPathLine><PathLine breadcrumbs={breadcrumbs} /></StyledPathLine>}
+    <ListTitle>Handbags</ListTitle>
+    <ListLayout>
+      {!isMobile && <ListingOptions />}
+      <CardsGrid cards={items} />
+      <PaginationBar countOfItems={countOfItems} />
+    </ListLayout>
+  </CustomContainer>;
 };
 
 export default Category;
