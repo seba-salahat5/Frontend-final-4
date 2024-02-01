@@ -7,99 +7,9 @@ import CarouselBanner from '../components/category/CategoryBanner';
 import PathLine from '../components/shared/PathLine';
 import { Link, Typography, Stack, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-/**
- * fix ScrollBar in new arraivals
- * fix star counter
- * fix mui number of cards font
- * fix mui dropdown font-color
- */
-
-let tempObj = [
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 1,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 3.4,
-    productId: 2,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 3,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 4,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 5,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 6,
-  },
-  {
-    image: "/assets/newArrivals/pink-bag-small.png",
-    productName: "Grande",
-    productDescreption: "Blossom Pouch",
-    discount: 0.5,
-    showRating: true,
-    price: 39.49,
-    showOldPrice: true,
-    ratersNumber: 43,
-    rating: 4,
-    productId: 7,
-  },
-];
+import { useGet } from '../custom_hooks/useApi.js'
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 
 const ListLayout = styled.div`
   display: flex;
@@ -125,6 +35,24 @@ const StyledPathLine = styled.div`
 
 const Category = () => {
   const navigate = useNavigate();
+  const [items, setItems] = useState([]);
+  const [fetchError, setFetchError] = useState(null);
+  const url = 'http://158.176.1.165:3000/product/';
+  const { type, number_of_items, pageNumber } = useParams();
+  const [countOfItems, setCountOfItems] = useState(20);
+
+  // Use the custom hook directly within the component
+  const { data, error, loading } = useGet(`${url}/${type}?page_number=${pageNumber}&number_of_items=${number_of_items}`);
+
+  useEffect(() => {
+    if (!loading && error) {
+      setFetchError(error);
+    } else if (!loading && data) {
+      setItems(data.items);
+      setCountOfItems(data.items_count)
+      setFetchError(null);
+    }
+  }, [data, loading]);
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -152,8 +80,8 @@ const Category = () => {
     <ListTitle>Handbags</ListTitle>
     <ListLayout>
       {!isMobile && <ListingOptions />}
-      <CardsGrid cards={tempObj} />
-      <PaginationBar />
+      <CardsGrid cards={items} />
+      <PaginationBar countOfItems={countOfItems} />
     </ListLayout>
   </CustomContainer>;
 };

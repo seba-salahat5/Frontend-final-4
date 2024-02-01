@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Layout = styled.div`
   display: flex;
@@ -70,27 +71,43 @@ const TabText = styled.p`
     color: var(--Type-Bright, #FFF);
   `}
 `;
-let numberOfTabs = 10;
-const PaginationBar = () => {
-  const [activeTab, setActiveTab] = useState(0);
+
+const PaginationBar = ({ countOfItems }) => {
+  const navigate = useNavigate();
+  const { type, number_of_items, page_number } = useParams();
+  const [activeTab, setActiveTab] = useState(Number(page_number) - 1 || 0);
+  const numberOfTabs = Math.ceil(countOfItems / number_of_items);
+
+  useEffect(() => {
+    setActiveTab(Number(page_number) - 1 || 0);
+  }, [page_number]);
 
   const handleTabClick = (index) => {
     setActiveTab(index);
+
+    // Update the URL with the new page number
+    navigate(`/category/${type}/${number_of_items}/${index + 1}`);
   };
 
   const handleNextTabClick = () => {
     // Increment active tab index or wrap around to the first tab
     const nextTabIndex = (activeTab + 1) % numberOfTabs;
     setActiveTab(nextTabIndex);
+
+    // Update the URL with the new page number
+    navigate(`/category/${type}/${number_of_items}/${nextTabIndex + 1}`);
   };
 
   const handlePrevTabClick = () => {
     // Decrement active tab index or wrap around to the last tab
     const prevTabIndex = (activeTab - 1 + numberOfTabs) % numberOfTabs;
     setActiveTab(prevTabIndex);
+
+    // Update the URL with the new page number
+    navigate(`/category/${type}/${number_of_items}/${prevTabIndex + 1}`);
   };
 
-  const numberOfTabsToShow = 5; // Fixed number of tabs to be shown
+  const numberOfTabsToShow = numberOfTabs < 5 ? numberOfTabs : 5; // Fixed number of tabs to be shown
 
   const renderTabs = () => {
     const tabs = [];

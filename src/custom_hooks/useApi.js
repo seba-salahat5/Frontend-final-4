@@ -39,7 +39,6 @@ export function useGet(url) {
       try {
         const response = await axios.get(url);
         setData(response.data);
-
         setLoading(false);
       } catch (error) {
         setError(error);
