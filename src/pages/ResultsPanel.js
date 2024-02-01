@@ -22,13 +22,16 @@ const ResultsPanel = () => {
   const pageNumber = 1;
   const numberOfItems = 10;
 
-  const urlEndpoint = value !== undefined
+  const urlEndpoint = value !== null
   ? `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}&value=${value}`
-  : `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`;
+  : (pageTitle == "Wishlist" ? `https://group4.iscovat.bid/wishlist/products?page_number=1&number_of_items=20`  :`${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`) ;
   const { data, loading } = useGet(urlEndpoint);
 
+  console.log("value", value);
+  console.log("urlEndpoint", urlEndpoint);
   useEffect(() => {
-    !loading && setViewProducts(data.items);
+    console.log(data);
+    !loading && setViewProducts(data.items || []);
   }, [data, loading]);
 
   const theme = useTheme();
@@ -43,12 +46,12 @@ const ResultsPanel = () => {
     <CustomContainer>
       {!isMobile && <PathLine />}
       {
-        viewProducts.length === 0 ? (
+        viewProducts?.length === 0 ? (
           <EmptyPanel image={emptyPageData.image} heading={emptyPageData.heading} text={emptyPageData.text} />
         ) : (
           <Box sx={{ flexGrow: 1, mt: 3 }}>
             <Grid container spacing={{ xs: 1, sm: 2, md: 3, xl: 4 }}>
-              {viewProducts.map((item) => (
+              {viewProducts?.map((item) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={item.product_id}>
                   <ProductCard
                     key={item.product_id}

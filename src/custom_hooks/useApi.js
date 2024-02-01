@@ -11,20 +11,20 @@ export function usePost(url, type) {
   useEffect(() => {
     async function fetchData() {
       try {
-        if(type){
+        if (type) {
           const postResponse = session_token
-          ? await axios.patch(url, requestBody, {
+            ? await axios.patch(url, requestBody, {
               headers: { Authorization: `Bearer ${session_token}` },
             })
-          : await axios.patch(url, requestBody);
-        setData(postResponse.data);
-        } else{
-                  const postResponse = session_token
-          ? await axios.post(url, requestBody, {
+            : await axios.patch(url, requestBody);
+          setData(postResponse.data);
+        } else {
+          const postResponse = session_token
+            ? await axios.post(url, requestBody, {
               headers: { Authorization: `Bearer ${session_token}` },
             })
-          : await axios.post(url, requestBody);
-        setData(postResponse.data);
+            : await axios.post(url, requestBody);
+          setData(postResponse.data);
         }
       } catch (error) {
         console.log(error);
@@ -55,8 +55,8 @@ export function useGet(url) {
       try {
         const response = session_token
           ? await axios.get(url, {
-              headers: { Authorization: `Bearer ${session_token}` },
-            })
+            headers: { Authorization: `Bearer ${session_token}` },
+          })
           : await axios.get(url);
         setData(response.data);
         setLoading(false);
@@ -72,5 +72,31 @@ export function useGet(url) {
     data,
     error,
     loading,
+  };
+}
+
+export function useDeleteHook(url) {
+  const [error, setError] = useState(null);
+  const [requestBody, setRequestBody] = useState(null);
+
+  useEffect(() => {
+    async function deleteData() {
+      try {
+        axios.delete(url, { headers: { Authorization: `Bearer ${session_token}` } })
+      } catch (error) {
+        console.log(error);
+        setError(error);
+      }
+    }
+    if (requestBody !== null) {
+      deleteData();
+    }
+  }, [url, requestBody]);
+
+  return {
+    error,
+    setNewRequestBody: (newRequestBody) => {
+      setRequestBody(newRequestBody);
+    },
   };
 }

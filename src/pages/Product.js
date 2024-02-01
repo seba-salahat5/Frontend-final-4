@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import {
   Typography,
@@ -18,7 +18,7 @@ import RoundedButton from "../components/shared/RoundedButton";
 import DescriptionSection from "../components/product/DescriptionSection";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import { useGet, usePost } from "../custom_hooks/useApi";
+import { useDeleteHook, useGet, usePost } from "../custom_hooks/useApi";
 
 const Heading = styled(Typography)(() => ({
   fontWeight: "600",
@@ -27,7 +27,6 @@ const Heading = styled(Typography)(() => ({
 }));
 
 const Product = () => {
-  const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isMd = useMediaQuery("(min-width:900px) and (max-width:1279px)");
@@ -46,9 +45,10 @@ const Product = () => {
   const [currentProduct, setCurrentProduct] = useState(null);
   const [relatedProducts, setRelatedProduct] = useState([]);
   const [ratings, setRatigns] = useState(null);
-  const [wishlist, setWishlist] = useState([]);
   const [categoryId, setCategoryId] = useState(0);
+  const [isLiked, setIsLiked] = useState(currentProduct?.isLiked || 0);
   const [brandId, setBrandId] = useState(0);
+  const [route, setRoute] = useState('');
 
   const { search } = useLocation();
   const params = new URLSearchParams(search);
@@ -64,9 +64,11 @@ const Product = () => {
   const { data: ratingData, loading: ratingLoading } = useGet(
     `${baseUrl}/ratings/${parseInt(product_id)}`
   );
-  const apiUrl =
-    "https://group4.iscovat.bid/wishlist/products?page_number=1&number_of_items=20";
-  const { data: wishlistItems, loading: loadingWishlist } = useGet(apiUrl);
+
+  const {setNewRequestBody: setDeleteBody} = useDeleteHook (`https://group4.iscovat.bid/wishlist/${route}`);
+  const {setNewRequestBody: setAddBody} = usePost(
+    `https://group4.iscovat.bid/wishlist/${route}`
+  );
 
   const { setNewRequestBody } = usePost(
     "https://group4.iscovat.bid/cart/"
@@ -78,10 +80,27 @@ const Product = () => {
     });
     alert("Your product added to the cart!");
   };
+  const handleWishlistButton = () => {
+
+    if(isLiked === 1){
+      setIsLiked(0);
+      setRoute(`/?product_id=${currentProduct.product_id}`)
+      setDeleteBody ({});
+      alert("Your product removed from the wishlist!");
+    }
+    else {
+      setIsLiked(1);
+      setRoute(`/?product_id=${currentProduct.product_id}`)
+      setAddBody({
+      });
+      alert("Your product added to the wishlist!");
+    }
+  };
 
   useEffect(() => {
     if (!productLoading && productData) {
       setCurrentProduct(productData);
+      setIsLiked(productData.is_liked);
       setCategoryId(parseInt(productData.category_id));
       setBrandId(parseInt(productData.brand_id));
     }
@@ -104,14 +123,6 @@ const Product = () => {
   const handleStateChange = (newState) => {
     setUserQuantity(newState);
   };
-
-  useEffect(() => {
-    console.log("hello");
-    if (!loadingWishlist && wishlistItems) {
-      console.log("wishlist", wishlistItems);
-      setWishlist(wishlistItems.items);
-    }
-  }, [wishlistItems, loadingWishlist]);
 
   return (
     <>
@@ -232,11 +243,9 @@ const Product = () => {
                     width={isMobile ? "319px" : "328px"}
                   />
                   <RoundedButton
-                    buttonText={"Add To Wishlist"}
+                    buttonText={isLiked === 0 ? "Add to Wishlist" : "Remove From Wishlist"}
                     ButtonIcon={FavoriteBorderRoundedIcon}
-                    onClickEvent={() => {
-                      console.log("Add To Wishlist");
-                    }}
+                    onClickEvent={handleWishlistButton}
                     isfilled={false}
                     showLeftIcon={true}
                     showRightIcon={false}
