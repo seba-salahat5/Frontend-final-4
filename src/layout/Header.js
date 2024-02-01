@@ -19,9 +19,10 @@ import InputField from "../components/header/InputField.js";
 import LeftDrawer from "../components/header/LeftDrawer.js";
 import Navbar from "../components/header/Navbar.js";
 import IconButtonsGroup from "../components/header/IconButtonsGroup.js";
-import { TOP_CATEGORIES } from "../utils/constants.js";
+import { CATEGORIES } from "../utils/constants.js";
 import { useDebounce } from "../custom_hooks/useDebounce.js";
 import { useGet } from "../custom_hooks/useApi.js";
+
 
 const CustomizedAppBar = styled(AppBar)(() => ({
   width: "100%",
@@ -46,15 +47,20 @@ const Heading = styled(Typography)(() => ({
   color: "var(--primary)",
 }));
 
+const StyledLink = styled(Link)(()=>({
+  textDecoration: 'none'
+}));
+
 const Header = () => {
   const [inputValue, setInputValue] = useState('');
+  const [autheriziedInput, setAutherizedInput] = useState();
   const [inputOptions, setInputOptions] = useState([]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isXSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const imageSrc = process.env.PUBLIC_URL + `/assets/logo.png`;
   const [isSearchMode, setIsSearchMode] = React.useState(false);
-  const { data, loading } = useGet(`https://group4.iscovat.bid/product/search?page_number=1&number_of_items=20&search_value=${inputValue}`);
+  const { data, loading } = useGet(`https://group4.iscovat.bid/product/search?page_number=1&number_of_items=20&search_value=${autheriziedInput}`);
 
   const navigate = useNavigate();
 
@@ -63,12 +69,13 @@ const Header = () => {
   });
 
   useEffect(() => {
-    if (inputValue !== '' && data !== null) {
-      !loading && setInputOptions(data.items);
+    if (inputValue !== '') {
+      setAutherizedInput(inputValue);
+      !loading && data!==null && setInputOptions(data.items);
     }
   }, [data, loading, inputValue]);
 
-  
+
   const handleSearchOptionSelected = (selectedOption) => {
     let selectedProduct = inputOptions.filter(option => option.name === selectedOption);
     navigate(`/product?product_id=${selectedProduct[0].product_id}`);
@@ -102,8 +109,11 @@ const Header = () => {
                     direction="row"
                     sx={{ alignItems: "center" }}
                   >
-                    <LeftDrawer navItems={TOP_CATEGORIES} />
-                    <Heading>Home</Heading>
+                    <LeftDrawer navItems={CATEGORIES} />
+                    <StyledLink to="/">
+                      <Heading>Home</Heading>
+                    </StyledLink>
+                    
                   </Stack>
                 </>
               )
@@ -112,7 +122,7 @@ const Header = () => {
                 <Link to="/">
                   <CustomizedImage src={imageSrc} alt="logo" />
                 </Link>
-                <Navbar navItems={TOP_CATEGORIES} />
+                <Navbar navItems={CATEGORIES} />
               </>
             )}
             {isXSmall ? (
@@ -135,7 +145,7 @@ const Header = () => {
                           DebouncedAction(inputValue);
                         }
                       }
-                      onValueSelected = {
+                      onValueSelected={
                         (selectedOption) => {
                           handleSearchOptionSelected(selectedOption);
                         }
@@ -165,7 +175,7 @@ const Header = () => {
                       DebouncedAction(inputValue);
                     }
                   }
-                  onValueSelected = {
+                  onValueSelected={
                     (selectedOption) => {
                       handleSearchOptionSelected(selectedOption);
                     }

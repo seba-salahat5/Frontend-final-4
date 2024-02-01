@@ -1,0 +1,11 @@
+####
+post http://158.176.1.165:3000/wishlist?product_id=20
+Cookie: session_token=bb6c85cf-8251-46e1-910e-03aa7d830fba
+
+####
+get http://158.176.1.165:3000/wishlist/products?page_number=1&number_of_items=20
+Cookie: session_token=bb6c85cf-8251-46e1-910e-03aa7d830fba
+####
+DELETE  http://158.176.1.165:3000/wishlist?product_id=20
+####
+

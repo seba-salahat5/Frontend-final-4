@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Typography, Stack, Grid, useMediaQuery, useTheme } from '@mui/material';
@@ -13,6 +13,7 @@ import DescriptionSection from '../components/product/DescriptionSection';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import { useGet } from "../custom_hooks/useApi";
+import { useUser } from '../context/userProvider';
 
 const Heading = styled(Typography)(() => ({
   fontWeight: '600',
@@ -32,6 +33,7 @@ const Product = () => {
   const [currentProduct, setCurrentProduct] = useState(null);
   const [relatedProducts, setRelatedProduct] = useState([]);
   const [ratings, setRatigns] = useState(null);
+  const [wishlist, setWishlist] = useState([]);
   const [categoryId, setCategoryId] = useState(0);
   const [brandId, setBrandId] = useState(0);
   
@@ -43,7 +45,10 @@ const Product = () => {
   const { data: productData, loading: productLoading } = useGet(`${baseUrl}/single-product/${parseInt(product_id)}`);
   const { data: relatedData, loading: relatedLoading } = useGet(`${baseUrl}/related-product?category_id=${categoryId}&brand_id=${brandId}`);
   const { data: ratingData, loading: ratingLoading} = useGet(`${baseUrl}/ratings/${parseInt(product_id)}`);
-  
+  const apiUrl = "https://group4.iscovat.bid/wishlist/products?page_number=1&number_of_items=20";
+  const { data: wishlistItems, loading: loadingWishlist } = useGet(apiUrl);
+
+
   useEffect(() => {
     if (!productLoading && productData) {
       setCurrentProduct(productData);
@@ -63,6 +68,14 @@ const Product = () => {
       setRatigns(ratingData);
     }
   }, [ratingData, ratingLoading, currentProduct]);
+
+  useEffect(() => {
+    console.log("hello");
+    if (!loadingWishlist && wishlistItems) {
+      console.log("wishlist", wishlistItems);
+      setWishlist(wishlistItems.items);
+    }
+  }, [wishlistItems, loadingWishlist]);
 
   return (
     <>

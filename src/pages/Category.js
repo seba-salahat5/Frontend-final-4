@@ -70,12 +70,19 @@ const Category = () => {
     const numberOfItems = 10;
     categotyTitle = "New Arrival";
     urlEndpoint = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`;
+  } else {
+    apiUrl = `https://group4.iscovat.bid/product/`;
+    const pageNumber = 1;
+    const numberOfItems = 10;
+    categotyTitle = categoryType;
+    urlEndpoint = `${apiUrl}product-category?category_id=${id}&page_number=${pageNumber}&number_of_items=${numberOfItems}`;
   }
   const [categoryItems, setCategoryItems] = useState([]);
   const { data, loading } = useGet(urlEndpoint);
 
   useEffect(() => {
     !loading && setCategoryItems(data);
+    console.log(data);
   }, [data, loading]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
