@@ -114,7 +114,7 @@ function NewArrivals({ isMainComponent, cards }) {
             <TitleTextStyle>New Arrivals</TitleTextStyle>
           </TitleStyle>
           <ViewAllLayout>
-            <ViewAllButton to={categoryLink}>
+            <ViewAllButton to="/category/new-arrival/20/1">
               <ButtonText>View All</ButtonText>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useUser } from "../context/userProvider";
 
 export function usePost(url) {
   const [data, setData] = useState(null);
@@ -33,15 +34,14 @@ export function useGet(url, session_token) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  let session_token = localStorage.getItem('session_token');
   useEffect(() => {
     const fetchData = async () => {
       try {
-        /*         console.log("Request URL:", url);
-        console.log("Authorization Header:", `Bearer ${session_token}`); */
-        /*         axios.defaults.headers.common["Authorization"] =
-          "Bearer " + session_token; */
-          
-        const response = await axios.get(url);
+        console.log("Request URL:", url);
+        console.log("Authorization Header:", `Bearer ${session_token}`);
+        const response =session_token ? await axios.get(url, { headers: { Authorization: `Bearer ${session_token}` } })
+         : await axios.get(url);
         setData(response.data);
         setLoading(false);
       } catch (error) {

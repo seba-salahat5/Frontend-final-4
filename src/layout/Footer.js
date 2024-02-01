@@ -9,7 +9,6 @@ import { CATEGORIES, LOGOS, COLLECTIONS } from '../utils/constants.js';
 const FooterComponent = styled('div')(() => ({
   margin: 0,
   paddingInline: '20px',
-  zIndex: '-3',
   width: '100%',
   paddingBlock: '32px',
   backgroundColor: 'var(--primary)',
@@ -55,6 +54,7 @@ const StyledDivider = styled(Divider)(() => ({
 const Footer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <FooterComponent>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, md: 3 }}>
@@ -62,11 +62,11 @@ const Footer = () => {
           <Stack spacing={isMobile ? '24px' : '73px'} direction={isMobile ? 'column' : 'row'}>
             <ListBox>
               <ListTitle>Shop By Category</ListTitle>
-              <FooterList list={CATEGORIES} />
+              <FooterList list={CATEGORIES} type={'navigate'}/>
             </ListBox>
             <ListBox>
               <ListTitle>Shop By Product</ListTitle>
-              <FooterList list={COLLECTIONS} />
+              <FooterList list={COLLECTIONS} type={'scroll'}/>
             </ListBox>
           </Stack>
         </Grid>
@@ -77,7 +77,7 @@ const Footer = () => {
           <Stack direction={'column'} sx={{ alignItems: { sm: 'left', md: 'end' } }}>
             <SocialLogos logos={LOGOS} />
             <Location />
-            <CopyrightText sx={{ textAlign: { sm: 'left', md: 'end' } }}>© 2021 | Cora Leviene All Rights Reserved</CopyrightText>
+            <CopyrightText sx={{ textAlign: { sm: 'left', md: 'end' } }}>© 2024 | Cora Leviene All Rights Reserved</CopyrightText>
           </Stack>
         </Grid>
       </Grid>

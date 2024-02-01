@@ -27,11 +27,11 @@ const CardsGrid = ({ cards }) => {
           productName={item.name}
           productDescreption={item.sub_title}
           discount={item.discount_value}
-          showRating={true}
+          showRating={item.ratings}
           price={item.price}
           showOldPrice={item.discount_value !== 0 ? true : false}
           ratersNumber={item.number_of_ratings}
-          rating={parseFloat(item.ratings)}
+          width={"17.875rem"}
         />
       ))}
     </GridLayout>

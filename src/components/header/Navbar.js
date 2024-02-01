@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { Box, Button, Typography } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
 const CustomizedTypography = styled(Typography)(() => ({
   fontSize: '14px',
@@ -14,11 +15,12 @@ const CustomizedTypography = styled(Typography)(() => ({
 }));
 
 function Navbar({ navItems }) {
+  const navigate = useNavigate();
   return (<Box sx={{ flexGrow: 1, alignItems: 'baseline' }}>
-    {navItems.map((navItem) => (
-      <Button key={navItem} sx={{ m: '5px' }}>
+    {navItems.slice(0, 5).map((navItem) => (
+      <Button key={navItem.id} sx={{ m: '5px' }} onClick={() => { navigate(`/category?id=${navItem.id}&category=${navItem.name}`) }}>
         <CustomizedTypography>
-          {navItem}
+          {navItem.name}
         </CustomizedTypography>
       </Button>
     ))}
