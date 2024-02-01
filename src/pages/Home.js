@@ -25,15 +25,13 @@ const Home = () => {
 
   const [newArrivals, setNewArrivals] = useState([]);
   const navigate = useNavigate();
-  const { isLoggedIn, session_token } = useUser();
+  const { session_token } = useUser();
   const apiUrl = "https://group4.iscovat.bid/product/new-arrival";
   const pageNumber = 1;
   const numberOfItems = 10;
 
-  const requsetProps = [`${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`];
-  isLoggedIn && requsetProps.push(session_token);
-
-  const { data, loading } = useGet(...requsetProps);
+  const url = `${apiUrl}?page_number=${pageNumber}&number_of_items=${numberOfItems}`;
+  const { data, loading } = useGet(url, session_token);
 
   useEffect(() => {
     !loading && setNewArrivals(data.items);

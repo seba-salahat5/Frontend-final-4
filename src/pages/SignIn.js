@@ -25,7 +25,6 @@ export default function SignIn() {
     if (data) {
       if (data.msg) {
         signIn(data.session_token);
-        toggleIsLoggedIn();
         navigate("/");
       }
       else {

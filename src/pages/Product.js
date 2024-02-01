@@ -45,18 +45,8 @@ const Product = () => {
   const { data: productData, loading: productLoading } = useGet(`${baseUrl}/single-product/${parseInt(product_id)}`);
   const { data: relatedData, loading: relatedLoading } = useGet(`${baseUrl}/related-product?category_id=${categoryId}&brand_id=${brandId}`);
   const { data: ratingData, loading: ratingLoading} = useGet(`${baseUrl}/ratings/${parseInt(product_id)}`);
-  
-  const {isLoggedIn, session_token} = useUser();
-  const requsetProps = useMemo(() => {
-    const apiUrl = "https://group4.iscovat.bid/wishlist/products?page_number=1&number_of_items=20";
-    const props = [`${apiUrl}`];
-    isLoggedIn && props.push(session_token);
-    console.log("isLoggedIn", isLoggedIn, "props", props);
-
-    return props;
-}, [isLoggedIn, session_token]);
-  
-  const { data: wishlistItems, loading: loadingWishlist } = useGet(...requsetProps);
+  const apiUrl = "https://group4.iscovat.bid/wishlist/products?page_number=1&number_of_items=20";
+  const { data: wishlistItems, loading: loadingWishlist } = useGet(apiUrl);
 
 
   useEffect(() => {
@@ -80,11 +70,12 @@ const Product = () => {
   }, [ratingData, ratingLoading, currentProduct]);
 
   useEffect(() => {
+    console.log("hello");
     if (!loadingWishlist && wishlistItems) {
-      console.log("wishlist", wishlistItems.irems);
+      console.log("wishlist", wishlistItems);
       setWishlist(wishlistItems.items);
     }
-  }, [wishlistItems, loadingWishlist, requsetProps]);
+  }, [wishlistItems, loadingWishlist]);
 
   return (
     <>

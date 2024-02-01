@@ -53,13 +53,14 @@ const StyledLink = styled(Link)(()=>({
 
 const Header = () => {
   const [inputValue, setInputValue] = useState('');
+  const [autheriziedInput, setAutherizedInput] = useState();
   const [inputOptions, setInputOptions] = useState([]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isXSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const imageSrc = process.env.PUBLIC_URL + `/assets/logo.png`;
   const [isSearchMode, setIsSearchMode] = React.useState(false);
-  const { data, loading } = useGet(`https://group4.iscovat.bid/product/search?page_number=1&number_of_items=20&search_value=${inputValue}`);
+  const { data, loading } = useGet(`https://group4.iscovat.bid/product/search?page_number=1&number_of_items=20&search_value=${autheriziedInput}`);
 
   const navigate = useNavigate();
 
@@ -68,8 +69,9 @@ const Header = () => {
   });
 
   useEffect(() => {
-    if (inputValue !== '' && data !== null) {
-      !loading && setInputOptions(data.items);
+    if (inputValue !== '') {
+      setAutherizedInput(inputValue);
+      !loading && data!==null && setInputOptions(data.items);
     }
   }, [data, loading, inputValue]);
 
