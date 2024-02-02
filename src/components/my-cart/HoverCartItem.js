@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import QuantityInput from "./QuantityInput";
 import CloseIcon from "@mui/icons-material/Close";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { usePost, useDeleteHook } from "../../custom_hooks/useApi";
 
 const Img = styled("img")({
@@ -24,32 +24,35 @@ const HoverCartItem = ({
   price,
 }) => {
   const [itemQuantity, setItemQuantity] = useState(quantity);
-  const [route, setRoute] = useState('');
-  const {setNewRequestBody} = usePost(`https://group4.iscovat.bid/cart/${route}`, 'patch');
-  const [deleteRoute, setDeleteRoute] = useState('');
-  const {setNewRequestBody: setDeleteBody} = useDeleteHook (`https://group4.iscovat.bid/cart/${deleteRoute}`);
+  const [route, setRoute] = useState("");
+  const { setNewRequestBody } = usePost(
+    `https://group4.iscovat.bid/cart/${route}`,
+    "patch"
+  );
+  const [deleteRoute, setDeleteRoute] = useState("");
+  const { setNewRequestBody: setDeleteBody } = useDeleteHook(
+    `https://group4.iscovat.bid/cart/${deleteRoute}`
+  );
+
   const handleQuantityChange = (newQuantity) => {
-    console.log(newQuantity);
-    console.log(itemQuantity);
-    if(newQuantity  < itemQuantity ){
-      console.log("heolooo");
+    console.log("newQuantity", newQuantity, "itemQuantity", itemQuantity);
+    if (newQuantity < itemQuantity) {
       setRoute("/decrease-quantity");
-    }
-    else {
-      setRoute('/increase-quantity');
+    } else {
+      setRoute("/increase-quantity");
     }
     setNewRequestBody({
-      "product_id":product_id,
-      "quantity":1
+      product_id: product_id,
+      quantity: Math.abs(newQuantity - itemQuantity), // Calculate the difference
     });
     setItemQuantity(newQuantity);
   };
 
-  const handleRemove = () =>{
-    setDeleteRoute(`/?product_id=${product_id}`)
-    setDeleteBody ({});
+  const handleRemove = () => {
+    setDeleteRoute(`/?product_id=${product_id}`);
+    setDeleteBody({});
     alert("Your product removed from the cart!");
-  }
+  };
 
   return (
     <Grid
@@ -92,7 +95,7 @@ const HoverCartItem = ({
               <QuantityInput
                 initialQuantity={itemQuantity}
                 onChange={handleQuantityChange}
-                product_id = {product_id}
+                product_id={product_id}
               />
             </Typography>
           </Grid>

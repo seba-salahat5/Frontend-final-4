@@ -68,15 +68,23 @@ const StyledButton = styled("button")`
 `;
 
 const QuantityInput = React.forwardRef(function CustomNumberInput(
-  { initialQuantity = 1, onChange, product_id, ...props }, ref) {
+  { initialQuantity = 1, onChange, product_id, ...props },
+  ref
+) {
   const [quantity, setQuantity] = React.useState(initialQuantity);
-  
-  const handleQuantityChange = (value) => {
-    setQuantity(value);
+
+  const handleQuantityChange = (event, value) => {
+    const newValue = value === undefined ? event.target.value : value;
+    setQuantity(newValue);
     if (onChange) {
-      onChange(value);
+      onChange(newValue);
     }
   };
+
+  // Expose the value through the ref
+  React.useImperativeHandle(ref, () => ({
+    getValue: () => quantity,
+  }));
 
   return (
     <BaseNumberInput
