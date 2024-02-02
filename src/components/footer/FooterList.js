@@ -18,8 +18,7 @@ const FooterList = ({ list, type }) => {
   const { setScrollTarget } = useScrollContext();
   const handleClick = (item) => {
     if (type === "navigate") {
-      //  const categoryLink = `/category/${category}/20/1/${id}`;
-      navigate(`/category/${item.name}/20/1/${item.id}`);
+      navigate(`/category/${item.name}/20/1/${item.id}/${item.name}`);
     } else {
       setScrollTarget(item.targetComponent);
     }

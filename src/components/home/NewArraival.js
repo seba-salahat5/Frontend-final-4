@@ -105,7 +105,7 @@ const ButtonText = styled(SharedTextStyles)`
 `;
 
 function NewArrivals({ isMainComponent, cards }) {
-  const categoryLink = `/category/new-arrival/20/1`;
+  const categoryLink = `/category/new-arrival/20/1/${null}/New Arrivals`;
   return (
     <ArrivalLayout>
       {isMainComponent && (

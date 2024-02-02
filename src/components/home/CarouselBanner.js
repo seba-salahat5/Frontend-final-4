@@ -114,7 +114,7 @@ function CarouselBanner(props) {
 
 function Item(props) {
   const category = "handpicked-products";
-  const categoryLink = `/category?id=1&category=${category}`;
+  const categoryLink = `/category/${category}/20/1/${null}/${category}`;
   return (
     <>
       <CarouselImage

@@ -6,10 +6,10 @@ import { CustomContainer } from "../layout/CustomContainer";
 import CarouselBanner from "../components/category/CategoryBanner";
 import PathLine from "../components/shared/PathLine";
 import {
+  Box,
+  Grid,
   Link,
   Typography,
-  Stack,
-  Grid,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -17,13 +17,8 @@ import { useNavigate } from "react-router-dom";
 import { useGet } from "../custom_hooks/useApi.js";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import ProductCard from "../components/shared/ProductCard.js";
 
-const ListLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-`;
 
 const ListTitle = styled.h1`
   color: var(--Primary, #1B4B66);
@@ -45,10 +40,9 @@ const Category = () => {
   const [items, setItems] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const url = "http://158.176.1.165:3000/product/";
-  const { type, number_of_items, pageNumber, id } = useParams();
+  const { type, number_of_items, pageNumber, id, name } = useParams();
   const [countOfItems, setCountOfItems] = useState(20);
 
-  // Use the custom hook directly within the component
   let tempUrl;
 
   if (id) {
@@ -71,53 +65,46 @@ const Category = () => {
 
   const handleClick = (event) => {
     event.preventDefault();
-    // Navigate to the home link
     navigate("/");
   };
-  const breadcrumbs = [
-    <Link
-      underline="hover"
-      key="1"
-      color="var(--primary)"
-      fontWeight={"500"}
-      href="/"
-      onClick={handleClick}
-    >
-      Home
-    </Link>,
-    <Typography key="2" color="var(--summary-text)">
-      Handbag
-    </Typography>,
-  ];
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const isMd = useMediaQuery("(min-width:900px) and (max-width:1279px)");
-  const isLg = useMediaQuery("(min-width:1280px) and (max-width:1500px)");
-  const isXl = useMediaQuery("(min-width:1700px)");
-  const imageWidth = isMobile
-    ? "100%"
-    : isMd
-    ? 440
-    : isLg
-    ? 605
-    : isXl
-    ? 950
-    : 740;
+
   return (
     <CustomContainer>
       <CarouselBanner />
       {!isMobile && (
         <StyledPathLine>
-          <PathLine breadcrumbs={breadcrumbs} />
+          <PathLine />
         </StyledPathLine>
       )}
-      <ListTitle>Handbags</ListTitle>
-      <ListLayout>
-        {!isMobile && <ListingOptions />}
-        <CardsGrid cards={items} />
+      <ListTitle>{name || "Category"}</ListTitle>
+      <Box sx={{ flexGrow: 1, mt: 3 }}>
+        <Grid container spacing={{ xs: 1, sm: 2, md: 3, xl: 4 }}>
+          {items?.map((item) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={item.product_id}>
+              <ProductCard
+                key={item.product_id}
+                image={item.image[0]}
+                productId={item.product_id}
+                productName={item.name}
+                productDescreption={item.sub_title}
+                discount={item.discount_value}
+                showRating={true}
+                price={item.price}
+                showOldPrice={item.discount_value !== 0 ? true : false}
+                ratersNumber={item.number_of_ratings}
+                rating={parseFloat(item.ratings)}
+              />
+            </Grid>
+
+          ))}
+        </Grid>
         <PaginationBar countOfItems={countOfItems} />
-      </ListLayout>
+      </Box>
     </CustomContainer>
+
   );
 };
 

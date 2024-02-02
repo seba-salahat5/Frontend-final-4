@@ -17,7 +17,7 @@ const LeftDrawer = ({ navItems }) => {
         {navItems.slice(0, 5).map((item) => (
           <ListItem key={item.id} onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-              <CustomizedLink to={`/category?id=${item.id}&category=${item.name}`}>{item.name}</CustomizedLink>
+              <CustomizedLink to={`/category/${item.name}/20/1/${item.id}/${item.name}`}>{item.name}</CustomizedLink>
             </ListItemText>
           </ListItem>
         ))}

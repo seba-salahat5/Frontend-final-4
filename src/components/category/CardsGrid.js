@@ -1,24 +1,9 @@
-import styled from "styled-components";
 import ProductCard from "../shared/ProductCard";
-
-const GridLayout = styled.div`
-  width: 57.25rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
-  gap: 4.25rem 2rem;
-  @media (max-width: 510px) {
-    gap: 1.375rem; // Add 'rem' unit
-    width: 20.125rem;
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(45%, 1fr)
-    ); // Change to auto-fit
-  }
-`;
+import { Grid } from '@mui/material';
 
 const CardsGrid = ({ cards }) => {
   return (
-    <GridLayout>
+    <Grid container spacing={{ xs: 1, sm: 2, md: 3, xl: 4 }}>
       {cards?.map((item) => (
         <ProductCard
           key={item.product_id}
@@ -34,7 +19,7 @@ const CardsGrid = ({ cards }) => {
           width={"17.875rem"}
         />
       ))}
-    </GridLayout>
+    </Grid>
   );
 };
 

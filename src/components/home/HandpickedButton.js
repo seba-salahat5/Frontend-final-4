@@ -36,7 +36,7 @@ const HandPickedCategory = styled.h3`
 
 const HandPickedButton = ({ image, categoryName, id }) => {
   const category = "handpicked-products";
-  const categoryLink = `/category/${category}/20/1/${id}`;
+  const categoryLink = `/category/${category}/20/1/${id}/HandPicked`;
   return (
     <ButtonContainer to={categoryLink}>
       <HandPickedImage
