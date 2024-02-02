@@ -30,7 +30,7 @@ const HoverCartItem = ({
   const {setNewRequestBody: setDeleteBody} = useDeleteHook (`https://group4.iscovat.bid/cart/${deleteRoute}`);
   const handleQuantityChange = (newQuantity) => {
     console.log(newQuantity);
-    console.log
+    console.log(itemQuantity);
     if(newQuantity  < itemQuantity ){
       console.log("heolooo");
       setRoute("/decrease-quantity");
