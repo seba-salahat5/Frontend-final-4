@@ -49,10 +49,10 @@ const CartTable = ({ cartData }) => {
           {cartData.map((items) => (
             <CartItem
               key={items.product_id}
-              productId = {items.product_id}
+              productId={items.product_id}
               productImage={items.image[0].url}
               brand={items.name}
-              productName={items.description}
+              productName={items.sub_title}
               quantity={items.cart_quantity}
               price={items.price}
               showRemoveLink

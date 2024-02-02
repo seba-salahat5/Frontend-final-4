@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import QuantityInput from "./QuantityInput";
 import CloseIcon from "@mui/icons-material/Close";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { usePost, useDeleteHook } from "../../custom_hooks/useApi";
 
 const Img = styled("img")({

@@ -5,8 +5,7 @@ import OrderDetailes from "../components/shared/OrderDetails";
 import { Box, Grid } from "@mui/material";
 import ContinueShoppingButton from "../components/my-cart/ContinueShoppingButton";
 import PlaceOrderButton from "../components/my-cart/PlaceOrderButton";
-import { useLocation } from "react-router-dom";
-import { useGet, usePost } from "../custom_hooks/useApi";
+import { useGet } from "../custom_hooks/useApi";
 import { useEffect, useState } from "react";
 import EmptyPanel from "../components/shared/EmptyPanel";
 
@@ -26,9 +25,7 @@ const MyCartContainer = styled.div``;
 const MyCart = () => {
   const [cartData, setCartData] = useState();
 
-  const { search } = useLocation();
-
-  const { data, loading, error } = useGet("https://group4.iscovat.bid/cart/");
+  const { data, loading } = useGet("https://group4.iscovat.bid/cart/");
 
   useEffect(() => {
     if (!loading && data) {
