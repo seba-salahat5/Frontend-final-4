@@ -19,7 +19,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProductCard from "../components/shared/ProductCard.js";
 
-
 const ListTitle = styled.h1`
   color: var(--Primary, #1B4B66);
   font-family: Inter;
@@ -39,7 +38,7 @@ const Category = () => {
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [fetchError, setFetchError] = useState(null);
-  const url = "http://158.176.1.165:3000/product/";
+  const url = "https://group4.iscovat.bid/product/";
   const { type, number_of_items, pageNumber, id, name } = useParams();
   const [countOfItems, setCountOfItems] = useState(20);
 
@@ -83,7 +82,15 @@ const Category = () => {
       <Box sx={{ flexGrow: 1, mt: 3 }}>
         <Grid container spacing={{ xs: 1, sm: 2, md: 3, xl: 4 }}>
           {items?.map((item) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={item.product_id}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              xl={2}
+              key={item.product_id}
+            >
               <ProductCard
                 key={item.product_id}
                 image={item.image[0]}
@@ -98,13 +105,11 @@ const Category = () => {
                 rating={parseFloat(item.ratings)}
               />
             </Grid>
-
           ))}
         </Grid>
         <PaginationBar countOfItems={countOfItems} />
       </Box>
     </CustomContainer>
-
   );
 };
 
