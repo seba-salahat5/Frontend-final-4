@@ -5,7 +5,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import QuantityInput from "./QuantityInput";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
-import { usePost } from "../../custom_hooks/useApi";
+import { usePost, useDeleteHook } from "../../custom_hooks/useApi";
 
 const Img = styled("img")({
   margin: "auto",
@@ -26,10 +26,13 @@ const HoverCartItem = ({
   const [itemQuantity, setItemQuantity] = useState(quantity);
   const [route, setRoute] = useState('');
   const {setNewRequestBody} = usePost(`https://group4.iscovat.bid/cart/${route}`, 'patch');
-
+  const [deleteRoute, setDeleteRoute] = useState('');
+  const {setNewRequestBody: setDeleteBody} = useDeleteHook (`https://group4.iscovat.bid/cart/${deleteRoute}`);
   const handleQuantityChange = (newQuantity) => {
-    setItemQuantity(newQuantity);
-    if(newQuantity < itemQuantity){
+    console.log(newQuantity);
+    console.log
+    if(newQuantity  < itemQuantity ){
+      console.log("heolooo");
       setRoute("/decrease-quantity");
     }
     else {
@@ -39,7 +42,14 @@ const HoverCartItem = ({
       "product_id":product_id,
       "quantity":1
     });
+    setItemQuantity(newQuantity);
   };
+
+  const handleRemove = () =>{
+    setDeleteRoute(`/?product_id=${product_id}`)
+    setDeleteBody ({});
+    alert("Your product removed from the cart!");
+  }
 
   return (
     <Grid
@@ -97,7 +107,7 @@ const HoverCartItem = ({
         alignItems={"flex-end"}
       >
         <Grid item>
-          <CloseIcon />
+          <CloseIcon onClick={handleRemove} />
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" component="div">

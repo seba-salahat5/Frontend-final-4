@@ -4,6 +4,8 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import { Link } from "react-router-dom";
+import { useDeleteHook } from "../../custom_hooks/useApi";
+
 
 const Img = styled("img")({
   margin: "auto",
@@ -21,6 +23,7 @@ const CustomTypography = styled(Typography)`
 `;
 
 export default function CartItem({
+  productId,
   productImage,
   brand,
   productName,
@@ -28,10 +31,18 @@ export default function CartItem({
   price,
 }) {
   const [subtotal, setSubtotal] = useState(0);
+  const [route, setRoute] = useState('');
+  const {setNewRequestBody: setDeleteBody} = useDeleteHook (`https://group4.iscovat.bid/cart/${route}`);
 
   useEffect(() => {
     setSubtotal(price * quantity);
   }, [price, quantity]);
+
+  const handleRemove = () =>{
+    setRoute(`/?product_id=${productId}`)
+    setDeleteBody ({});
+    alert("Your product removed from the cart!");
+  }
   return (
     <>
       <Grid item xs={7} container>
@@ -99,7 +110,7 @@ export default function CartItem({
         </Grid>
 
         <Grid container item xs={12} sx={{ justifyContent: "flex-end" }}>
-          <Link sx={{ cursor: "pointer" }} variant="body2">
+          <Link sx={{ cursor: "pointer" }} variant="body2" onClick={handleRemove}>
             remove
           </Link>
         </Grid>

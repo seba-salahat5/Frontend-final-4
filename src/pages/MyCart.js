@@ -32,7 +32,6 @@ const MyCart = () => {
 
   useEffect(() => {
     if (!loading && data) {
-      console.log(data);
       setCartData(data);
     } else {
       setCartData([]);

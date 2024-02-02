@@ -18,7 +18,7 @@ function Navbar({ navItems }) {
   const navigate = useNavigate();
   return (<Box sx={{ flexGrow: 1, alignItems: 'baseline' }}>
     {navItems.slice(0, 5).map((navItem) => (
-      <Button key={navItem.id} sx={{ m: '5px' }} onClick={() => { navigate(`/category/${navItem.name}/20/1/${navItem.id}/${navItem.name}`) }}>
+      <Button key={navItem.id} sx={{ m: '5px' }} onClick={() => { navigate(`/category/product-category/20/1/${navItem.id}/${navItem.name}`) }}>
         <CustomizedTypography>
           {navItem.name}
         </CustomizedTypography>
