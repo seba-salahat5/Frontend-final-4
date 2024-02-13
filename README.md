@@ -15,7 +15,7 @@ Key Features:
 - Product Search.
 - Product Image Gallery.
 - Product Ratings and Reviews.
-- Horizontial slider for the new arrivals and brands.
+- Horizontal slider for the new arrivals and brands.
 - Footer links with automatic scroller.
 - Product listing with pagination.
 - Fully responsive design.
